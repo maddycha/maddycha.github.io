@@ -16,8 +16,8 @@ a{
 p{
     font-family: 'Mona Sans';
     font-weight: 250;
-    line-height: 1.4rem;
-    font-size: 0.8rem;
+    line-height: 1.2rem;
+    font-size: 0.7rem;
 }
 
 .icons p, .windownav p{
@@ -122,7 +122,10 @@ h4{
 
 #about .windowcontent{
     padding: 32px;
-    width: 400px;
+    width: 460px;
+}
+.about-img img{
+    width: 108px;
 }
 
 h6{
@@ -169,7 +172,7 @@ h3{
 
 .dressup-section{
     padding: 32px;
-    border-bottom: solid 1px var(--black);
+    border-bottom: dotted 1px var(--black);
 }
 
 .window{
@@ -191,8 +194,7 @@ h3{
     height: 60vh;
     box-sizing: border-box;
     right: 0;
-    scale: 1.08;
-    z-index: -20;
+    padding-bottom: 8px;
 }
 
 .icons{
@@ -240,10 +242,13 @@ ul:last-of-type{
     border-left: solid 1px var(--black);
 }
 
-
 .windownav *{
     line-height: 32px;
     padding: 0px 6px;
+}
+
+.windownav p{
+    padding: 0px 10px;
 }
 
 .windownav i{
@@ -254,11 +259,6 @@ line-height: 24px;
 .x{
     border-left: solid 1px var(--black);
 }
-
-#no-laptop{
-    display: none;
-}
-
 #laptop{
     display: block;
 }
@@ -266,9 +266,13 @@ line-height: 24px;
 
 
 #no-laptop{
+    display: none;
+    overflow: hidden;
     background-color: #D0CFD0;
     width: 100%;
     height: 100vh;
+    background-image: radial-gradient(var(--black) 0.5px, transparent 0);
+    background-size: 40px 40px;
 }
 
 
@@ -279,6 +283,10 @@ line-height: 24px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border: solid 0.5px var(--black);
+    border-radius: 8px;
+    background-color: #D0CFD0;
+    box-shadow: 4px 12px 40px #241f1f14;
 }
 
 #no-laptop *{
@@ -286,10 +294,8 @@ line-height: 24px;
 }
 
 #no-laptop .intro{
-    display: flex;
     justify-content: space-between;
-    vertical-align: baseline;
-    margin: 0% 5%;
+    padding: 12px;
 }
 
 #no-laptop h1{
@@ -298,19 +304,28 @@ line-height: 24px;
     padding-bottom: 4px;
 }
 
+
 .mobile-img img{
     width: 100%;
+    border-top: solid 0.5px var(--black);
+    border-bottom: solid 0.5px var(--black);
 }
 
 #no-laptop p{
     line-height: 0.7rem;
     font-size: 0.6rem;
+    font-weight: 300;
+}
+
+.mobile-links{
+    display: flex;
+    justify-content: space-between;
 }
 
 #no-laptop i{
     height: 100%;
-    padding: 20px 0px;
-    font-size: 24px;
+    font-size: 20px;
+    padding: 12px;
 }
 
 

@@ -153,7 +153,6 @@ function topsUpdate(x) {
       document.getElementById(String(i + "-topsbrand")).style.textTransform = "lowercase";
       document.getElementById(String(i + "-topsbrand")).style.fontStyle = "normal";
 
-
     } else {
       document.getElementById(String(i + "-topsbrand")).style.textTransform = "uppercase";
       document.getElementById(String(i + "-topsbrand")).style.fontStyle = "italic";
