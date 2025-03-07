@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'dreamer';
+    src: url(dreamer/DreamerTM.woff2);
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'instrument-serif';
+    src: url(instrument-serif/InstrumentSerif-Regular.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'instrument-serif';
+    src: url(instrument-serif/InstrumentSerif-Italic.ttf);
+    font-weight: normal;
+    font-style: italic;
+}
+
+
+@font-face {
+    font-family: 'Mona Sans';
+    src:
+        url('mona-sans/Mona-Sans.woff2') format('woff2 supports variations'),
+        url('mona-sans/Mona-Sans.woff2') format('woff2-variations');
+    font-weight: 200 900;
+    font-stretch: 75% 125%;
+}
