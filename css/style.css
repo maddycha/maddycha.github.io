@@ -388,8 +388,6 @@ line-height: 24px;
         background-color: #D0CFD0;
         box-shadow: 4px 12px 40px #241f1f14;
     }
-
-
 }
 
 @media screen and (pointer:none),
@@ -419,4 +417,30 @@ line-height: 24px;
         font-size: 80px;
     }
 
+}
+
+
+@media only screen and (orientation: landscape){
+    .mobile-container{
+        width: 60%;
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        border: solid 0.5px var(--black);
+        border-radius: 8px;
+        background-color: #D0CFD0;
+        box-shadow: 4px 12px 40px #241f1f14;
+        margin-top: 24px;
+    }
+
+    #no-laptop{
+        display: block;
+        overflow: scroll;
+        background-color: #D0CFD0;
+        width: 100%;
+        height: auto;
+        background-image: radial-gradient(var(--black) 0.5px, transparent 0);
+        background-size: 40px 40px;
+    }
 }
