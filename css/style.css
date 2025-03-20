@@ -13,13 +13,6 @@ a{
     text-decoration: none;
 }
 
-p{
-    font-family: 'Mona Sans';
-    font-weight: 250;
-    line-height: 1.2rem;
-    font-size: 0.7rem;
-}
-
 .icons p, .windownav p{
     text-transform: uppercase;
     font-size: 0.7rem;
@@ -74,7 +67,14 @@ body {
 #home{
     z-index: -99;
     background: var(--white);
-    padding: 60px;
+    padding: 24px 68px;
+}
+
+p{
+    font-family: 'Mona Sans';
+    font-weight: 250;
+    line-height: 1.2rem;
+    font-size: 0.7rem;
 }
 
 h2{
@@ -322,6 +322,20 @@ line-height: 24px;
     justify-content: space-between;
 }
 
+.laptop-links{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
+}
+
+.laptop-links a i{
+    font-size: 1.2rem;
+    padding: 12px;
+    padding-top: 24px;
+}
+
 #no-laptop i{
     height: 100%;
     font-size: 20px;
@@ -341,6 +355,41 @@ line-height: 24px;
         display: none;
     }
 
+    p{
+        font-family: 'Mona Sans';
+        font-weight: 250;
+        line-height: 2rem !important;
+        font-size: 1.6rem !important;
+    }
+
+    h2{
+        font-size: 20px;
+    }
+
+    h1{
+        font-family: 'dreamer', sans-serif;
+        font-size: 120px !important;
+    }
+
+    .mobile-links a i{
+        font-size: 2.8rem !important;
+        padding: 24px !important;
+    }
+
+    .mobile-container{
+        width: 80%;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: solid 0.5px var(--black);
+        border-radius: 8px;
+        background-color: #D0CFD0;
+        box-shadow: 4px 12px 40px #241f1f14;
+    }
+
+
 }
 
 @media screen and (pointer:none),
@@ -352,6 +401,22 @@ line-height: 24px;
 
     #laptop{
         display: none;
+    }
+
+    p{
+        font-family: 'Mona Sans';
+        font-weight: 250;
+        line-height: 1.2rem;
+        font-size: 0.7rem;
+    }
+
+    h2{
+        font-size: 20px;
+    }
+
+    h1{
+        font-family: 'dreamer', sans-serif;
+        font-size: 80px;
     }
 
 }

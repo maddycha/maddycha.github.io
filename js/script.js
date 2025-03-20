@@ -71,7 +71,7 @@ document.addEventListener('click', function (b) {
 function about() {
 
   var bottomLimit = 2 + window.innerHeight - document.getElementById("about").offsetHeight - document.getElementById("macnav").offsetHeight;
-  var rightLimit = 1 + window.innerWidth - document.getElementById("about").offsetWidth;
+  var rightLimit = -120 + window.innerWidth - document.getElementById("about").offsetWidth;
 
   if (aboutPos == "false") {
     document.getElementById("about").style.left = getRandom(0, rightLimit) + 'px'; // 👈🏼 Horizontally
@@ -89,7 +89,7 @@ function about() {
 function resume() {
 
   var bottomLimit = 2 + window.innerHeight - document.getElementById("resume").offsetHeight - document.getElementById("macnav").offsetHeight;
-  var rightLimit = 1 + window.innerWidth - document.getElementById("resume").offsetWidth;
+  var rightLimit = -120 + window.innerWidth - document.getElementById("resume").offsetWidth;
 
   if (resumePos == "false") {
     document.getElementById("resume").style.left = getRandom(0, rightLimit) + 'px'; // 👈🏼 Horizontally
@@ -107,7 +107,7 @@ function resume() {
 function game() {
 
   var bottomLimit = 2 + window.innerHeight - document.getElementById("game").offsetHeight - document.getElementById("macnav").offsetHeight;
-  var rightLimit = 1 + window.innerWidth - document.getElementById("game").offsetWidth;
+  var rightLimit = -120 + window.innerWidth - document.getElementById("game").offsetWidth;
 
   if (gamePos == "false") {
     document.getElementById("game").style.left = getRandom(0, rightLimit) + 'px'; // 👈🏼 Horizontally
