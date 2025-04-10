@@ -4,10 +4,10 @@ var getRandom = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 var windows = [];
 
-windows.push({ name: "w0", pos: false, text: "about.note", openId: "ow0" });
-windows.push({ name: "w1", pos: false, text: "dressup.exe", openId: "ow1" });
-windows.push({ name: "w2", pos: false, text: "resume.pdf", openId: "ow2" });
-windows.push({ name: "w3", pos: false, text: "browser.exe", openId: "ow3" });
+windows.push({ name: "w0", pos: false, text: "about", openId: "ow0" });
+windows.push({ name: "w1", pos: false, text: "dressup", openId: "ow1" });
+windows.push({ name: "w2", pos: false, text: "resume", openId: "ow2" });
+windows.push({ name: "w3", pos: false, text: "guestbook", openId: "ow3" });
 
 dragElement(document.getElementById("w0"));
 dragElement(document.getElementById("w1"));
@@ -271,7 +271,7 @@ const feedURL = 'https://status.cafe/users/maddy.atom'
           const entries = data.querySelectorAll("entry");
           let html = ``;
 
-          for(s = 0; s < 2; s++) {
+          for(s = 0; s < 1; s++) {
             let title = entries[s].querySelector("title").innerHTML.slice(0, 5).trim();
             let content = entries[s].querySelector("content").textContent.trim();
             let dateString = entries[s].querySelector("published").innerHTML.slice(5,10);
