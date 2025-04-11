@@ -5,9 +5,82 @@
     --g2: linear-gradient(to right, #d3d3d3, #cfcfcf);
 }
 
+::selection {;
+    background: #241f1f22;
+  }
+
+
+/* crt filter */
+.crt::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background:linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.03));
+        z-index: 400;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+  }
+  @keyframes flicker {
+    0% {
+    opacity: 0.27861;
+    }
+    5% {
+    opacity: 0.34769;
+    }
+    10% {
+    opacity: 0.23604;
+    }
+    15% {
+    opacity: 0.10626;
+    }
+    20% {
+    opacity: 0.18128;
+    }
+    25% {
+    opacity: 0.10626;
+    }
+    30% {
+    opacity: 0.18128;
+    }
+    35% {
+    opacity: 0.23604;
+    }
+  }
+  .crt::after {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(18, 16, 16, 0.02);
+    opacity: 0;
+    z-index: 400;
+    pointer-events: none;
+    animation: flicker 0.2s infinite;
+  }
+
+
+
 html {
     scroll-behavior: smooth !important;
+    cursor: url(../imgs/cursors/default.cur), auto;
 }
+a:hover{
+    cursor: url(../imgs/cursors/pointer.cur), pointer;
+}
+input:hover, textarea:hover{
+    cursor: url(../imgs/cursors/text.cur), text;
+}
+input[type=submit]{
+    cursor: url(../imgs/cursors/pointer.cur), pointer;
+}
+
 
 /* ::-webkit-scrollbar {display: none;} */
 img {
@@ -133,7 +206,7 @@ body {
     scrollbar-width: none;
     /* Firefox */
     color: var(--black);
-    font-family: 'instrument-serif', serif;
+    font-family: 'Instrument Serif', serif;
     background-image: radial-gradient(var(--black) 1px, transparent 0);
     background-size: 60px 60px;
 }
@@ -194,7 +267,7 @@ li {
 
 .open p {
     font-size: 0.7rem;
-    font-weight: 200;
+    font-weight: 300;
     text-transform: uppercase;
 }
 
@@ -235,7 +308,7 @@ li {
 
 p {
     font-family: 'Mona Sans';
-    font-weight: 250;
+    font-weight: 300;
     line-height: 1rem;
     font-size: 0.7rem;
 }
@@ -278,7 +351,7 @@ h4 {
 
 .item {
     float: left;
-    font-family: 'instrument-serif', serif;
+    font-family: 'Instrument Serif', serif;
     text-transform: lowercase;
     padding-right: 12px;
 }
@@ -298,18 +371,18 @@ h4 {
 }
 
 .about-text{
-    padding-top: 24px;
+    padding-top: 12px;
 }
 
 h6 {
     font-size: 12px;
     font-family: 'Mona Sans', sans-serif;
-    font-weight: 200;
+    font-weight: 300;
     line-height: 1.2rem;
 }
 
 h3 {
-    font-family: 'instrument-serif', serif;
+    font-family: 'Instrument Serif', serif;
     font-weight: 400;
     line-height: 2rem;
     font-size: 1.4rem;
@@ -540,15 +613,16 @@ input[type=text], input[type=url], textarea{
     border-bottom: dotted 1px var(--black);
     background-color: transparent;
     box-sizing: border-box;
-    font-family: "Instrument Sans", sans-serif;
+    font-family: "Mona Sans", sans-serif;
     color: var(--black);
-    font-weight: 200;
+    font-weight: 300;
     font-size: 0.7rem;
     background-position: 0px 6px;
     background-repeat: no-repeat;
     padding-left: 16px;
     background-size: 10px 10px;
 }
+
 
 input[type=text]:focus, input[type=url]:focus, textarea:focus{
     outline: none;
@@ -573,9 +647,9 @@ textarea{
 input[type=submit]{
     background-color: #241f1f12;
     box-sizing: border-box;
-    font-family: "Instrument Sans", sans-serif;
+    font-family: "Mona Sans", sans-serif;
     color: var(--black);
-    font-weight: 200;
+    font-weight: 300;
     font-size: 0.7rem;
     border: solid 0.5px var(--black);
     border-radius: 12px;
@@ -609,7 +683,7 @@ input[type=submit]:hover{
 }
 
 #guestbooks___guestbook-messages-container small{
-    font-weight: 200;
+    font-weight: 300;
     /* font-size: 0.5rem; */
     padding-left: 4px;
 }
@@ -622,9 +696,9 @@ input[type=submit]:hover{
 }
 
 blockquote{
-    font-family: "Instrument Sans", sans-serif;
+    font-family: "Mona Sans", sans-serif;
     color: var(--black);
-    font-weight: 200;
+    font-weight: 300;
     font-size: 0.7rem;
     line-height: 1rem;
 }
