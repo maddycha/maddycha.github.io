@@ -6,7 +6,7 @@ var windows = [];
 
 windows.push({ name: "w0", pos: false, text: "about", openId: "ow0" });
 windows.push({ name: "w1", pos: false, text: "dressup", openId: "ow1" });
-windows.push({ name: "w2", pos: false, text: "resume", openId: "ow2" });
+windows.push({ name: "w2", pos: false, text: "art", openId: "ow2" });
 windows.push({ name: "w3", pos: false, text: "guestbook", openId: "ow3" });
 
 dragElement(document.getElementById("w0"));
@@ -166,9 +166,33 @@ function dragElement(elmnt) {
   }
 }
 function closeDragElement() {
-  // stop moving when mouse button is released:
+// stop moving when mouse button is released:
   document.onmouseup = null;
   document.onmousemove = null;
+}
+
+
+//gallery
+var art = [];
+var artNum = 12;
+
+window.addEventListener("load", function artLoad() {
+  for (var i = 0; i < artNum; i++) {
+    art.push("imgs/art/" + i + ".png");
+    document.getElementById('gallery').innerHTML = "<div class='artimg' onclick='artUpdate(" + i + ");'><img class='artimg-img' id='artimg-"+ i +"' src='" + art[i] + "'></div>" + document.getElementById('gallery').innerHTML;
+  }
+  document.getElementById('gallery').innerHTML += "<div class='clear'></div>";
+  document.getElementById('gallery').innerHTML = "<div class='art-text'><p>hello! here's a collection of some of my work.</p><p>more of my work can be found on social media as i continue working on this page.<div class='laptop-links'><p><a href='https://www.instagram.com/maddycha' target='_blank'>&#8618; <img class='icon'src='imgs/icons/instagram.png'> instagram</a></p><p><a href='https://twitter.com/maddycha' target='_blank'><p>&#8618; <img class='icon' src='imgs/icons/twitter.png'> twitter</a></p><p><a href='https://bsky.app/profile/maddycha.com' target='_blank'><p>&#8618; <img class='icon' src='imgs/icons/bluesky.png'> bluesky</a></p></div></p><p></div>" + document.getElementById('gallery').innerHTML;
+});
+
+function artUpdate(x){
+  var selected = "artimg-"+x;
+  document.getElementById("preview-img").src = art[x];
+  for(var i = 0; i < artNum; i++){
+    var notselected = "artimg-"+i;
+    document.getElementById(notselected).style.border = "dotted 1px var(--black)";
+  }
+  document.getElementById(selected).style.border = "solid 1px var(--black)";
 }
 
 //dress-up game
@@ -184,8 +208,10 @@ function topsUpdate(x) {
   document.getElementById("tops-img").src = tops[x];
   for (var i = 0; i < topsBrands.length + 1; i++) {
     if (i !== x) {
+      if(document.getElementById(String(i+"-topsbrand")) !== null){
       document.getElementById(String(i + "-topsbrand")).style.textTransform = "lowercase";
       document.getElementById(String(i + "-topsbrand")).style.fontStyle = "normal";
+    }
     } else {
       document.getElementById(String(i + "-topsbrand")).style.textTransform = "uppercase";
       document.getElementById(String(i + "-topsbrand")).style.fontStyle = "italic";
@@ -197,8 +223,10 @@ function bottomsUpdate(x) {
   document.getElementById("bottoms-img").src = bottoms[x];
   for (var i = 0; i < bottomsBrands.length + 1; i++) {
     if (i !== x) {
+      if(document.getElementById(String(i+"-bottomsbrand")) !== null){
       document.getElementById(String(i + "-bottomsbrand")).style.textTransform = "lowercase";
       document.getElementById(String(i + "-bottomsbrand")).style.fontStyle = "normal";
+      }
     } else {
       document.getElementById(String(i + "-bottomsbrand")).style.textTransform = "uppercase";
       document.getElementById(String(i + "-bottomsbrand")).style.fontStyle = "italic";
@@ -210,14 +238,17 @@ function shoesUpdate(x) {
   document.getElementById("shoes-img").src = shoes[x];
   for (var i = 0; i < shoesBrands.length + 1; i++) {
     if (i !== x) {
+      if(document.getElementById(String(i+"-shoesbrand")) !== null){
       document.getElementById(String(i + "-shoesbrand")).style.textTransform = "lowercase";
       document.getElementById(String(i + "-shoesbrand")).style.fontStyle = "normal";
+      }
     } else {
       document.getElementById(String(i + "-shoesbrand")).style.textTransform = "uppercase";
       document.getElementById(String(i + "-shoesbrand")).style.fontStyle = "italic";
     }
   }
 }
+
 window.addEventListener("load", function dressup() {
 
   for (var i = 1; i < topsBrands.length + 1; i++) {
