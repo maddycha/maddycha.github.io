@@ -409,7 +409,7 @@ h3 {
     width: 30%;
 }
 
-.right-70{
+.left-70{
     float: left;
     width: 70%;
 }
@@ -610,6 +610,15 @@ input[type=text]:focus, input[type=url]:focus, textarea:focus{
     background-image: url('../imgs/icons/message.png');
 }
 
+.button-textarea, .button-textarea:focus{
+    font-size: 0.4rem;
+    padding: 4px;
+    background: #241f1f12;
+    border-bottom: none;
+    resize: none;
+    min-height: 24px;
+}
+
 textarea{
     min-height: 60px;
 }
@@ -722,6 +731,10 @@ blockquote{
     height:100%;
     object-fit: contain;
 }
+
+
+
+
 
 @media screen and (pointer:none),
 (pointer:coarse) and (min-width: 768px) and (max-width: 2000px) {
