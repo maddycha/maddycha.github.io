@@ -79,6 +79,21 @@ input:hover, textarea:hover{
 input[type=submit]{
     cursor: url(../imgs/cursors/pointer.cur), pointer;
 }
+.icons .row:hover{
+    cursor: url(../imgs/cursors/pointer.cur), pointer;
+}
+.x:hover{
+    cursor: url(../imgs/cursors/pointer.cur), pointer;
+}
+.item:hover{
+    cursor: url(../imgs/cursors/pointer.cur), pointer;
+}
+
+.windownav:active{
+    cursor: url(../imgs/cursors/drag.cur), auto;
+}
+
+
 
 
 /* ::-webkit-scrollbar {display: none;} */
@@ -97,12 +112,12 @@ a {
 }
 
 .screenshots img {
-    width: 80%;
+    width: 90%;
     border-radius: 12px;
 }
 
 .game-thumbs img {
-    width: 20%;
+    width: 18%;
 }
 
 .browser p {
@@ -386,16 +401,24 @@ h3 {
     border-bottom: dotted 1px var(--black);
 }
 
+.websection .text-section, .pokesprites, .cards, .links-section .text-section{
+    width: 90%;
+}
+
+#webrings{
+    display: none;
+}
+
+#webrings *{
+    float: left;
+}
+
 .text-section {
     padding-bottom: 8px;
 }
 
 .bold {
     font-weight: 400;
-}
-
-.about-section {
-    border-bottom: dotted 1px var(--black);
 }
 
 .links {
@@ -406,12 +429,12 @@ h3 {
 
 .left-30{
     float: left;
-    width: 30%;
+    width: 30% !important;
 }
 
 .left-70{
     float: left;
-    width: 70%;
+    width: 70% !important;
 }
 
 .links a {
@@ -465,9 +488,10 @@ h3 {
     float: none;
     width: 80px;
     text-align: center;
-    float: right;
+    float: left;
     padding: 12px 12px;
-    margin-right: 12px;
+    margin-right: 24px;
+    margin-bottom: 24px;
     background: var(--white);
 }
 
@@ -490,6 +514,8 @@ h3 {
     padding-right: 14px;
     box-sizing: border-box;
     position: fixed;
+    overflow-y: hidden;
+    height: 71vh;
 }
 
 .right-col {
@@ -575,6 +601,34 @@ ul:last-of-type {
     scroll-behavior: smooth !important;
 }
 
+.linkscontent{
+    width: 600px;
+    height: 74vh;
+    padding: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-gutter: stable;
+    scroll-behavior: smooth !important;
+}
+
+.links-section{
+    border: dotted 1px var(--black);
+    /* float: left; */
+    padding: 12px;
+    margin-bottom: 8px;
+}
+
+.links-top{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 8px;
+}
+
+.col-30{
+    flex-basis: 0;
+    flex: 1 1 0px;
+}
+
 input[type=text], input[type=url], textarea{
     width: 100%;
     padding: 4px 0px 2px 0px;
@@ -593,6 +647,9 @@ input[type=text], input[type=url], textarea{
     background-size: 10px 10px;
 }
 
+.jokers{
+    width: 60px;
+}
 
 input[type=text]:focus, input[type=url]:focus, textarea:focus{
     outline: none;
@@ -682,13 +739,15 @@ blockquote{
     line-height: 1rem;
 }
 
-#artimg-11{
+#artimg-23{
     border: solid 1px black;
+    opacity: 1;
 }
 
-#art{
+.artcontent{
     position: relative;
-    width: 900px;
+    width: 921px;
+    height: 480px;
 }
 
 .artimg-img{
@@ -698,18 +757,44 @@ blockquote{
     float: left;
     border: dotted 1px var(--black);
     margin: 4px;
+    opacity: 0.6;
 }
 
 #gallery{
-    width: 400px;
+    width: 440px;
     float: left;
     padding: 8px;
+    box-sizing: border-box;
+    height: 480px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-gutter: stable;
+    scroll-behavior: smooth !important;
+}
+
+.bottom-rounded{
+    border-bottom-right-radius: 8px;
+    overflow: hidden;
 }
 
 #previewer{
     border-left: solid 1px var(--black);
     height: 480px;
     float: right;
+    width: 480px;
+    border-bottom-right-radius: 8px;
+    background: var(--g1);
+    background-color: #241f1f62;
+    background-size: cover;
+    background-attachment: fixed;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    color: var(--black);
+    font-family: 'Instrument Serif', serif;
+    background-image: radial-gradient(var(--black) 1px, transparent 0);
+    background-size: 60px 60px;
 }
 
 #preview-img{
@@ -717,7 +802,8 @@ blockquote{
     max-width: 480px;
     object-fit: contain;
     height: 480px;
-    border-bottom-right-radius: 8px;
+    margin: auto;
+    display: block;
 }
 
 .art-text{

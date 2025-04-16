@@ -7,15 +7,21 @@ var windows = [];
 windows.push({ name: "w0", pos: false, text: "about", openId: "ow0" });
 windows.push({ name: "w1", pos: false, text: "dressup", openId: "ow1" });
 windows.push({ name: "w2", pos: false, text: "art", openId: "ow2" });
-windows.push({ name: "w3", pos: false, text: "guestbook", openId: "ow3" });
+windows.push({ name: "w3", pos: false, text: "links", openId: "ow3" });
+windows.push({ name: "w4", pos: false, text: "guestbook", openId: "ow4" });
+// windows.push({ name: "w5", pos: false, text: "collections", openId: "ow5" });
+
 
 dragElement(document.getElementById("w0"));
 dragElement(document.getElementById("w1"));
 dragElement(document.getElementById("w2"));
 dragElement(document.getElementById("w3"));
+dragElement(document.getElementById("w4"));
+// dragElement(document.getElementById("w5"));
+
 
 //ordering
-var windowsZ = ["w0", "w1", "w2", "w3"];
+var windowsZ = ["w0", "w1", "w2", "w3", "w4"];
 var itemToFind = "";
 let divElement = document.getElementsByClassName("window");
 var found = windows.findIndex(el => el == itemToFind)
@@ -42,6 +48,11 @@ document.addEventListener('mousedown', function (b) {
       }
     }
   }
+  if(windows[3].pos == true){
+    document.getElementById("webrings").style.display = "block";
+  } else{
+    document.getElementById("webrings").style.display = "none";
+   }
 });
 document.addEventListener('click', function (b) {
   for (var i = 0; i < windowsZ.length; i++) {
@@ -59,13 +70,19 @@ document.addEventListener('click', function (b) {
       }
     }
   }
+  if(windows[3].pos == true){
+    document.getElementById("webrings").style.display = "block";
+
+  } else{
+    document.getElementById("webrings").style.display = "none";
+   }
 });
 
 //window functionality
 function openWindow(x) {
   var openW = x.id;
   var bottomLimit = 2 + window.innerHeight - document.getElementById(openW).offsetHeight - document.getElementById("macnav").offsetHeight;
-  var rightLimit = -120 + window.innerWidth - document.getElementById(openW).offsetWidth;
+  var rightLimit = 0 + window.innerWidth - document.getElementById(openW).offsetWidth;
   var num = openW.slice(1);
   var openPos = windows[num].pos;
 
@@ -174,7 +191,7 @@ function closeDragElement() {
 
 //gallery
 var art = [];
-var artNum = 12;
+var artNum = 24;
 
 window.addEventListener("load", function artLoad() {
   for (var i = 0; i < artNum; i++) {
@@ -182,7 +199,7 @@ window.addEventListener("load", function artLoad() {
     document.getElementById('gallery').innerHTML = "<div class='artimg' onclick='artUpdate(" + i + ");'><img class='artimg-img' id='artimg-"+ i +"' src='" + art[i] + "'></div>" + document.getElementById('gallery').innerHTML;
   }
   document.getElementById('gallery').innerHTML += "<div class='clear'></div>";
-  document.getElementById('gallery').innerHTML = "<div class='art-text'><p>hello! here's a collection of some of my work.</p><p>more of my work can be found on social media as i continue working on this page.<div class='laptop-links'><p><a href='https://www.instagram.com/maddycha' target='_blank'>&#8618; <img class='icon'src='imgs/icons/instagram.png'> instagram</a></p><p><a href='https://twitter.com/maddycha' target='_blank'><p>&#8618; <img class='icon' src='imgs/icons/twitter.png'> twitter</a></p><p><a href='https://bsky.app/profile/maddycha.com' target='_blank'><p>&#8618; <img class='icon' src='imgs/icons/bluesky.png'> bluesky</a></p></div></p><p></div>" + document.getElementById('gallery').innerHTML;
+  // document.getElementById('gallery').innerHTML = "<div class='art-text'><p>hello! here's a collection of some of my work.</p><p>more of my work can be found on social media as i continue working on this page.<div class='laptop-links'><p><a href='https://www.instagram.com/maddycha' target='_blank'>&#8618; <img class='icon'src='imgs/icons/instagram.png'> instagram</a></p><p><a href='https://twitter.com/maddycha' target='_blank'><p>&#8618; <img class='icon' src='imgs/icons/twitter.png'> twitter</a></p><p><a href='https://bsky.app/profile/maddycha.com' target='_blank'><p>&#8618; <img class='icon' src='imgs/icons/bluesky.png'> bluesky</a></p></div></p><p></div>" + document.getElementById('gallery').innerHTML;
 });
 
 function artUpdate(x){
@@ -191,8 +208,10 @@ function artUpdate(x){
   for(var i = 0; i < artNum; i++){
     var notselected = "artimg-"+i;
     document.getElementById(notselected).style.border = "dotted 1px var(--black)";
+    document.getElementById(notselected).style.opacity = "0.6";
   }
   document.getElementById(selected).style.border = "solid 1px var(--black)";
+  document.getElementById(selected).style.opacity = "1";
 }
 
 //dress-up game
@@ -294,23 +313,23 @@ document.getElementById("time").innerHTML = cTime;
 
 
 //status.cafe
-const feedURL = 'https://status.cafe/users/maddy.atom'
-      fetch(feedURL)
-        .then(response => response.text())
-        .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
-        .then(data => {
-          const entries = data.querySelectorAll("entry");
-          let html = ``;
+// const feedURL = 'https://status.cafe/users/maddy.atom'
+//       fetch(feedURL)
+//         .then(response => response.text())
+//         .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+//         .then(data => {
+//           const entries = data.querySelectorAll("entry");
+//           let html = ``;
 
-          for(s = 0; s < 1; s++) {
-            let title = entries[s].querySelector("title").innerHTML.slice(0, 5).trim();
-            let content = entries[s].querySelector("content").textContent.trim();
-            let dateString = entries[s].querySelector("published").innerHTML.slice(5,10);
-            html += `
-            <div class="text-section">
-              <p><span class="bold">${title}</span> - ${dateString}</p>
-              <p>${content}</p></div>
-            `;
-          }
-          document.getElementById("feed-reader").innerHTML = html;
-        })
+//           for(s = 0; s < 1; s++) {
+//             let title = entries[s].querySelector("title").innerHTML.slice(0, 5).trim();
+//             let content = entries[s].querySelector("content").textContent.trim();
+//             let dateString = entries[s].querySelector("published").innerHTML.slice(5,10);
+//             html += `
+//             <div class="text-section">
+//               <p><span class="bold">${title}</span> - ${dateString}</p>
+//               <p>${content}</p></div>
+//             `;
+//           }
+//           document.getElementById("feed-reader").innerHTML = html;
+//         })
