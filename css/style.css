@@ -409,7 +409,7 @@ h3 {
     display: none;
 }
 
-#webrings *{
+#webrings > *{
     float: left;
 }
 
