@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
 
+<!--
+hi nice to see u here! sorry for the mess...
+feel free to take inspo from my site and lmk if you have any questions!
+@maddycha
+  -->
+
 <head>
     <title>maddycha</title>
-    <meta http-equiv="refresh" content="0; url=http://maddycha.com/"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
     <link rel='stylesheet' href='fonts/fonts.css' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://webring.nekoweb.org/onionring.css">
     <link rel="shortcut icon" type="image/png" href="imgs/misc/favicon.png" />
     <meta property="og:title" content="maddycha" />
     <meta property="og:url" content="https://www.maddycha.com/" />
@@ -17,13 +28,639 @@
     <meta property="og:site_name" content="maddycha">
     <meta name="twitter:image:alt" content="preview of maddycha.com homepage">
     <meta property="og:description" content="personal website for designer/illustrator/hobbyist maddy cha">
+    <div class="crt"></div>
 </head>
 
 <body>
-    <div class="container">
-<img src="preview.png">
-</div>
+    <div id="no-laptop">
+        <div class="mobile-container">
+            <div class="row">
+                <img style="width: 200px;" src="imgs/misc/portrait.png">
+            </div>
+            <div class="row">
+                <h1>maddycha</h1>
+            </div>
+        </div>
+    </div>
 
+    <div id="laptop" onload="createWindows()">
+        <div id="macnav">
+            <ul>
+                <li>&copy; maddy cha 2025</li>
+            </ul>
+            <ul id="openwindows">
+            </ul>
+            <ul>
+                <li id="date"></li>
+                <li id="time"></li>
+            </ul>
+        </div>
+
+        <div class="icons">
+            <div class="row" id="w0icon" onclick="openWindow(w0)">
+                <img src="imgs/icons/about.png">
+                <p>about</p>
+            </div>
+            <div class="row" id="w2icon" onclick="openWindow(w2)">
+                <img src="imgs/icons/art.png">
+                <p>art</p>
+            </div>
+            <div class="clear"></div>
+            <div class="row" id="w1icon" onclick="openWindow(w1)">
+                <img src="imgs/icons/dressup.png">
+                <p>dressup</p>
+            </div>
+            <div class="row" id="w3icon" onclick="openWindow(w3)">
+                <img src="imgs/icons/links.png">
+                <p>links</p>
+            </div>
+            <div class="clear"></div>
+            <div class="row" id="w4icon" onclick="openWindow(w4)">
+                <img src="imgs/icons/guestbook.png">
+                <p>guestbook</p>
+            </div>
+            <!-- <div class="row" id="w5icon" onclick="openWindow(w5)">
+                <img src="imgs/icons/collections.png">
+                <p>collections</p>
+            </div> -->
+        </div>
+
+        <div class="center" id="home">
+            <div class="row">
+                <img style="width: 160px;" src="imgs/misc/portrait.png">
+            </div>
+            <div class="row">
+                <h1>maddycha</h1>
+            </div>
+            <!-- <div class="row">
+                <h2>product designer in brooklyn</h2>
+                <h2>currently @ instagram</h2>
+            </div> -->
+        </div>
+
+
+
+
+
+        <div class="section window" id="w0" onmousedown="orderDiv(this)">
+            <div class="row windownav" id="w0nav">
+                <p> ੈ✩‧₊ about</p>
+                <div class="x" onclick="closeWindow(w0)"><img class="icon" src="imgs/icons/x.png"></div>
+            </div>
+            <div class="web-bar">
+                <div class="browser">
+                    <p>https://maddycha.com/about</p>
+                </div>
+            </div>
+            <div class="bottom-rounded">
+                <div class="browsercontent windowcontent scrollable">
+                    <div class="left-col">
+                        <div class="webnav websection">
+                            <h2>contents</h2>
+                            <p><a href="#about">&#8618; about</a></p>
+                            <p><a href="#gamerecs">&#8618; video games</a></p>
+                            <p><a href="#pokemon">&#8618; pokemon</a></p>
+                            <p><a href="#acnh">&#8618; animal crossing</a></p>
+                            <p><a href="#balatro">&#8618; balatro</a></p>
+                            <!-- <p><a href="#links">&#8618; links</a></p>
+                            <p><a href="#neighborhood">&#8618; neighborhood</a></p> -->
+                        </div>
+                        <div class="websection">
+                            <h2>currently</h2>
+                            <div class="text-section">
+                                <p><span class="bold">residing: </span>new york</p>
+                                <p><span class="bold">playing: </span>animal crossing</p>
+                                <p><span class="bold">listening to: </span><a
+                                        href="https://open.spotify.com/playlist/3VBGAjb2Luqi2oFPKlW0zo?si=1149a0a36098475b"
+                                        target="_blank">&#8618; playlist</a></p>
+                                <p><span class="bold">learning: </span>pixel art</p>
+                            </div>
+                            <a href="https://maddycha.com/" target="_blank"><img src="imgs/misc/maddycha-button.gif"
+                                    alt="maddycha"></a>
+                        </div>
+                        <div class="websection">
+                            <h2>to-do</h2>
+                            <p> &#9634; create menu/sitemap</p>
+                            <p> &#9634; add content on mobile</p>
+                        </div>
+                        <!-- <div class="status websection">
+                        <h2>status <a href="https://status.cafe/users/maddy" target="_blank">[previous]</a></h2>
+                        <div id='feed-reader'></div>
+                    </div> -->
+                        <!-- <div class="button websection">
+                        <h2>link back</h2>
+                        <div class="text-section">
+                            <a href="https://maddycha.com/" target="_blank"><img src="imgs/misc/maddycha-button.gif"
+                                    alt="maddycha"></a>
+                        </div>
+                        <textarea
+                            class="button-textarea"><a href="https://maddycha.com/" target="_blank"><img src="[IMAGE-SOURCE]" alt="maddycha"></a></textarea>
+                        <p>feel free to link back to my page using the button above!</p>
+                    </div> -->
+                        <div class="websection">
+                            <h2>tamanotchi <a href="https://status.cafe/users/maddy" target="_blank">[view profile]</a>
+                            </h2>
+                            <div class="tamas">
+                                <a href="https://tamanotchi.world/21951c"><img src="https://tamanotchi.world/i/21951"
+                                        alt="It's tamaNOTchi! Click to feed!"></a><a
+                                    href="https://tamanotchi.world/21946c"><img src="https://tamanotchi.world/i/21946"
+                                        alt="It's tamaNOTchi! Click to feed!"></a><a
+                                    href="https://tamanotchi.world/21944c"><img src="https://tamanotchi.world/i/21944"
+                                        alt="It's tamaNOTchi! Click to feed!"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-col">
+                        <div id="about" class="about websection">
+                            <h2>about</h2>
+                            <div class="about-section">
+                                <div class="about-img left-30">
+                                    <img src="imgs/misc/me.png">
+                                </div>
+                                <div class="about-text left-70">
+                                    <div class="text-section">
+                                        <p>hi i'm maddy welcome to my page! ⋆ ˚｡⋆୨୧˚｡˚⋆</p>
+                                    </div>
+                                    <div class="text-section">
+                                        <p>i like to play video games and draw and spend money.</p>
+                                        <p>i live with my two cats pigeon & bunny whom i love very much.</p>
+                                    </div>
+                                    <div class="text-section">
+                                        <p>keep reading to learn more about my interests!</p>
+                                    </div>
+                                    <div class="laptop-links">
+                                        <p><a href="https://www.instagram.com/maddycha" target="_blank">&#8618; <img
+                                                    class="icon" src="imgs/icons/instagram.png"> instagram</a></p>
+                                        <p><a href="https://twitter.com/maddycha" target="_blank">
+                                                <p>&#8618; <img class="icon" src="imgs/icons/twitter.png"> twitter
+                                            </a></p>
+                                        <p><a href="https://bsky.app/profile/maddycha.com" target="_blank">
+                                                <p>&#8618; <img class="icon" src="imgs/icons/bluesky.png"> bluesky
+                                            </a></p>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <section class="clear"></section>
+                        </div>
+
+                        <div id="gamerecs" class="games websection">
+                            <h2>video games</h2>
+                            <div class="text-section">
+                                <p>i looooove video games.... i mostly really play on switch bc i don't have a pc.</p>
+                                <p>here are a few that are special to me!</p>
+                            </div>
+                            <div class="game-thumbs">
+                                <img class="gamethumb" src="imgs/web/games/acnh.png">
+                                <img class="gamethumb" src="imgs/web/games/rhythm heaven.png">
+                                <img class="gamethumb" src="imgs/web/games/balatro.png">
+                                <img class="gamethumb" src="imgs/web/games/portal2.png">
+                                <img class="gamethumb" src="imgs/web/games/aa.png">
+                                <img class="gamethumb" src="imgs/web/games/katamari.png">
+                                <img class="gamethumb" src="imgs/web/games/papermario.png">
+                                <img class="gamethumb" src="imgs/web/games/mouthwashing.png">
+                                <img class="gamethumb" src="imgs/web/games/taiko.png">
+                                <img class="gamethumb" src="imgs/web/games/fea.png">
+                                <img class="gamethumb" src="imgs/web/games/pikmin.png">
+                                <img class="gamethumb" src="imgs/web/games/bioshock.png">
+                                <img class="gamethumb" src="imgs/web/games/stardew.png">
+                                <img class="gamethumb" src="imgs/web/games/inscryption.png">
+                                <img class="gamethumb" src="imgs/web/games/cotl.png">
+                                <img class="gamethumb" src="imgs/web/games/pmd.png">
+                                <img class="gamethumb" src="imgs/web/games/undertale.png">
+                                <img class="gamethumb" src="imgs/web/games/proximate.png">
+                                <img class="gamethumb" src="imgs/web/games/miku.png">
+                                <img class="gamethumb" src="imgs/web/games/twau.png">
+                            </div>
+                        </div>
+
+                        <div id="pokemon" class="fav pokemon websection">
+                            <h2>pokemon</h2>
+                            <div class="text-section">
+                                <p><span class="bold">favorite pokemon</span></p>
+                                <p>some of my faves! chosen either for sentimental or aesthetic reasons.</p>
+                                <p>(not listed in any order)</p>
+                            </div>
+                            <div class="pokesprites">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/klefki.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/oricorio-pom-pom.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/haxorus.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/vaporeon.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/golisopod.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/meowth.png">
+                                <br>
+                                <img class="pkmnsprite" src="imgs/web/pokemon/spewpa.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/crustle.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/rattata.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/mr-mime.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/swoobat.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/mismagius.png">
+                            </div>
+                            <br>
+                            <div class="text-section">
+                                <p><span class="bold">favorite shinies</span></p>
+                                <p>i love shiny hunting more than anything in the world!</p>
+                                <p>eventually i'll populate with my shiny collection, but here are my faves for now.</p>
+                            </div>
+                            <div class="pokesprites">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/wooper.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/jumpluff.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/furret.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/oricorio-pau.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/toxapex.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/pachirisu.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/dragonair.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/vaporeon.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/oricorio-pom-pom.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/audino-mega.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/altaria.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/azumarill.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/latias.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/stufful.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/nihilego.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/oricorio-sensu.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/umbreon.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/gardevoir.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/sylveon.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/politoed.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/ninetales.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/whimsicott.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/venomoth.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/reuniclus.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/togedemaru.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/magnezone.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/eevee.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/mimikyu.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/golisopod.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/pheromosa.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/charizard.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/haxorus.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/oricorio.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/tapu-lele.png">
+                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/cutiefly.png">
+                            </div>
+                        </div>
+
+                        <div id="acnh" class="acnh websection">
+                            <h2>animal crossing</h2>
+                            <div class="text-section">
+                                <p>i love animal crossing more than life itself i will not hear any slander or criticism
+                                    on
+                                    it.
+                                </p>
+                                <p>this section is dedicated to my new horizons island possum that will never be
+                                    complete bc
+                                    i
+                                    keep redesigning it.</p>
+                                <p>i've never worked harder on anything in my life so i hope u enjoy.</p>
+                            </div>
+                            <div class="text-section">
+                                <p><span class="bold">island name:</span> possum</p>
+                                <p><span class="bold">native fruit:</span> cherries</p>
+                                <p><span class="bold">started:</span> 03.20.2020</p>
+                            </div>
+
+                            <div class="acnh-villagers text-section">
+                                <img id="julian" src="imgs/web/acnh/julian.png">
+                                <img id="pietro" src="imgs/web/acnh/pietro.png">
+                                <img id="henry" src="imgs/web/acnh/henry.png">
+                                <img id="rosie" src="imgs/web/acnh/rosie.png">
+                                <img id="roscoe" src="imgs/web/acnh/roscoe.png">
+                                <img id="chevre" src="imgs/web/acnh/chevre.png">
+                                <img id="mac" src="imgs/web/acnh/mac.png">
+                                <img id="punchy" src="imgs/web/acnh/punchy.png">
+                                <img id="apollo" src="imgs/web/acnh/apollo.png">
+                                <img id="margie" src="imgs/web/acnh/margie.png">
+                            </div>
+                            <div class="screenshots">
+                                <img src="imgs/web/acnh/possum1.png">
+                                <img src="imgs/web/acnh/possum2.png">
+                                <img src="imgs/web/acnh/possum3.png">
+                                <img src="imgs/web/acnh/possum4.png">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+
+                        <div id="balatro" class="games websection">
+                            <h2>balatro</h2>
+                            <div class="text-section">
+                                <p>balatro is my favorite indie game now and forever...</p>
+                                <p>so far i've 100%ed balatro on switch but i also play on mobile & steam</p>
+                                <p>my fave mod is <a href="https://www.nexusmods.com/balatro/mods/58"
+                                        target="_blank">pokermon</a> but i'm severely technologically challenged so i
+                                    probably need to redownload it...</p>
+                            </div>
+                            <div class="text-section">
+                                <p><span class="bold">favorite jokers</span></p>
+                            </div>
+                            <div class="cards">
+                                <img class="jokers" src="imgs/web/balatro/Baron.webp">
+                                <img class="jokers" src="imgs/web/balatro/Bloodstone.webp">
+                                <img class="jokers" src="imgs/web/balatro/Blueprint.webp">
+                                <img class="jokers" src="imgs/web/balatro/Burnt_Joker.webp">
+                                <img class="jokers" src="imgs/web/balatro/Business_Card.webp">
+                                <img class="jokers" src="imgs/web/balatro/Cartomancer.webp">
+                                <img class="jokers" src="imgs/web/balatro/Cavendish.webp">
+                                <img class="jokers" src="imgs/web/balatro/Chaos_the_Clown.webp">
+                                <img class="jokers" src="imgs/web/balatro/DNA.webp">
+                                <img class="jokers" src="imgs/web/balatro/Hallucination.webp">
+                                <img class="jokers" src="imgs/web/balatro/Hanging_Chad.webp">
+                                <img class="jokers" src="imgs/web/balatro/Lucky_Cat.webp">
+                                <img class="jokers" src="imgs/web/balatro/Midas_Mask.webp">
+                                <img class="jokers" src="imgs/web/balatro/Mime.webp">
+                                <img class="jokers" src="imgs/web/balatro/Oops_All_6s.webp">
+                                <img class="jokers" src="imgs/web/balatro/Perkeo.webp">
+                                <img class="jokers" src="imgs/web/balatro/Photograph.webp">
+                                <img class="jokers" src="imgs/web/balatro/Rocket.webp">
+                                <img class="jokers" src="imgs/web/balatro/Sixth_Sense.webp">
+                                <img class="jokers" src="imgs/web/balatro/Sock_and_Buskin.webp">
+                                <img class="jokers" src="imgs/web/balatro/Space_Joker.webp">
+                                <img class="jokers" src="imgs/web/balatro/Vagabond.webp">
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="section window" id="w1" onmousedown="orderDiv(this)">
+            <div class="row windownav" id="w1nav">
+                <p> ੈ✩‧₊ dressup</p>
+                <div class="x" onclick="closeWindow(w1)"><img class="icon" src="imgs/icons/x.png"></div>
+            </div>
+            <div class="windowcontent">
+                <div class="col dress-up">
+                    <img src="imgs/items/base.png" id="base-img">
+                    <img src="imgs/items/s1.png" id="shoes-img">
+                    <img src="imgs/items/b1.png" id="bottoms-img">
+                    <img src="imgs/items/t1.png" id="tops-img">
+                </div>
+                <div class="col dressup-text">
+                    <div class="row dressup-section" id="tops"></div>
+                    <div class="row dressup-section" id="bottoms"></div>
+                    <div class="row dressup-section" style="border: none" id="shoes"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="section window" id="w2" onmousedown="orderDiv(this)">
+            <div class="row windownav" id="w2nav">
+                <p> ੈ✩‧₊ art</p>
+                <div class="x" onclick="closeWindow(w2)"><img class="icon" src="imgs/icons/x.png"></div>
+            </div>
+            <div id="art">
+                <div class="bottom-rounded">
+                <div class="artcontent windowcontent">
+                    <div id="gallery">
+                        <div class="clear"></div>
+                    </div>
+                    <div id="previewer"><img id="preview-img" src="imgs/art/23.png"></div>
+                    <div class="clear"></div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section window" id="w3" onmousedown="orderDiv(this)">
+            <div class="row windownav" id="w3nav">
+                <p> ੈ✩‧₊ links</p>
+                <div class="x" onclick="closeWindow(w3)"><img class="icon" src="imgs/icons/x.png"></div>
+            </div>
+            <div class="web-bar">
+                <div class="browser">
+                    <p>https://maddycha.com/links</p>
+                </div>
+            </div>
+            <div class="bottom-rounded">
+                <div class="linkscontent windowcontent">
+                    <div class="links-top">
+                        <div class="links-section col-30">
+                            <h2>find me</h2>
+                            <p><a href="https://www.instagram.com/maddycha" target="_blank">&#8618; instagram</a></p>
+                            <p><a href="https://twitter.com/maddycha" target="_blank">
+                                    <p>&#8618; twitter
+                                </a></p>
+                            <p><a href="https://bsky.app/profile/maddycha.com" target="_blank">
+                                    <p>&#8618; bluesky
+                                </a></p>
+                            <p><a href="https://giphy.com/maddycha" target="_blank">
+                                    <p>&#8618; giphy
+                                </a></p>
+                            <p><a href="https://spacehey.com/maddycha" target="_blank">
+                                    <p>&#8618; spacehey
+                                </a></p>
+                            <p><a href="https://forum.melonland.net/index.php?action=profile;u=2575" target="_blank">
+                                    <p>&#8618; melonland
+                                </a></p>
+                        </div>
+                        <div class="links-section col-30">
+                            <h2>credit</h2>
+                            <p><a href="https://app.dithermark.com/" target="_blank">
+                                    <p>&#8618; dithering effect
+                                </a></p>
+                            <p><a href="https://www.switchiconshowdown.com/" target="_blank">
+                                    <p>&#8618; video game thumbnails
+                                </a></p>
+                            <p><a href="https://www.smogon.com/forums/threads/smogon-sprite-project.3647722/"
+                                    target="_blank">
+                                    <p>&#8618; pokemon sprites
+                                </a></p>
+                            <p><a href="https://fateside.tumblr.com/post/149383267194/animal-crossing-pixel-masterpost"
+                                    target="_blank">
+                                    <p>&#8618; animal crossing sprites
+                                </a></p>
+                            <!-- <p><a href="https://bechnokid.neocities.org/tutorials/statuscafefeed/" target="_blank">&#8618;
+                            status
+                            cafe feed reader</a></p> -->
+                            <p><a href="https://guestbooks.meadow.cafe/" target="_blank">&#8618; guestbook</a></p>
+                            <p><a href="https://oudkee.neocities.org/tutorials/tutcrt" target="_blank">&#8618; crt
+                                    effect</a></p>
+                            <p><a href="http://www.rw-designer.com/cursor-set/aero-tailles-shadow-big-sized"
+                                    target="_blank">&#8618; xl cursor set</a></p>
+                        </div>
+                        <div class="button links-section col-30">
+                            <h2>link back</h2>
+                            <div class="text-section">
+                                <a href="https://maddycha.com/" target="_blank"><img src="imgs/misc/maddycha-button.gif"
+                                        alt="maddycha"></a>
+                            </div>
+                            <textarea
+                                class="button-textarea"><a href="https://maddycha.com/" target="_blank"><img src="[IMAGE-SOURCE]" alt="maddycha"></a></textarea>
+                            <p>feel free to link back to my page using the button above!</p>
+                        </div>
+                    </div>
+
+                    <div class="links-section">
+                        <h2>cool sites</h2>
+                        <div class="text-section">
+                            <p>if you'd like your site removed or button updated, please feel free to email me at <a
+                                    class="bold" href="mailto:maddycha@gmail.com" target="_blank">maddycha@gmail.com</a>
+                                or message me on discord <span class="bold">@ maddycha</span>.</p>
+                        </div>
+                        <div class="buttons">
+                            <a href="https://tamanotchi.world/" target="_blank"><img src="imgs/buttons/tamanotchi.gif"
+                                    alt="tamanotchi"></a>
+                            <a href="https://forum.melonland.net/" target="_blank"><img src="imgs/buttons/melonland.gif"
+                                    alt="melonland"></a>
+                                    <a href="https://discourse.32bit.cafe/" target="_blank"><img src="imgs/buttons/32bitcafe.png"
+                                        alt="32bitcafe"></a>
+                            <a href="https://districts.nekoweb.org/index.html" target="_blank"><img
+                                    src="imgs/buttons/districts.png" alt="districts"></a>
+                            <a href="https://snewdraws.net" target="_blank"><img style="image-rendering: pixelated"
+                                    src="imgs/buttons/snew.gif" alt="Snewdraws.net Button"></a>
+                            <a href="https://dog-house.neocities.org/" target="_blank"><img
+                                    src="imgs/buttons/doghouse.gif" alt="doghouse"></a>
+                            <a href="https://ribo.zone" target="_blank"><img src="imgs/buttons/ribose.png"
+                                    alt="ribozone"></a>
+                            <a href="https://helveticablanc.com/index.html" target="_blank"><img
+                                    src="imgs/buttons/helveticablanc.gif" alt="helveticablanc"></a>
+                            <a href="https://lazybones.neocities.org/" target="_blank"><img
+                                    src="imgs/buttons/lazybones.png" alt="lazybones"></a>
+                            <a href="https://amalinalai.github.io/precipice/" target="_blank"><img
+                                    src="imgs/buttons/amalinalai.gif" alt="amalinalai"></a>
+                            <a href="https://amfmradio.nekoweb.org/" target="_blank"><img
+                                    src="imgs/buttons/amfmradio.png" alt="amfmradio"></a>
+                            <a href="https://sweetfish.site/" target="_blank"><img src="imgs/buttons/sweetfish.png"
+                                    alt="sweetfish"></a>
+                            <a href="https://coils.neocities.org/" target="_blank"><img src="imgs/buttons/coils.png"
+                                    alt="coils"></a>
+                            <a href="https://plumes.neocities.org/" target="_blank"><img src="imgs/buttons/plumes.gif"
+                                    alt="plumes"></a>
+                            <a href="https://lostletters.neocities.org/" target="_blank"><img
+                                    src="imgs/buttons/humanfinny.jpg" alt="humanfinny"></a>
+                            <a href="https://humanfinny.neocities.org/" target="_blank"><img
+                                    src="imgs/buttons/ribose.png" alt="ribozone"></a>
+                            <a href="https://ghostingpen.neocities.org/" target="_blank"><img
+                                    src="imgs/buttons/ghostingpen.gif" alt="ghostingpen"></a>
+                            <a href="https://sixey.es/" target="_blank"><img src="imgs/buttons/sixeyes.gif"
+                                    alt="siexeyes"></a>
+                            <a href="https://daisy.nekoweb.org/" target="_blank"><img src="imgs/buttons/daisy.gif"
+                                    alt="daisy"></a>
+                            <a href="https://july.lol/" target="_blank"><img src="imgs/buttons/july.gif" alt="july"></a>
+                            <a href="http://sugarstarluxe.neocities.org/" target="_blank"><img
+                                    src="imgs/buttons/sugarstarluxe.gif" alt="sugarstarluxe"></a>
+                            <a href="http://pameluft.neocities.org/" target="_blank"><img
+                                    src="imgs/buttons/pameluft.gif" alt="pameluft"></a>
+                            <a href="http://jeith.com/" target="_blank"><img src="imgs/buttons/jeith.gif"
+                                    alt="jeith"></a>
+                            <a href="https://rice.place/" target="_blank"><img src="imgs/buttons/riceplace.png"
+                                    alt="riceplace"></a>
+                            <a href="https://felixfever.nekoweb.org/" target="_blank"><img
+                                    src="imgs/buttons/felixfever.gif" alt="felixfever"></a>
+                            <a href="https://harlequi.nz/" target="_blank"><img src="imgs/buttons/harlequinz.png"
+                                    alt="harlequinz"></a>
+                            <a href="https://freakphone.net/" target="_blank"><img src="imgs/buttons/freakphone.gif"
+                                    alt="freakphone"></a>
+                            <a href="https://lied.neocities.org"><img
+                                    src="https://lied.neocities.org/img/88x31a.gif"></a>
+                            <a href="https://faegardens333.neocities.org/" target="_blank"><img
+                                    src="imgs/buttons/faegardens.gif" alt="faegardens"></a>
+                            <a href="https://lovesick.cafe/home" target="_blank"><img src="imgs/buttons/lovesick.png"
+                                    alt="lovesick"></a>
+                            <a href="https://wasongo.art/" target="_blank"><img src="imgs/buttons/wasongo.gif"
+                                    alt="wasongo"></a>
+                            <a href="http://fawn.nekoweb.org/" target="_blank"><img src="imgs/buttons/fawn.png"
+                                    alt="fawn"></a>
+                            <a href="https://cheapycore.com/" target="_blank"><img src="imgs/buttons/cheapcore.gif"
+                                    alt="cheapycore"></a>
+                            <a href="https://gspace48.neocities.org/" target="_blank"><img src="imgs/buttons/gspace48.gif"
+                                        alt="gspace48"></a>
+                        </div>
+                    </div>
+
+                    <div class="links-section">
+                        <h2>webrings</h2>
+                        <div class="text-section">
+                            <p>always looking to join more webrings! let me know if you'd think my site would be a good
+                                fit for yours.</p>
+                        </div>
+                        <div id="webrings">
+                            <div id="webring1" class="webring" style="width: 100px; height: 100px;">
+                                <iframe style="border: none; width: 100%"
+                                    src="https://neocities.jeith.com/wii-webring.html?site=https://maddycha.com&variant=standard"></iframe>
+                            </div>
+                            <object id="webring2" class="webring" id="melonland-surf-club"
+                                data="https://melonland.net/surf-badge.svg?fill=#241f1f" type="image/svg+xml"
+                                style="width: 100px; height: 100px;"></object>
+                                <div id="webring3" class="webring">
+                                    <div id='nekowebring' style="padding: 0px;">
+                                        <script type="text/javascript" src="https://webring.nekoweb.org/onionring-variables.js"></script>
+                                        <script type="text/javascript" src="https://webring.nekoweb.org/onionring-widget.js" color="pink"></script>
+                                        </div>                                </div>
+                                        <div id="webring4" class="webring">
+                                            <div id='cutie-club'>
+                                                <script type="text/javascript" src="https://ita.toys/cutie-club/onionring-variables.js"></script>
+                                                <script type="text/javascript" src="https://ita.toys/cutie-club/onionring-widget4.js"></script>
+                                                </div>
+                                        </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div class="section window" id="w4" onmousedown="orderDiv(this)">
+            <div class="row windownav" id="w4nav">
+                <p> ੈ✩‧₊ guestbook</p>
+                <div class="x" onclick="closeWindow(w4)"><img class="icon" src="imgs/icons/x.png"></div>
+            </div>
+            <div class="bottom-rounded">
+                <div class="guestbookcontent windowcontent">
+                    <h2>leave message</h2>
+                    <div id="guestbooks___guestbook-form-container">
+                        <form id="guestbooks___guestbook-form"
+                            action="https://guestbooks.meadow.cafe/guestbook/508/submit" method="post">
+                            <div class="guestbooks___input-container">
+                                <input id="nameinput" placeholder="name" type="text" id="name" name="name" required>
+                            </div>
+                            <div class="guestbooks___input-container">
+                                <input id="siteinput" placeholder="website (optional)" type="url" id="website"
+                                    name="website">
+                            </div>
+                            <div id="guestbooks___challenge-answer-container"></div>
+                            <br />
+                            <div class="guestbooks___input-container">
+                                <textarea id="messageinput" placeholder="message (plain text only)..." id="text"
+                                    name="text" style="width: 100%; box-sizing: border-box; resize: vertical;"
+                                    required></textarea>
+                            </div>
+                            <br />
+                            <input type="submit" value="submit response">
+                            <div id="guestbooks___error-message"></div>
+                        </form>
+                    </div>
+                    <div class="break">
+                        <p>⋆ ˚｡⋆୨୧˚｡˚⋆ ˚｡⋆୨୧˚｡˚⋆ ˚｡⋆୨୧˚｡˚⋆ ˚｡⋆୨୧˚｡˚⋆ ˚｡⋆୨୧˚｡˚⋆ ˚｡⋆୨୧˚｡˚⋆</p>
+                    </div>
+                    <div id="guestbooks___guestbook-messages-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+    <script src="js/script.js" type="text/javascript"></script>
+    <script async src="https://guestbooks.meadow.cafe/resources/js/embed_script/508/script.js"></script>
 </body>
 
 </html>
