@@ -175,6 +175,7 @@ a {
     /* float: left; */
     padding: 12px;
     margin-bottom: 8px;
+    position: relative;
 }
 
 
@@ -602,7 +603,7 @@ ul:last-of-type {
 }
 
 .linkscontent{
-    width: 600px;
+    width: 640px;
     height: 74vh;
     padding: 8px;
     overflow-y: auto;
@@ -679,6 +680,14 @@ input[type=text]:focus, input[type=url]:focus, textarea:focus{
 #maddycha-button{
     transform: scale(1.5);
     transform-origin: top left;
+}
+
+#pixel-float{
+    transform: scale(1.5);
+    transform-origin: bottom right;
+    position: absolute;
+    right: 4px;
+    bottom: 0;
 }
 
 #button-container{
