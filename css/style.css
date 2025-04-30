@@ -673,7 +673,16 @@ input[type=text]:focus, input[type=url]:focus, textarea:focus{
     background: #241f1f08;
     border-bottom: none;
     resize: none;
-    min-height: 36px;
+    min-height: 46px;
+}
+
+#maddycha-button{
+    transform: scale(1.5);
+    transform-origin: top left;
+}
+
+#button-container{
+    height: 48px;
 }
 
 textarea{
