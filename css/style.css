@@ -407,9 +407,11 @@ h3 {
 }
 
 #webrings{
-    display: none;
-    width: 100%; height: 100%; flex-direction: column;overflow: hidden;
+    display: none;overflow: hidden;flex-wrap: wrap;
+}
 
+.webring{
+    width: 50%;
 }
 
 #cutie-club table{
@@ -605,7 +607,7 @@ ul:last-of-type {
 }
 
 .linkscontent{
-    width: 647px;
+    width:671px;
     height: 74vh;
     padding: 8px;
     overflow-y: auto;

@@ -71,7 +71,7 @@ document.addEventListener('click', function (b) {
     }
   }
   if(windows[3].pos == true){
-    document.getElementById("webrings").style.display = "block";
+    document.getElementById("webrings").style.display = "flex";
 
   } else{
     document.getElementById("webrings").style.display = "none";
