@@ -414,6 +414,10 @@ h3 {
     float: left;
 }
 
+#cutie-club table{
+    width: 100%;
+}
+
 .text-section {
     padding-bottom: 8px;
 }
