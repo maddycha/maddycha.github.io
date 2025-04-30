@@ -407,11 +407,17 @@ h3 {
 }
 
 #webrings{
-    display: none;overflow: hidden;flex-wrap: wrap;
+    display: none;
 }
 
 .webring{
     width: 50%;
+    float: left;
+}
+
+#nekowebring .webring-prev img,#nekowebring .webring-next img{
+    width: 8px;
+    height: 16px;
 }
 
 #cutie-club table{
@@ -436,6 +442,12 @@ h3 {
     float: left;
     width: 30% !important;
 }
+
+.left-50{
+    float: left;
+    width: 50% !important;
+}
+
 
 .left-70{
     float: left;
@@ -692,6 +704,10 @@ input[type=text]:focus, input[type=url]:focus, textarea:focus{
     position: absolute;
     right: 4px;
     bottom: 0;
+}
+
+.pixels img{
+    image-rendering: pixelated;
 }
 
 #button-container{

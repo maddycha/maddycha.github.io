@@ -49,7 +49,7 @@ document.addEventListener('mousedown', function (b) {
     }
   }
   if(windows[3].pos == true){
-    document.getElementById("webrings").style.display = "flex";
+    document.getElementById("webrings").style.display = "block";
   } else{
     document.getElementById("webrings").style.display = "none";
    }
@@ -71,7 +71,7 @@ document.addEventListener('click', function (b) {
     }
   }
   if(windows[3].pos == true){
-    document.getElementById("webrings").style.display = "flex";
+    document.getElementById("webrings").style.display = "block";
 
   } else{
     document.getElementById("webrings").style.display = "none";
