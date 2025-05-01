@@ -82,6 +82,12 @@ input[type=submit]{
 .icons .row:hover{
     cursor: url(../imgs/cursors/pointer.cur), pointer;
 }
+#sitemap li:hover{
+    cursor: url(../imgs/cursors/pointer.cur), pointer;
+}
+#copy-open li:hover{
+    cursor: url(../imgs/cursors/pointer.cur), pointer;
+}
 .x:hover{
     cursor: url(../imgs/cursors/pointer.cur), pointer;
 }
@@ -239,11 +245,48 @@ body {
     height: 40px;
 }
 
-ul {
-    width: 220px;
+#sitemap{
+    border-top: solid 1px var(--black);
+    border-right: solid 1px var(--black);
+    border-left: none;
+    border-bottom: none;
+    position: absolute;
+    bottom: 40px;
+    padding: 0px;
+    box-sizing: border-box;
+    transform-origin: bottom left;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background: var(--white);
+
 }
 
-li {
+#sitemap li{
+    border-bottom: dotted 1px var(--black);
+    padding: 16px;
+}
+
+#sitemap li:first-of-type{
+    padding-top: 24px;
+}
+
+#sitemap li:last-of-type{
+    padding-bottom: 24px;
+    border-bottom: none;
+}
+
+ul {
+    width: 220px;
+    box-sizing: border-box;
+}
+
+#copy-open li, #copy-open, #sitemap{
+    box-sizing: border-box;
+    width: 260px !important;
+}
+
+#macnav li {
     display: inline-block;
     padding-top: 12px;
     padding-left: 12px;
@@ -593,6 +636,13 @@ ul:last-of-type {
     padding-top: 0px;
     padding-bottom: 4px;
     font-size: 2.4rem;
+}
+
+#cat-img{
+    width: 20%;
+    position: absolute;
+    right: 12px;
+    bottom: 4px;
 }
 
 .mobilesection .art img, .mobilesection .screenshots img{
