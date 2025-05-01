@@ -95,7 +95,7 @@ var webring = {
 <rect x="5" y="9" width="1" height="1" fill="#000000" />
 </svg></a>
 <object>
-      <div><img id="rhythmring-img" src="imgs/widget/g2.png" style="padding-bottom: 2px;"></div>
+      <div><img id="rhythmring-img" src="" style="padding-bottom: 2px;"></div>
       <a href="RANDOM" target="_blank">[random]</a>
             </object>
       <a href="NEXT" target="_blank">
@@ -179,7 +179,7 @@ var webring = {
     </div>
   `,
   // widget css
-  stylesheet: "https://maddycha.com/rhythm-ring/css/style.css",
+  stylesheet: "https://maddycha.com/rhythm-ring/css/rhythmring.css",
 
   // html inserted instead of your widget on sites that aren't in the ring
   error: "<div>this site isn't part of the webring yet</div>",

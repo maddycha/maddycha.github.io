@@ -171,31 +171,9 @@ h2{
 }
 
 
-#rhythmring *{
-    color: black;
-    fill: black;
-    font-size: 10px;
-    text-align: center;
-}
 
-#rhythmring{
-    width: min-content;
-    min-width: min-content;
-    display: flex;
-    gap: 8px;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4px;
-}
 
-#rhythmring a:hover{
-    text-decoration:underline;
-}
 
-#rhythmring-img{
-    content:url("https://maddycha.com/rhythm-ring/imgs/widget/g1.png");
-    width: auto;
-}
 
 @media screen and (pointer:none),
 (pointer:coarse) and (min-width: 0px) and (max-width: 767px) {
