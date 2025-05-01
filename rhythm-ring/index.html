@@ -22,9 +22,13 @@
 <body onload="members();">
     <main id="ds">
         <div id="left-screen">
+            <img id="logo" src="imgs/misc/logo.png">
             <section id="about">
-                <p>welcome! this is a webring for fans of the rhythm heaven series.</p>
-                <p>this webring is being maintained by: <a href="https://maddycha.com/" target="_blank">maddy</a></p>
+                <div class="white-bg">
+                    <p>welcome! this is a webring for fans of the rhythm heaven series.</p>
+                    <p>this webring is being maintained by: <a href="https://maddycha.com/" target="_blank">maddy</a>
+                    </p>
+                </div>
             </section>
             <section id="credit">
                 <h2>credit</h2>
@@ -77,28 +81,53 @@
                 </table>
             </section>
 
+
+            <section>
+                <h2>widget</h2>
+                <div class="white-bg">
+<p>once you have been accepted into the webring, paste this snippet into your html file where you want the widget to appear! it should look like this</p>
+<script defer src="http://maddycha.com/rhythm-ring/js/script.js" type="text/javascript"></script>
+<textarea style="height: 44px"><script defer src="http://maddycha.com/rhythm-ring/js/script.js" type="text/javascript"></script></textarea>
+
+
+                    <p>right now there are three different images you can choose from!</p>
+                    <p>replace [IMAGE LINK] with one of these options:</p>
+                    <div class="widget-img-options">
+                        <div class="widget-img">
+                    <img src="https://maddycha.com/rhythm-ring/imgs/widget/g1.png">
+                    <p>g1.png</p>
+                </div>
+                <div class="widget-img">
+                    <img src="https://maddycha.com/rhythm-ring/imgs/widget/g2.png">
+                    <p>g2.png</p>
+                </div>
+                <div class="widget-img">
+                    <img src="https://maddycha.com/rhythm-ring/imgs/widget/g3.png">
+                    <p>g3.png</p>
+                </div>
+                </div>
+                    <textarea style="height: 44px">#rhythmring-img{
+    content: url("https://maddycha.com/rhythm-ring/imgs/widget/[IMAGE LINK]");
+}</textarea>
+                    <p>to change the color of the text and arrows, use this css.</p>
+                    <textarea style="height: 44px;">#rhythmring *{
+    color: [INSERT COLOR];
+    fill: [INSERT COLOR];
+}</textarea>
+                    <p>to change the width of the widget, use this css.</p>
+                    <small>(note: min-width is set to min-content, would not suggest changing this!)</small>
+                    <textarea style="height: 36px;">#rhythmring{
+    width: [INSERT WIDTH];
+}</textarea>
+                </div>
+            </section>
+
         </div>
         <div class="clear"></div>
 
-
-        <section>
-            <h2>widget</h2>
-<p>to change the color of the text and arrows, add this code to your css.</p>
-            <code>#rhythmring *{
-                color: [INSERT COLOR];
-                fill: [INSERT COLOR];
-            }</code>
-<p>to change the width of the widget, add this code to your css.
-    <br>(note: min-width is set to min-content, would not suggest changing this!)
-</p>
-<code>#rhythmring{
-    width: [INSERT WIDTH];
-}</code>
-            <script src="js/script.js" type="text/javascript"></script>
-        </section>
     </main>
-<footer>
-</footer>
+    <footer>
+    </footer>
 </body>
 
 </html>

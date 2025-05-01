@@ -94,10 +94,10 @@ var webring = {
 <rect x="4" y="9" width="1" height="1" fill="#000000" />
 <rect x="5" y="9" width="1" height="1" fill="#000000" />
 </svg></a>
-<section>
+<object>
       <div><img id="rhythmring-img" src="imgs/widget/g2.png" style="padding-bottom: 2px;"></div>
       <a href="RANDOM" target="_blank">[random]</a>
-            </section>
+            </object>
       <a href="NEXT" target="_blank">
       <?xml version="1.0" encoding="UTF-8" ?>
 <svg version="1.1" width="14" height="10" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
@@ -178,7 +178,6 @@ var webring = {
       </a>
     </div>
   `,
-
   // widget css
   stylesheet: "https://maddycha.com/rhythm-ring/css/style.css",
 
