@@ -180,7 +180,7 @@ var webring = {
   `,
 
   // widget css
-  stylesheet: "https://maddycha.com/rhythmring/css/style.css",
+  stylesheet: "https://maddycha.com/rhythm-ring/css/style.css",
 
   // html inserted instead of your widget on sites that aren't in the ring
   error: "<div>this site isn't part of the webring yet</div>",
