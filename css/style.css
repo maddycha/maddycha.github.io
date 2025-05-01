@@ -259,7 +259,7 @@ body {
     overflow: hidden;
     transition: max-height 0.2s ease-out;
     background: var(--white);
-
+    z-index: 99;
 }
 
 #sitemap li{
