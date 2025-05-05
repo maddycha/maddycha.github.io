@@ -16,6 +16,13 @@
     right: 32px;
   }
 
+  #rhythmring{
+    width: 120px !important;
+    min-width: 120px!important;
+    gap: 0px !important;
+    padding: 0px !important;
+}
+
 
 /* crt filter */
 .crt::before {

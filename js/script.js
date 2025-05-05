@@ -351,5 +351,4 @@ fetch(feedURL)
               <p>${content}</p></div>
             `;
     }
-    document.getElementById("feed-reader").innerHTML = html;
   })
