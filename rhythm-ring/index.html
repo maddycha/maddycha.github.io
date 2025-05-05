@@ -23,14 +23,34 @@
     <main id="ds">
         <div id="left-screen">
             <img id="logo" style="width: 200px;" src="imgs/misc/logo.png">
-            <section id="about">
+
+
+        </div>
+        <div id="right-screen">
+
+            <nav>
+                <img onclick="openPage(aboutpage);" src="imgs/misc/about.png">
+                <img onclick="openPage(joinpage);" src="imgs/misc/join.png">
+                <img onclick="openPage(widgetpage);" src="imgs/misc/widget.png">
+                <img onclick="openPage(memberspage);" src="imgs/misc/members.png">
+            </nav>
+            <div class="nav-bg"></div>
+
+            <section id="aboutpage" class="page">
                 <div class="white-bg">
                     <p>Welcome! This is a webring for fans of the rhythm heaven series.</p>
                     <p>This webring is being maintained by: <a href="https://maddycha.com/" target="_blank">maddy</a>
                     </p>
                 </div>
-            </section>
-            <section id="credit">
+
+                <div class="white-bg">
+                    <ol>
+                        <li>Must be a hand-coded personal website, social media pages & carrd will not be considered.</li>
+                        <li>No hate speech or nsfw content.</li>
+                        <li>Include the webring widget or a linkback after approval</li>
+                    </ol>
+                </div>
+
                 <h2>credit</h2>
                 <ul>
                     <a href="https://juneish.neocities.org/written/resources/?page=webstring" target="_blank">
@@ -45,70 +65,270 @@
                     </a>
                 </ul>
             </section>
-        </div>
-        <div id="right-screen">
 
-            <nav>
-<img src="imgs/misc/about.png">
-<img src="imgs/misc/join.png">
-<img src="imgs/misc/widget.png">
-<img src="imgs/misc/members.png">
-
-            </nav>
-
-            <section id="join">
-                <h2>requirements</h2>
+<div id="joinpage">
+            <section class="page">
+                <h2>How to join</h2>
                 <ol>
-                    <li>Must be a hand-coded personal website, social media pages & carrd will not be considered.</li>
-                    <li>No hate speech or nsfw content.</li>
-                    <li>Include the webring widget or a linkback after approval</li>
+                    <li>Send me an email at <a href="mailto:maddycha@gmail.com" target="_blank">maddycha@gmail.com</a> with the subject "[RHYTHM RING] application".</li>
+                    <li>Copy and paste this on a separate line in the email and replace bracketed text with your info.
+
+                        <textarea style="margin-bottom: 2px;">members.push({name: "[NAME]", url: "[https://URL.com]", img: "[FILE NAME]"});</textarea>
+                                                <small>EXAMPLE: members.push({name: "<span class="accent-color">maddy</span>", url: "<span class="accent-color">https://maddycha.com/"</span>, img: "<span class="accent-color">the-dazzles-2.png</span>"});</small>
+                    </li>
                 </ol>
             </section>
 
-            <section id="members">
-<div id="members-table"></div>
+            <div class="icon-options">
+                <div class="icon">
+                    <img src="imgs/icons/built-to-scale.png">
+                    <code>built-to-scale.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/glee-club.png">
+                    <code>glee-club.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/fillbots.png">
+                    <code>fillbots.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/fan-club.png">
+                    <code>fan-club.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/remix-1.png">
+                    <code>remix-1.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/rhythm-rally.png">
+                    <code>rhythm-rally.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/shoot-em-up.png">
+                    <code>shoot-em-up.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/blue-birds.png">
+                    <code>blue-birds.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/moai-doo-wop.png">
+                    <code>moai-doo-wop.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/remix-2.png">
+                    <code>remix-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/love-lizards.png">
+                    <code>love-lizards.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/crop-stomp.png">
+                    <code>crop-stomp.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/freeze-frame.png">
+                    <code>freeze-frame.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/the-dazzles.png">
+                    <code>the-dazzles.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/remix-3.png">
+                    <code>remix-3.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/munchy-monk.png">
+                    <code>munchy-monk.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/dj-school.png">
+                    <code>dj-school.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/drummer-duel.png">
+                    <code>drummer-duel.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/love-lab.png">
+                    <code>love-lab.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/remix-4.png">
+                    <code>remix-4.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/splashdown.png">
+                    <code>splashdown.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/big-rock-finish.png">
+                    <code>big-rock-finish.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/dog-ninja.png">
+                    <code>dog-ninja.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/frog-hop.png">
+                    <code>frog-hop.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/remix-5.png">
+                    <code>remix-5.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/space-soccer.png">
+                    <code>space-soccer.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/lockstep.png">
+                    <code>lockstep.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/rockers.png">
+                    <code>rockers.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/karate-man.png">
+                    <code>karate-man.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/remix-6.png">
+                    <code>remix-6.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/built-to-scale-2.png">
+                    <code>built-to-scale-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/the-dazzles-2.png">
+                    <code>the-dazzles-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/frog-hop-2.png">
+                    <code>frog-hop-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/fan-club-2.png">
+                    <code>fan-club-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/remix-7.png">
+                    <code>remix-7.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/rhythm-rally-2.png">
+                    <code>rhythm-rally-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/fillbots-2.png">
+                    <code>fillbots-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/blue-birds-2.png">
+                    <code>blue-birds-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/lockstep-2.png">
+                    <code>lockstep-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/remix-8.png">
+                    <code>remix-8.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/moai-doo-wop-2.png">
+                    <code>moai-doo-wop-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/karate-man-2.png">
+                    <code>karate-man-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/glee-club-2.png">
+                    <code>glee-club-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/space-soccer-2.png">
+                    <code>space-soccer-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/remix-9.png">
+                    <code>remix-9.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/shoot-em-up-2.png">
+                    <code>shoot-em-up-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/splashdown-2.png">
+                    <code>splashdown-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/munchy-monk-2.png">
+                    <code>munchy-monk-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/rockers-2.png">
+                    <code>rockers-2.png</code>
+                </div>
+                <div class="icon">
+                    <img src="imgs/icons/remix-10.png">
+                    <code>remix-10.png</code>
+                </div>
+            </div>
+            </div>
+
+            <section id="memberspage" class="page">
+                <div id="members-table"></div>
             </section>
 
 
-            <section>
+            <section id="widgetpage" class="page">
                 <h2>widget</h2>
                 <div class="scroll-rounded">
-                <div class="white-bg scroll-y">
-<p>Once you have been accepted into the webring, paste this snippet into your html file where you want the widget to appear! It should look like this</p>
-<script src="js/rhythmring.js" type="text/javascript"></script>
-<textarea style="height: 44px"><script defer src="http://maddycha.com/rhythm-ring/js/rhythmring.js" type="text/javascript"></script></textarea>
+                    <div class="white-bg scroll-y">
+                        <p>Once you have been accepted into the webring, paste this snippet into your html file where
+                            you want the widget to appear! It should look like this</p>
+                        <script src="js/rhythmring.js" type="text/javascript"></script>
+                        <textarea
+                            style="height: 28px"><script defer src="http://maddycha.com/rhythm-ring/js/rhythmring.js" type="text/javascript"></script></textarea>
 
 
-                    <p>Right now there are three different images you can choose from!</p>
-                    <p>Replace [IMAGE LINK] with one of these options:</p>
-                    <div class="widget-img-options">
-                        <div class="widget-img">
-                    <img src="https://maddycha.com/rhythm-ring/imgs/widget/g1.png">
-                    <p>g1.png</p>
-                </div>
-                <div class="widget-img">
-                    <img src="https://maddycha.com/rhythm-ring/imgs/widget/g2.png">
-                    <p>g2.png</p>
-                </div>
-                <div class="widget-img">
-                    <img src="https://maddycha.com/rhythm-ring/imgs/widget/g3.png">
-                    <p>g3.png</p>
-                </div>
-                </div>
-                    <textarea style="height: 44px">#rhythmring-img{
+                        <p>Right now there are three different images you can choose from!</p>
+                        <p>Replace [IMAGE LINK] with one of these options:</p>
+                        <div class="widget-img-options">
+                            <div class="widget-img">
+                                <img src="https://maddycha.com/rhythm-ring/imgs/widget/g1.png">
+                                <p>g1.png</p>
+                            </div>
+                            <div class="widget-img">
+                                <img src="https://maddycha.com/rhythm-ring/imgs/widget/g2.png">
+                                <p>g2.png</p>
+                            </div>
+                            <div class="widget-img">
+                                <img src="https://maddycha.com/rhythm-ring/imgs/widget/g3.png">
+                                <p>g3.png</p>
+                            </div>
+                        </div>
+                        <textarea style="height: 44px">#rhythmring-img{
     content: url("https://maddycha.com/rhythm-ring/imgs/widget/[IMAGE LINK]");
 }</textarea>
-                    <p>to change the color of the text and arrows, use this css.</p>
-                    <textarea style="height: 44px;">#rhythmring *{
+                        <p>to change the color of the text and arrows, use this css.</p>
+                        <textarea style="height: 44px;">#rhythmring *{
     color: [INSERT COLOR];
     fill: [INSERT COLOR];
 }</textarea>
-                    <p>To change the width of the widget, use this css.</p>
-                    <small>(note: min-width is set to min-content, would not suggest changing this!)</small>
-                    <textarea style="height: 36px;">#rhythmring{
+                        <p>To change the width of the widget, use this css.</p>
+                        <small>(note: min-width is set to min-content, would not suggest changing this!)</small>
+                        <textarea style="height: 36px;">#rhythmring{
     width: [INSERT WIDTH];
 }</textarea>
-                </div>
+                    </div>
                 </div>
             </section>
 
