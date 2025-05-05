@@ -9,6 +9,14 @@
     background: #241f1f22;
   }
 
+
+  #rr-preview{
+    position: absolute;
+    bottom: 40px;
+    right: 32px;
+  }
+
+
 /* crt filter */
 .crt::before {
     content: " ";

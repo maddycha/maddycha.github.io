@@ -24,4 +24,5 @@
 #rhythmring-img{
     content:url("https://maddycha.com/rhythm-ring/imgs/widget/g1.png");
     width: auto;
+    image-rendering: pixelated;
 }

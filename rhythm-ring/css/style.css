@@ -52,7 +52,6 @@
     pointer-events: none;
     animation: flicker 0.2s infinite;
   }
-
 html {
     scroll-behavior: smooth !important;
     cursor: url(../imgs/cursors/default.cur), auto;
