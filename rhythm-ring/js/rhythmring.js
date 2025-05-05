@@ -5,12 +5,9 @@
 var members = [];
 
 members.push({name: "maddy", url: "https://maddycha.com/", img: "the-dazzles-2.png"});
-// members.push({name: "test", url: "https://tester.com/", img: "fan-club.png"});
-
-// members.push({name: "test", url: "https://tester.com/", img: "fan-club.png"});
-
-// members.push({name: "test", url: "https://tester.com/", img: "fan-club.png"});
-// members.push({name: "test", url: "https://tester.com/", img: "fan-club.png"});
+members.push({name: "yoona", url: "https://y2kstardust.neocities.org/", img: "built-to-scale.png"});
+members.push({name: "max", url: "https://minerolymax.neocities.org", img: "blue-birds-2.png"});
+members.push({name: "ddnikki", url: "https://ddnikki.nekoweb.org", img: "rockers.png"});
 
 var webring = {
   // list of sites in the ring

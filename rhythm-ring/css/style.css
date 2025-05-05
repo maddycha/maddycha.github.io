@@ -87,6 +87,11 @@ audio::-webkit-media-controls-play-button,
 .space{
     height: 24px;
 }
+
+#left-screen a{
+    color: black;
+}
+
 .centered{
     margin: 0 auto;
     display: flex;
@@ -147,7 +152,6 @@ margin-right: 11px;
 box-sizing: border-box;
 }
 .member:nth-of-type(3n){
-    background: red;
     padding-right: 0;
 }
 
@@ -345,7 +349,6 @@ img {
     -ms-user-select: none;
 }
 a {
-    color: currentColor;
     text-decoration: none;
 }
 
