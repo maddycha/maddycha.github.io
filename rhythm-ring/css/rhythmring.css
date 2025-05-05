@@ -8,12 +8,11 @@
 
 #rhythmring{
     width: min-content;
-    min-width: min-content;
     display: flex;
-    gap: 8px;
+    gap: 2px;
     justify-content: space-between;
     align-items: center;
-    padding: 4px;
+    padding: 2px;
     font-family: "rhythm heaven", monospace;
 }
 
