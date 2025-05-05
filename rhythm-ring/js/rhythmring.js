@@ -5,7 +5,12 @@
 var members = [];
 
 members.push({name: "maddy", url: "https://maddycha.com/", img: "the-dazzles-2.png"});
-members.push({name: "test", url: "https://tester.com/", img: "fan-club.png"});
+// members.push({name: "test", url: "https://tester.com/", img: "fan-club.png"});
+
+// members.push({name: "test", url: "https://tester.com/", img: "fan-club.png"});
+
+// members.push({name: "test", url: "https://tester.com/", img: "fan-club.png"});
+// members.push({name: "test", url: "https://tester.com/", img: "fan-club.png"});
 
 var webring = {
   // list of sites in the ring

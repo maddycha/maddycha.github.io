@@ -57,9 +57,52 @@ html {
     scroll-behavior: smooth !important;
     cursor: url(../imgs/cursors/default.cur), auto;
     font-family: "rhythm heaven", monospace;
-    background: gray;
 }
 
+body{
+    background-image: url("../imgs/misc/background.png");
+    background-size: cover;
+    background-color: rgba(255,255,255,0.9);
+    background-blend-mode: lighten;
+}
+
+#left-screen, #right-screen{
+    position: relative;
+}
+
+audio::-webkit-media-controls-play-button,
+ audio::-webkit-media-controls-panel {
+ background-color: #73ffff;
+ color: #73ffff;
+ }
+
+#left-screen{
+    border-right: solid 2px black;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.space{
+    height: 24px;
+}
+.centered{
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.no-outline-section{
+    padding: 16px;
+    text-align: center;
+}
+
+#logo{
+    width: 100%;
+    padding-top: 24px;
+}
 
 ::-webkit-scrollbar {
     width: 16px;               /* width of the entire scrollbar */
@@ -77,7 +120,47 @@ html {
 
   #joinpage,#widgetpage,#memberspage{
     display: none;
+    position: relative;
   }
+
+
+
+
+  #lockstep{
+    position: absolute;
+    left: 110px;
+    z-index: 95;
+    top: 432px;
+  }
+
+  #cheer{
+    position: absolute;
+    right: -12px;
+    z-index: 95;
+    top: 378px;
+  }
+  .member{
+    text-align: center;
+    width: 30%;
+padding-bottom: 24px;
+float: left;
+margin-right: 11px;
+box-sizing: border-box;
+}
+.member:nth-of-type(3n){
+    background: red;
+    padding-right: 0;
+}
+
+.member *{
+    width: 100%;}
+
+.member img{
+    width: 60px;
+    image-rendering: pixelated;
+    margin: 0 auto;
+    background: blue;
+}
 
 nav{
     position: absolute;
@@ -92,7 +175,7 @@ nav{
     z-index: 99;
 }
 
-.accent-color{
+.accent-color, a, a:hover, a:visited{
     color: #00a8f8;
 }
 
@@ -100,7 +183,7 @@ nav{
    list-style:decimal;
    counter-reset: item;
  }
- li {
+ ol li {
    counter-increment: item;
    padding-left: 2px;
    margin-left: 8px;
@@ -134,12 +217,25 @@ body{
     transform: translate(-50%, -50%);
     font-size: 12px;
     line-height: 14px;
-
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
 }
 
 #ds{
     aspect-ratio: 384 / 256;
-    width: 800px
+    width: 800px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: black solid 2px;
+
+
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
 
 #left-screen, #right-screen{
@@ -194,7 +290,7 @@ section{
     overflow: hidden;
 }
 
-.white-bg, h2, ul, ol{
+.white-bg, h2, ol{
     background: white;
     border-radius: 12px;
     padding: 12px;

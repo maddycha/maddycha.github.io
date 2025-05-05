@@ -20,38 +20,12 @@
 </head>
 
 <body onload="populateMembers();">
+
     <main id="ds">
         <div id="left-screen">
-            <img id="logo" style="width: 200px;" src="imgs/misc/logo.png">
+            <img id="logo" src="imgs/misc/logo.png">
 
-
-        </div>
-        <div id="right-screen">
-
-            <nav>
-                <img onclick="openPage(aboutpage);" src="imgs/misc/about.png">
-                <img onclick="openPage(joinpage);" src="imgs/misc/join.png">
-                <img onclick="openPage(widgetpage);" src="imgs/misc/widget.png">
-                <img onclick="openPage(memberspage);" src="imgs/misc/members.png">
-            </nav>
-            <div class="nav-bg"></div>
-
-            <section id="aboutpage" class="page">
-                <div class="white-bg">
-                    <p>Welcome! This is a webring for fans of the rhythm heaven series.</p>
-                    <p>This webring is being maintained by: <a href="https://maddycha.com/" target="_blank">maddy</a>
-                    </p>
-                </div>
-
-                <div class="white-bg">
-                    <ol>
-                        <li>Must be a hand-coded personal website, social media pages & carrd will not be considered.</li>
-                        <li>No hate speech or nsfw content.</li>
-                        <li>Include the webring widget or a linkback after approval</li>
-                    </ol>
-                </div>
-
-                <h2>credit</h2>
+            <div class="credit centered">
                 <ul>
                     <a href="https://juneish.neocities.org/written/resources/?page=webstring" target="_blank">
                         <li>webring code</li>
@@ -63,10 +37,55 @@
                     <a href="https://www.spriters-resource.com/ds_dsi/rhythmheaven/" target="_blank">
                         <li>rhythm heaven sprites</li>
                     </a>
+                    <div class="space"></div>
+                    <li>
+                        <audio controls autoplay loop>
+                            <source src="title-screen.mp3">
+                        </audio>
+                    </li>
                 </ul>
-            </section>
+
+            </div>
+        </div>
+        <div id="right-screen">
+
+            <nav>
+                <img onclick="openPage(aboutpage);" src="imgs/misc/about.png">
+                <img onclick="openPage(joinpage);" src="imgs/misc/join.png">
+                <img onclick="openPage(widgetpage);" src="imgs/misc/widget.png">
+                <img onclick="openPage(memberspage);" src="imgs/misc/members.png">
+            </nav>
+            <div class="nav-bg"></div>
+
+            <div id="aboutpage" class="page">
+
+                <img class="centered" src="imgs/misc/idol.png">
+                <div class="no-outline-section">
+                <p>Hello there!</p>
+
+<p>This is a webring for fans of the rhythm heaven series.</p>
+<p>Whether you've played some of the games or just appreciate the aesthetic &amp; vibe, you are welcome to join!</p>
+                </p>
+            </div>
+                <section>
+                    <h2>Requirements</h2>
+                    <ol>
+                        <li>Must be a hand-coded personal website, social media pages & carrd will not be considered.</li>
+                        <li>No hate speech or nsfw content.</li>
+                        <li>Include the webring widget or a linkback after approval</li>
+                    </ol>
+                </section>
+
+                <div class="no-outline-section">
+                    <p>This webring is being maintained by: <a href="https://maddycha.com/" target="_blank">maddy</a>
+
+                </div>
+                <img id="lockstep" src="imgs/misc/lockstep.png">
+
+            </div>
 
 <div id="joinpage">
+
             <section class="page">
                 <h2>How to join</h2>
                 <ol>
@@ -74,7 +93,7 @@
                     <li>Copy and paste this on a separate line in the email and replace bracketed text with your info.
 
                         <textarea style="margin-bottom: 2px;">members.push({name: "[NAME]", url: "[https://URL.com]", img: "[FILE NAME]"});</textarea>
-                                                <small>EXAMPLE: members.push({name: "<span class="accent-color">maddy</span>", url: "<span class="accent-color">https://maddycha.com/"</span>, img: "<span class="accent-color">the-dazzles-2.png</span>"});</small>
+                                                <p>EXAMPLE: members.push({name: "<span class="accent-color">maddy</span>", url: "<span class="accent-color">https://maddycha.com/"</span>, img: "<span class="accent-color">the-dazzles-2.png</span>"});</p>
                     </li>
                 </ol>
             </section>
@@ -283,9 +302,11 @@
             </div>
             </div>
 
-            <section id="memberspage" class="page">
+            <div id="memberspage" class="page">
+                <img id="cheer" src="imgs/misc/cheer.png">
                 <div id="members-table"></div>
-            </section>
+                <div class="clear"></div>
+                </div>
 
 
             <section id="widgetpage" class="page">
