@@ -5,15 +5,27 @@ function openPage(x) {
   document.getElementById("memberspage").style.display = "none";
   document.getElementById(x.id).style.display = "block";
   if(x.id == "aboutpage"){
-    console.log("about");
+    document.getElementById("about-button").src = "imgs/misc/about-pressed.png";
+    document.getElementById("join-button").src = "imgs/misc/join.png";
+    document.getElementById("widget-button").src = "imgs/misc/widget.png";
+    document.getElementById("members-button").src = "imgs/misc/members.png";
   }
-  // else if(x.id == "joinpage"){
-  //   console.log("members");
-  // } else if(x.id == "widgetpage"){
-  //   console.log("members");
-  // } else if(x.id == "memberspage"){
-  //   console.log("members");
-  // }
+  else if(x.id == "joinpage"){
+    document.getElementById("about-button").src = "imgs/misc/about.png";
+    document.getElementById("join-button").src = "imgs/misc/join-pressed.png";
+    document.getElementById("widget-button").src = "imgs/misc/widget.png";
+    document.getElementById("members-button").src = "imgs/misc/members.png";
+  } else if(x.id == "widgetpage"){
+    document.getElementById("about-button").src = "imgs/misc/about.png";
+    document.getElementById("join-button").src = "imgs/misc/join.png";
+    document.getElementById("widget-button").src = "imgs/misc/widget-pressed.png";
+    document.getElementById("members-button").src = "imgs/misc/members.png";
+  } else if(x.id == "memberspage"){
+    document.getElementById("about-button").src = "imgs/misc/about.png";
+    document.getElementById("join-button").src = "imgs/misc/join.png";
+    document.getElementById("widget-button").src = "imgs/misc/widget.png";
+    document.getElementById("members-button").src = "imgs/misc/members-pressed.png";
+    }
 }
 
 function populateMembers() {

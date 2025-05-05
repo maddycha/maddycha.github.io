@@ -50,10 +50,10 @@
         <div id="right-screen">
 
             <nav>
-                <img onclick="openPage(aboutpage);" src="imgs/misc/about.png">
-                <img onclick="openPage(joinpage);" src="imgs/misc/join.png">
-                <img onclick="openPage(widgetpage);" src="imgs/misc/widget.png">
-                <img onclick="openPage(memberspage);" src="imgs/misc/members.png">
+                <img id="about-button" onclick="openPage(aboutpage);" src="imgs/misc/about-pressed.png">
+                <img id="join-button" onclick="openPage(joinpage);" src="imgs/misc/join.png">
+                <img id="widget-button" onclick="openPage(widgetpage);" src="imgs/misc/widget.png">
+                <img id="members-button" onclick="openPage(memberspage);" src="imgs/misc/members.png">
             </nav>
             <div class="nav-bg"></div>
 
@@ -90,10 +90,10 @@
                 <h2>How to join</h2>
                 <ol>
                     <li>Send an email at <a href="mailto:maddycha@gmail.com" target="_blank">maddycha@gmail.com</a> with the subject
-                        <br>"[rhythm ring] application".</li>
-                    <li>Copy and paste this on a separate line in the email and replace bracketed text with your info.
+                        <br>"rhythm ring application".</li>
+                    <li>Copy and paste this on a separate line in the email and replace uppercase text with your info.
 
-                        <textarea style="margin-bottom: 2px;">members.push({name: "[NAME]", url: "[https://URL.com]", img: "[FILE NAME]"});</textarea>
+                        <textarea style="margin-top: 2px;margin-bottom: 2px;">members.push({name: "NAME", url: "HTTPS://URL.COM", img: "FILE NAME"});</textarea>
                                                 <p>EXAMPLE: members.push({name: "<span class="accent-color">maddy</span>", url: "<span class="accent-color">https://maddycha.com/"</span>, img: "<span class="accent-color">the-dazzles-2.png</span>"});</p>
                     </li>
                 </ol>
@@ -340,7 +340,7 @@
                         <textarea style="height: 44px">#rhythmring-img{
     content: url("https://maddycha.com/rhythm-ring/imgs/widget/[IMAGE LINK]");
 }</textarea>
-                        <p>to change the color of the text and arrows, use this css.</p>
+                        <p>To change the color of the text and arrows, use this css.</p>
                         <textarea style="height: 44px;">#rhythmring *{
     color: [INSERT COLOR];
     fill: [INSERT COLOR];
