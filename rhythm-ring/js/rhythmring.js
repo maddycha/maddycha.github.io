@@ -8,6 +8,7 @@ members.push({name: "maddy", url: "https://maddycha.com/", img: "the-dazzles-2.p
 members.push({name: "yoona", url: "https://y2kstardust.neocities.org/", img: "built-to-scale.png"});
 members.push({name: "max", url: "https://minerolymax.neocities.org", img: "blue-birds-2.png"});
 members.push({name: "ddnikki", url: "https://ddnikki.nekoweb.org", img: "rockers.png"});
+members.push({name: "sunny", url: "https://sunshinebeach.neocities.org/", img: "lockstep.png"});
 
 var webring = {
   // list of sites in the ring
