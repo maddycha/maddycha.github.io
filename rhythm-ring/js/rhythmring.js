@@ -9,6 +9,9 @@ members.push({name: "yoona", url: "https://y2kstardust.neocities.org/", img: "bu
 members.push({name: "max", url: "https://minerolymax.neocities.org", img: "blue-birds-2.png"});
 members.push({name: "ddnikki", url: "https://ddnikki.nekoweb.org", img: "rockers.png"});
 members.push({name: "sunny", url: "https://sunshinebeach.neocities.org/", img: "lockstep.png"});
+members.push({name: "Joey", url: "https://goldremix.neocities.org/", img: "rockers-2.png"});
+members.push({name: "phi", url: "https://biofreak.world", img: "glee-club-2.png"});
+
 
 var webring = {
   // list of sites in the ring
