@@ -28,6 +28,10 @@ function openPage(x) {
     }
 }
 
+  var audio = document.getElementById("title-song");
+  audio.volume = 0.2;
+
+
 function populateMembers() {
   for(var i = 0; i < members.length; i++){
     document.getElementById("members-table").innerHTML+= "<div class='member'><img src='imgs/icons/"+members[i].img+"'><p>"+members[i].name+"</p><a href='"+members[i].url+"' target='_blank'><p>[website]</p></a></div>";
