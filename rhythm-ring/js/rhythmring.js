@@ -11,6 +11,8 @@ members.push({name: "ddnikki", url: "https://ddnikki.nekoweb.org", img: "rockers
 members.push({name: "sunny", url: "https://sunshinebeach.neocities.org/", img: "lockstep.png"});
 members.push({name: "Joey", url: "https://goldremix.neocities.org/", img: "rockers-2.png"});
 members.push({name: "phi", url: "https://biofreak.world", img: "glee-club-2.png"});
+members.push({name: "Haumea Geth", url: "https://stupidwittlebaby.neocities.org/", img: "love-lab.png"});
+
 
 
 var webring = {
