@@ -259,6 +259,7 @@ height: 100%;
 }
 
 img{
+    image-rendering: pixelated;
     width: auto;
 }
 
@@ -303,6 +304,9 @@ section{
     justify-content: space-between;
     align-items:baseline;
     text-align: center;
+}
+.widget-img{
+    image-rendering: pixelated;
 }
 
 small{
