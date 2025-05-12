@@ -15,6 +15,7 @@ members.push({name: "Haumea Geth", url: "https://stupidwittlebaby.neocities.org/
 members.push({name: "OllieOkay", url: "https://ollie-okay.neocities.org/", img: "fillbots.png"});
 members.push({name: "snacks", url: "https://snacksgg.neocities.org/", img: "moai-doo-wop-2.png"});
 members.push({name: "Starry", url: "https://starry-knight.neocities.org/", img: "crop-stomp.png"});
+members.push({name: "Piranhebula", url: "https://piranhebula.neocities.org/", img: "crop-stomp.png"});
 
 
 var webring = {
