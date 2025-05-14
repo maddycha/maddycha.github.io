@@ -10,12 +10,14 @@ members.push({name: "max", url: "https://minerolymax.neocities.org", img: "blue-
 members.push({name: "ddnikki", url: "https://ddnikki.nekoweb.org", img: "rockers.png"});
 members.push({name: "sunny", url: "https://sunshinebeach.neocities.org/", img: "lockstep.png"});
 members.push({name: "Joey", url: "https://goldremix.neocities.org/", img: "rockers-2.png"});
-members.push({name: "phi", url: "https://biofreak.world", img: "glee-club-2.png"});
-members.push({name: "Haumea Geth", url: "https://stupidwittlebaby.neocities.org/", img: "love-lab.png"});
-members.push({name: "OllieOkay", url: "https://ollie-okay.neocities.org/", img: "fillbots.png"});
-members.push({name: "snacks", url: "https://snacksgg.neocities.org/", img: "moai-doo-wop-2.png"});
 members.push({name: "Starry", url: "https://starry-knight.neocities.org/", img: "crop-stomp.png"});
+members.push({name: "phi", url: "https://biofreak.world", img: "glee-club-2.png"});
+members.push({name: "OllieOkay", url: "https://ollie-okay.neocities.org/", img: "fillbots.png"});
+members.push({name: "Haumea Geth", url: "https://stupidwittlebaby.neocities.org/", img: "love-lab.png"});
+members.push({name: "snacks", url: "https://snacksgg.neocities.org/", img: "moai-doo-wop-2.png"});
 members.push({name: "Piranhebula", url: "https://piranhebula.neocities.org/", img: "crop-stomp.png"});
+members.push({name: "candycanearter", url: "https://abslimeware.neocities.org", img: "fillbots.png"});
+
 
 
 var webring = {
