@@ -1,27 +1,33 @@
 @font-face {
-    font-family: 'dreamer';
-    src: url(dreamer/DreamerTM.woff2);
-    font-weight: normal;
-    font-style: normal;
-}
-
-.instrument-serif-regular {
-    font-family: "Instrument Serif", serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.instrument-serif-regular-italic {
-    font-family: "Instrument Serif", serif;
-    font-weight: 400;
-    font-style: italic;
-}
-
-.mona-sans {
-  font-family: "Mona Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
+  font-family: 'satoshi-variable';
+  src: url('satoshi/Satoshi-Variable.woff2') format('woff2'),
+       url('satoshi/Satoshi-Variable.woff') format('woff'),
+       url('satoshi/Satoshi-Variable.ttf') format('truetype');
+  font-weight: 300 900;
+  font-display: swap;
   font-style: normal;
-  font-variation-settings:
-    "width" 100;
+}
+
+@font-face {
+  font-family: 'satoshi-variable-italic';
+  src: url('satoshi/Satoshi-VariableItalic.woff2') format('woff2'),
+       url('satoshi/Satoshi-VariableItalic.woff') format('woff'),
+       url('satoshi/Satoshi-VariableItalic.ttf') format('truetype');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'zt-bros-light-italic';
+  src: url('zt-bros/ZTBrosOskon90s-Italic.otf');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: '000webfont';
+  src: url('000webfont.ttf');
+  font-weight: 400;
+  font-style: normal;
 }

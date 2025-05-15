@@ -1,4 +1,5 @@
 document.getElementsByTagName('img').ondragstart = function () { return false; };
+var style = window.getComputedStyle(document.body)
 
 var getRandom = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
@@ -7,7 +8,7 @@ var windows = [];
 windows.push({ name: "w0", pos: false, text: "about", openId: "ow0" });
 windows.push({ name: "w1", pos: false, text: "dressup", openId: "ow1" });
 windows.push({ name: "w2", pos: false, text: "art", openId: "ow2" });
-windows.push({ name: "w3", pos: false, text: "links", openId: "ow3" });
+windows.push({ name: "w3", pos: false, text: "social", openId: "ow3" });
 windows.push({ name: "w4", pos: false, text: "guestbook", openId: "ow4" });
 // windows.push({ name: "w5", pos: false, text: "collections", openId: "ow5" });
 
@@ -78,12 +79,80 @@ document.addEventListener('click', function (b) {
   }
 });
 
+
+//tab functionality
+function openAboutTab(x) {
+  var aboutTabs = ["about-me", "site-info"];
+  if (sitemapOpen == true) {
+    content.style.maxHeight = null;
+    console.log("null");
+    setTimeout(sitemapBottomDelay, 200);
+    sitemapOpen = false;
+  }
+  for (var at = 0; at < aboutTabs.length; at++) {
+    document.getElementById("a" + at).classList.remove("a-active-tab");
+    document.getElementById("a" + at).style.background = style.getPropertyValue('--bg');
+    document.getElementById("a" + at).style.color = style.getPropertyValue('--primary');
+    document.getElementById("a" + at).style.borderBottomColor = style.getPropertyValue('--primary');
+    document.getElementById("a" + at + "Content").style.display = "none";
+  }
+  var openT = x.id;
+  var openTcontent = x.id + "Content";
+  document.getElementById(x.id).classList.add("a-active-tab");
+  aActive = document.getElementsByClassName("a-active-tab");
+  for (var i = 0; i < aActive.length; i++) {
+    if(aActive[i].id == "a0"){
+      aActive[i].style.color = style.getPropertyValue('--bg');
+    } else{
+      aActive[i].style.color = style.getPropertyValue('--primary');
+    }
+    aActive[i].style.background = style.getPropertyValue('--' + x.id + '');
+    aActive[i].style.borderBottomColor = style.getPropertyValue('--' + x.id + '');
+    document.getElementById("aboutBrowser").style.background = style.getPropertyValue('--' + x.id + '');
+    document.getElementById(aActive[i].id + "Content").style.display = "block";
+    document.getElementById("aUrl").innerHTML = "https://maddycha.com/"+aboutTabs[aActive[i].id.slice(1)];
+  }
+}
+function openSocialTab(x) {
+  var socialTabs = ["links", "resources", "rhythm-ring"];
+  if (sitemapOpen == true) {
+    content.style.maxHeight = null;
+    console.log("null");
+    setTimeout(sitemapBottomDelay, 200);
+    sitemapOpen = false;
+  }
+  for (var at = 0; at < socialTabs.length; at++) {
+    document.getElementById("s" + at).classList.remove("s-active-tab");
+    document.getElementById("s" + at).style.background = style.getPropertyValue('--bg');
+    document.getElementById("s" + at).style.color = style.getPropertyValue('--primary');
+    document.getElementById("s" + at).style.borderBottomColor = style.getPropertyValue('--primary');
+    document.getElementById("s" + at + "Content").style.display = "none";
+  }
+  var openT = x.id;
+  var openTcontent = x.id + "Content";
+  document.getElementById(x.id).classList.add("s-active-tab");
+  sActive = document.getElementsByClassName("s-active-tab");
+  for (var i = 0; i < sActive.length; i++) {
+    // if(sActive[i].id == "s"){
+    //   sActive[i].style.color = style.getPropertyValue('--bg');
+    // } else{
+      sActive[i].style.color = style.getPropertyValue('--primary');
+    // }
+    sActive[i].style.background = style.getPropertyValue('--' + x.id + '');
+    sActive[i].style.borderBottomColor = style.getPropertyValue('--' + x.id + '');
+    document.getElementById("socialBrowser").style.background = style.getPropertyValue('--' + x.id + '');
+    document.getElementById(sActive[i].id + "Content").style.display = "block";
+    document.getElementById("sUrl").innerHTML = "https://maddycha.com/"+socialTabs[sActive[i].id.slice(1)];
+  }
+}
+
 //window functionality
 function openWindow(x) {
 
-  if (sitemapOpen == true){
+  if (sitemapOpen == true) {
     content.style.maxHeight = null;
     console.log("null");
+    setTimeout(sitemapBottomDelay, 200);
     sitemapOpen = false;
   }
 
@@ -99,7 +168,7 @@ function openWindow(x) {
       if (windows[o].pos == false) {
         document.getElementById(openW).style.left = getRandom(0, rightLimit) + 'px'; // 👈🏼 Horizontally
         document.getElementById(openW).style.top = getRandom(0, bottomLimit) + 'px'; // 👈🏼 Vertically
-        document.getElementById('openwindows').innerHTML += "<li class='open' id='" + windows[o].openId + "' onclick='openWindow(" + openW + ")';'><p>" + windows[o].text + "</p></li>"
+        document.getElementById('openwindows').innerHTML += "<li class='open' id='" + windows[o].openId + "' onclick='openWindow(" + openW + ")';'>" + windows[o].text + "</li>"
         windows[o].pos = true;
       }
     }
@@ -206,7 +275,6 @@ window.addEventListener("load", function artLoad() {
     document.getElementById('gallery').innerHTML = "<div class='artimg' onclick='artUpdate(" + i + ");'><img class='artimg-img' id='artimg-" + i + "' src='" + art[i] + "'></div>" + document.getElementById('gallery').innerHTML;
   }
   document.getElementById('gallery').innerHTML += "<div class='clear'></div>";
-  // document.getElementById('gallery').innerHTML = "<div class='art-text'><p>hello! here's a collection of some of my work.</p><p>more of my work can be found on social media as i continue working on this page.<div class='laptop-links'><p><a href='https://www.instagram.com/maddycha' target='_blank'>&#8618; <img class='icon'src='imgs/icons/instagram.png'> instagram</a></p><p><a href='https://twitter.com/maddycha' target='_blank'><p>&#8618; <img class='icon' src='imgs/icons/twitter.png'> twitter</a></p><p><a href='https://bsky.app/profile/maddycha.com' target='_blank'><p>&#8618; <img class='icon' src='imgs/icons/bluesky.png'> bluesky</a></p></div></p><p></div>" + document.getElementById('gallery').innerHTML;
 });
 
 function artUpdate(x) {
@@ -214,10 +282,10 @@ function artUpdate(x) {
   document.getElementById("preview-img").src = art[x];
   for (var i = 0; i < artNum; i++) {
     var notselected = "artimg-" + i;
-    document.getElementById(notselected).style.border = "dotted 1px var(--black)";
-    document.getElementById(notselected).style.opacity = "0.6";
+    document.getElementById(notselected).style.border = "dotted 1px var(--primary)";
+    document.getElementById(notselected).style.opacity = "0.4";
   }
-  document.getElementById(selected).style.border = "solid 1px var(--black)";
+  document.getElementById(selected).style.border = "solid 1px var(--primary)";
   document.getElementById(selected).style.opacity = "1";
 }
 
@@ -280,19 +348,19 @@ window.addEventListener("load", function dressup() {
   for (var i = 1; i < topsBrands.length + 1; i++) {
     var b = i - 1;
     tops.push("imgs/items/t" + i + ".png");
-    document.getElementById('tops').innerHTML += "<div class='item' onclick='topsUpdate(" + b + ");'><h4 class='number'>0" + i + "</h4><h5 class='brand' id='" + b + "-topsbrand'>" + topsBrands[i - 1] + "</h5>";
+    document.getElementById('tops').innerHTML += "<div class='item' onclick='topsUpdate(" + b + ");'><h2 class='number'>0" + i + "</h2><p class='brand' id='" + b + "-topsbrand'>" + topsBrands[i - 1] + "</p>";
   }
 
   for (var i = 1; i < bottomsBrands.length + 1; i++) {
     var b = i - 1;
     bottoms.push("imgs/items/b" + i + ".png");
-    document.getElementById('bottoms').innerHTML += "<div class='item' onclick='bottomsUpdate(" + b + ");'><h4 class='number'>0" + i + "<h5 class='brand' id='" + b + "-bottomsbrand'>" + bottomsBrands[i - 1] + "</h5>";
+    document.getElementById('bottoms').innerHTML += "<div class='item' onclick='bottomsUpdate(" + b + ");'><h2 class='number'>0" + i + "</h2><p class='brand' id='" + b + "-bottomsbrand'>" + bottomsBrands[i - 1] + "</p>";
   }
 
   for (var i = 1; i < shoesBrands.length + 1; i++) {
     var b = i - 1;
     shoes.push("imgs/items/s" + i + ".png");
-    document.getElementById('shoes').innerHTML += "<div class='item' onclick='shoesUpdate(" + b + ");'><h4 class='number'>0" + i + "</h4><h5 class='brand' id='" + b + "-shoesbrand'>" + shoesBrands[i - 1] + "</h5>";
+    document.getElementById('shoes').innerHTML += "<div class='item' onclick='shoesUpdate(" + b + ");'><h2 class='number'>0" + i + "</h2><p class='brand' id='" + b + "-shoesbrand'>" + shoesBrands[i - 1] + "</p>";
   }
 
   document.getElementById(String(0 + "-topsbrand")).style.textTransform = "uppercase";
@@ -320,35 +388,93 @@ document.getElementById("time").innerHTML = cTime;
 var sitemapOpen = false;
 var content = document.getElementById("sitemap");
 //open sitemap from copy ul
+
+function sitemapBottomDelay() {
+  content.style.bottom = "39px";
+}
 function openSitemap() {
-      if (sitemapOpen == false){
-        content.style.maxHeight = content.scrollHeight + "px";
-        console.log("open");
-        sitemapOpen = true;
-      } else {
-        content.style.maxHeight = null;
-        console.log("null");
-        sitemapOpen = false;
-      }
+  if (sitemapOpen == false) {
+    content.style.maxHeight = content.scrollHeight + "px";
+    content.style.bottom = "40px";
+    sitemapOpen = true;
+  } else {
+    content.style.maxHeight = null;
+    console.log("null");
+    setTimeout(sitemapBottomDelay, 200);
+    // content.style.bottom = "39px";
+    sitemapOpen = false;
+  }
 }
 
 //status.cafe
 const feedURL = 'https://status.cafe/users/maddy.atom'
-fetch(feedURL)
-  .then(response => response.text())
-  .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
-  .then(data => {
-    const entries = data.querySelectorAll("entry");
-    let html = ``;
 
-    for (s = 0; s < 1; s++) {
-      let title = entries[s].querySelector("title").innerHTML.slice(0, 5).trim();
-      let content = entries[s].querySelector("content").textContent.trim();
-      let dateString = entries[s].querySelector("published").innerHTML.slice(5, 10);
-      html += `
-            <div class="text-section">
-              <p><span class="bold">${title}</span> - ${dateString}</p>
-              <p>${content}</p></div>
+      fetch(feedURL)
+        .then(response => response.text())
+        .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+        .then(data => {
+          const entries = data.querySelectorAll("entry");
+          let html = ``;
+
+          for (i = 0; i < 1; i++) {
+            let title = entries[i].querySelector("title").innerHTML.slice(0, 5).trim();
+            let content = entries[i].querySelector("content").textContent.trim();
+            let dateString = entries[i].querySelector("published").innerHTML.slice(5,10);
+            html += `
+            <div class='status-entry'>
+              <div class='status-content'>${content}</div>
+              <h2 style='padding-left: 16px;'>${dateString}</h2>
+              </div>
             `;
-    }
-  })
+          }
+          document.getElementById("feed-reader").innerHTML = html;
+        })
+
+
+
+// click effect
+
+// include this line when the page loads
+document.querySelector("body").addEventListener("click", explodeOnClick);
+
+/**
+ * Creates a container at the point of the page where the user clicked.  Populates that container with little "+" signs, sets an interval timer which regularly calculates the point on a curve give the time passed (x), updates the position of each '+' sign to be at the calculated position (given the time that's passed).
+ * e {Event} - object representing the 'click' of the page
+ **/
+function explodeOnClick(e) {
+  let toPopulate = document.createElement("div");
+  toPopulate.classList.add("explode");
+
+  toPopulate.style.top = e.clientY + "px";
+  toPopulate.style.left = e.clientX + "px";
+
+  document.querySelector("body").appendChild(toPopulate);
+
+  setTimeout(() => toPopulate.remove(), 1200);
+
+  // populate 1 star for testing
+  for (let i = 0; i < 2; i++) {
+    setTimeout(() => {
+      let newStar = document.createElement("p");
+      let j = 0;
+      let xDirection = Math.random() < 0.5 ? -1 : 1; // left or right
+      let xDistance = Math.random() * 100; // Random distance between 0 to 100px for where to fall
+      newStar.textContent = "+";
+      toPopulate.appendChild(newStar);
+
+      let timerId = setInterval(() => {
+        // Calculate new y position based on the parabolic equation
+        let yTrans = -(-(1 / 40) * (j - 20) ** 2 + 10) + "px";
+        let xTrans = xDirection * (xDistance * (j / 100)) + "px";
+        newStar.style.transform = `translateX(${xTrans}) translateY(${yTrans})`;
+
+        j += 1;
+      }, 25);
+
+      setTimeout(() => {
+        clearInterval(timerId);
+        newStar.remove();
+      }, 5000);
+    }, Math.floor(i / 3) * 50);
+  }
+}

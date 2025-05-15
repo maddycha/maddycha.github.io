@@ -1,0 +1,27 @@
+
+#rhythmring *{
+    color: black;
+    fill: black;
+    font-size: 10px;
+    text-align: center;
+}
+
+#rhythmring{
+    width: min-content;
+    display: flex;
+    gap: 2px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px;
+    font-family: "rhythm heaven", monospace;
+}
+
+#rhythmring a:hover{
+    text-decoration:underline;
+}
+
+#rhythmring-img{
+    content:url("https://maddycha.com/rhythm-ring/imgs/widget/g1.png");
+    width: auto;
+    image-rendering: pixelated;
+}

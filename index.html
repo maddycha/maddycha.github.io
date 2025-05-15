@@ -16,6 +16,8 @@ feel free to take inspo from my site and lmk if you have any questions!
     <link
         href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap"
         rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <link rel='stylesheet' href='fonts/fonts.css' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -29,100 +31,101 @@ feel free to take inspo from my site and lmk if you have any questions!
     <meta name="twitter:image:alt" content="preview of maddycha.com homepage">
     <meta property="og:description" content="personal website for designer/illustrator/hobbyist maddy cha">
     <div class="crt"></div>
+    <base target="_blank">
 </head>
 
 <body>
-    <div id="no-laptop">
-        <div class="mobile-container">
-            <div class="centered mobilesection">
-            <img class="pixels" style="image-rendering: pixelated;" src="imgs/misc/pixel-large.gif" alt="maddycha">
-                <h1>maddycha</h1>
-                <div class="mobile-links">
-                    <p><a href="https://www.instagram.com/maddycha" target="_blank">↪&#xFE0E; instagram</a></p>
-                    <p><a href="https://twitter.com/maddycha" target="_blank">
-                            <p>↪&#xFE0E; twitter
-                        </a></p>
-                    <p><a href="https://bsky.app/profile/maddycha.com" target="_blank">
-                            <p>↪&#xFE0E; bluesky
-                        </a></p>
+
+    <div id="macnav">
+        <div class="container m-0 p-0" style="height: 40px;">
+            <div class="row m-0 p-0 h-100">
+                <div class="col-sm-3" style="width: 285px;border-right: solid 1px var(--primary);">
+                    <div id="sitemap">
+                        <h2 style="padding:12px 0px;">sitemap</h2>
+                        <ul class="sitemap-list mb-3" style="width: 260px;">
+                            <li onclick="openWindow(w0);">about
+                                <ul class="mb-2">
+                                    <li onclick="openAboutTab(a0);openWindow(w0);">about me</li>
+                                    <li onclick="openAboutTab(a1);openWindow(w0);">site info
+                                        <br>
+                                        <p>credits &amp; update log</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="mb-2" onclick="openWindow(w2);">art</li>
+                            <li onclick="openWindow(w3);">social
+                                <ul class="mb-2">
+                                    <li onclick="openSocialTab(s0);openWindow(w3);">links
+                                        <br>
+                                        <p>my external links & button, cool sites, &amp; webrings</p>
+                                    </li>
+                                    <li onclick="openSocialTab(s1);openWindow(w3);">resources</li>
+                                    <li onclick="openSocialTab(s2);openWindow(w3);">rhythm-ring
+                                        <br>
+                                        <p>rhythm heaven webring</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="mb-2" onclick="openWindow(w4);">guestbook</li>
+                        </ul>
                     </div>
-        </div>
+                    <ul id="copy-open" onclick="openSitemap()">
+                        <li>&copy; maddy cha 2025</li>
+                    </ul>
 
-            <div class="mobilesection">
-                <p>hi i'm maddy welcome to my page!</p>
-                <div class="text-section">
-                    <p>i like to play video games and draw and spend money.</p>
-                    <p>i live with my two cats pigeon & bunny whom i love very much.</p>
+
                 </div>
-                <div class="text-section">
-                    <p>this page is best viewed on desktop, but feel free to take a look around.</p>
+                <div class="col gx-2 gy-1">
+                    <ul id="openwindows">
+                    </ul>
+                </div>
+                <div class="col-sm-2">
+                    <ul id="date-time">
+                        <li id="date"></li>
+                        <li id="time"></li>
+                    </ul>
                 </div>
             </div>
-
-            <div class="mobilesection">
-                <div class="art">
-                    <img src="imgs/art/pixels/1.gif">
-                    <img src="imgs/art/22.png">
-                    <img src="imgs/art/23.png">
-                    <img src="imgs/art/19.png">
-                    <img src="imgs/art/18.png">
-                    <img src="imgs/art/13.png">
-                </div>
-                <div class="clear"></div>
-            </div>
-
-            <div class="mobilesection" style="border-bottom: none;">
-                <div class="tamas">
-                    <a href="https://tamanotchi.world/21951c"><img src="https://tamanotchi.world/i2/21951" alt="It's tamaNOTchi! Click to feed!"></a><a href="https://tamanotchi.world/21946c"><img src="https://tamanotchi.world/i2/21946" alt="It's tamaNOTchi! Click to feed!"></a><a href="https://tamanotchi.world/21944c"><img src="https://tamanotchi.world/i2/21944" alt="It's tamaNOTchi! Click to feed!"></a>
-                </div>
-
-            </div>
-
-            <div class="centered" style="padding-top:24px;padding-bottom: 48px;"><p>&copy; maddy cha 2025</p></div>
         </div>
     </div>
 
-    <div id="laptop" onload="createWindows()">
-            <ul id="sitemap">
-                <li class="sitemap-link" onclick="openWindow(w0)">
-                    <h2 style="padding-bottom: 4px;">about</h2>
-                    <p>blurbs about me &amp; my interests</p>
-                </li>
-                <li class="sitemap-link" onclick="openWindow(w2)">
-                    <h2 style="padding-bottom: 4px;">art</h2>
-                    <p>gallery of my digital art</p>
-                </li>
-                <li class="sitemap-link" onclick="openWindow(w1)">
-                    <h2 style="padding-bottom: 4px;">dressup</h2>
-                    <p>explore my wardrobe</p>
-                </li>
-                <li class="sitemap-link" onclick="openWindow(w3)">
-                    <h2 style="padding-bottom: 4px;">links</h2>
-                    <p>external links, site credits, webrings, buttons</p>
-                </li>
-                <li class="sitemap-link" onclick="openWindow(w4)">
-                    <h2 style="padding-bottom: 4px;">guestbook</h2>
-                    <p>leave a note</p>
-                    </li>
-            </ul>
 
-            <div id="rhythm-ring-preview">
-                <a href="https://maddycha.com/rhythm-ring" target="_blank"><img id="rr-preview" src="imgs/misc/rr-preview-1.png" style="image-rendering: pixelated;"></a>
+    <div id="laptop" onload="createWindows();">
+
+        <div class="icon-container">
+            <div class="icon" id="w0icon" onclick="openWindow(w0)">
+                <img src="imgs/icons/about.png">
+                <h3>about</h3>
             </div>
-        <div id="macnav">
-            <ul id="copy-open" onclick="openSitemap()">
-                <li>&copy; maddy cha 2025</li>
-            </ul>
-            <ul id="openwindows">
-            </ul>
-            <ul>
-                <li id="date"></li>
-                <li id="time"></li>
-            </ul>
+            <div class="icon" id="w2icon" onclick="openWindow(w2)">
+                <img src="imgs/icons/art.png">
+                <h3>art</h3>
+            </div>
+            <div class="icon" id="w3icon" onclick="openWindow(w3)">
+                <img src="imgs/icons/social.png">
+                <h3>social</h3>
+            </div>
+            <div class="icon" id="w4icon" onclick="openWindow(w4)">
+                <img src="imgs/icons/guestbook.png">
+                <h3>guestbook</h3>
+            </div>
+
+            <div class="center">
+                <div class="alert">
+                    <h2>this site is very much still under construction!!!!
+                        <br>
+                        <br>i just wanted to publish to get rid of the old one but obviously this entire desktop view is
+                        a complete work in progress.
+                        <br>
+                        <br>also don't have responsive working yet my apologies!
+                    </h2>
+                </div>
+                <img src="imgs/misc/main.png" style="height: 100vh; z-index: 0;">
+            </div>
         </div>
 
-        <div class="icons">
-            <div class="row" id="w0icon" onclick="openWindow(w0)">
+        <!-- <div class="icons">
+            <div class="row draggable" id="w0icon" onclick="openWindow(w0)">
                 <img src="imgs/icons/about.png">
                 <p>about</p>
             </div>
@@ -144,643 +147,894 @@ feel free to take inspo from my site and lmk if you have any questions!
                 <img src="imgs/icons/guestbook.png">
                 <p>guestbook</p>
             </div>
-            <!-- <div class="row" id="w5icon" onclick="openWindow(w5)">
+            <div class="row" id="w5icon" onclick="openWindow(w5)">
                 <img src="imgs/icons/collections.png">
                 <p>collections</p>
-            </div> -->
-        </div>
-
-        <div class="center" id="home">
-            <div class="row">
-                <img style="width: 160px;" src="imgs/misc/portrait.png">
             </div>
-            <div class="row">
-                <h1>maddycha</h1>
-            </div>
-            <!-- <div class="row">
-                <h2>product designer in brooklyn</h2>
-                <h2>currently @ instagram</h2>
-            </div> -->
-        </div>
+        </div> -->
 
 
 
-
-
-        <div class="section window" id="w0" onmousedown="orderDiv(this)">
-            <div class="row windownav" id="w0nav">
-                <p> ੈ✩‧₊ about</p>
-                <div class="x" onclick="closeWindow(w0)"><img class="icon" src="imgs/icons/x.png"></div>
+        <div class="section window" id="w0" onmousedown="orderDiv(this);">
+            <div class="windownav" id="w0nav">
+                <h3>about</h3>
+                <div class="x" onclick="closeWindow(w0)">
+                    <h3>x</h3>
+                </div>
             </div>
             <div class="web-bar">
-                <div class="browser">
-                    <p>https://maddycha.com/about</p>
+                <div class="tabs d-flex">
+                    <h5 onclick="openAboutTab(this)" id="a0" class="a-active-tab"><img src="imgs/xyz/cee79f35.gif">
+                        about me
+                    </h5>
+                    <h5 onclick="openAboutTab(this)" id="a1" class=""><img src="imgs/pixel-safari/e8b3f1aa.gif"> site
+                        info
+                    </h5>
+                    <!-- <h5 onclick="openAboutTab(this)" id="a2" class=""><img src="imgs/pixel-safari/disc3.gif"> shrines
+                    </h5>
+                    <h5 onclick="openAboutTab(this)" id="a3" class=""><img src="imgs/pixel-safari/disc3.gif"> media</h5> -->
+                    <div class="flex-fill" style="border-bottom: solid 1px var(--primary);"></div>
+                </div>
+                <div id="aboutBrowser" class="browser">
+                    <h3 id="aUrl">https://maddycha.com/about-me</h3>
                 </div>
             </div>
             <div class="bottom-rounded">
-                <div class="browsercontent windowcontent scrollable">
-                    <div class="left-col">
-                        <div class="webnav websection">
-                            <h2>contents</h2>
-                            <p><a href="#about">↪&#xFE0E; about</a></p>
-                            <!-- <p><a href="#cats">↪&#xFE0E; pigeon &amp; bunny</a></p> -->
-                            <p><a href="#collection">↪&#xFE0E; sonny angels</a></p>
-                            <p><a href="#gamerecs">↪&#xFE0E; video games</a></p>
-                            <p><a href="#pokemon">↪&#xFE0E; pokemon</a></p>
-                            <p><a href="#acnh">↪&#xFE0E; animal crossing</a></p>
-                            <p><a href="#balatro">↪&#xFE0E; balatro</a></p>
-                        </div>
-                        <div class="websection">
-                            <h2>currently</h2>
-                            <div class="text-section">
-                                <p><span class="bold">playing: </span>animal crossing</p>
-                                <p><span class="bold">listening to: </span><a
-                                        href="https://open.spotify.com/playlist/3VBGAjb2Luqi2oFPKlW0zo?si=1149a0a36098475b"
-                                        target="_blank">↪&#xFE0E; playlist</a></p>
-                                <p><span class="bold">learning: </span>pixel art</p>
-                            </div>
-                            <img id="pixel-float" style="image-rendering: pixelated" src="imgs/misc/pixel.gif"
-                                alt="maddycha">
-                        </div>
-                        <!-- <div class="websection">
-                            <h2>to-do</h2>
-                            <p> &#9634; create menu/sitemap</p>
-                            <p> &#9634; add content on mobile</p>
-                        </div> -->
-                        <!-- <div class="status websection">
-                        <h2>status <a href="https://status.cafe/users/maddy" target="_blank">[previous]</a></h2>
-                        <div id='feed-reader'></div>
-                    </div> -->
-                    <div class="websection">
-                        <h2>featured</h2>
-                        <p style="padding-bottom: 0px; width: 80%;">interviewed &amp; drawn by cheapycore for their
-                            <br><a href="https://cheapycore.com/talkies/maddy/" target="_blank">↪&#xFE0E; talkies series</a></p>
-                        <a href="https://cheapycore.com/talkies/maddy/" target="_blank"><img id="featured-img" src="imgs/for-me/cheapycore.gif"></a>
-                    </div>
-                        <div class="websection">
-                            <h2>tamanotchi <a href="https://status.cafe/users/maddy" target="_blank">[view profile]</a>
-                            </h2>
-                            <div class="tamas">
-                                <a href="https://tamanotchi.world/21951c"><img src="https://tamanotchi.world/i/21951"
-                                        alt="It's tamaNOTchi! Click to feed!"></a><a
-                                    href="https://tamanotchi.world/21946c"><img src="https://tamanotchi.world/i/21946"
-                                        alt="It's tamaNOTchi! Click to feed!"></a><a
-                                    href="https://tamanotchi.world/21944c"><img src="https://tamanotchi.world/i/21944"
-                                        alt="It's tamaNOTchi! Click to feed!"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right-col">
-                        <div id="about" class="about websection">
-                            <h2>about</h2>
-                            <div class="about-section">
-                                <div class="about-img left-30">
-                                    <img src="imgs/misc/me.png">
-                                </div>
-                                <div class="about-text left-70">
-                                    <div class="text-section">
-                                        <p>hi i'm maddy welcome to my page! ⋆ ˚｡⋆୨୧˚｡˚⋆</p>
-                                    </div>
-                                    <div class="text-section">
-                                        <p>i like to play video games and draw and spend money.</p>
-                                        <p>i live with my two cats pigeon & bunny whom i love very much.</p>
-                                    </div>
-                                    <div class="text-section">
-                                        <p>keep reading to learn more about my interests!</p>
-                                    </div>
-                                    <div class="laptop-links">
-                                        <p><a href="https://www.instagram.com/maddycha" target="_blank">↪&#xFE0E; <img
-                                                    class="icon" src="imgs/icons/instagram.png"> instagram</a></p>
-                                        <p><a href="https://twitter.com/maddycha" target="_blank">
-                                                <p>↪&#xFE0E; <img class="icon" src="imgs/icons/twitter.png"> twitter
+                <div id="a0Content" class="container scrollable">
+                    <div class="row g-2">
+                        <div class="col-sm-3">
+                            <div class="row g-2 mb-2">
+                                <div class="col">
+                                    <h4>find me</h4>
+                                    <section>
+                                        <p><a href="https://www.instagram.com/maddycha">instagram</a>
+                                        </p>
+                                        <p><a href="https://twitter.com/maddycha">twitter </a></p>
+                                        <p><a href="https://bsky.app/profile/maddycha.com">bluesky </a>
+                                        </p>
+                                        <p><a href="https://giphy.com/maddycha">giphy </a></p>
+                                        <p><a href="https://spacehey.com/maddycha">spacehey </a></p>
+                                        <p><a href="https://forum.melonland.net/index.php?action=profile;u=2575">melonland
                                             </a></p>
-                                        <p><a href="https://bsky.app/profile/maddycha.com" target="_blank">
-                                                <p>↪&#xFE0E; <img class="icon" src="imgs/icons/bluesky.png"> bluesky
-                                            </a></p>
-                                    </div>
+                                    </section>
                                 </div>
-                                <div class="clear"></div>
                             </div>
-                            <section class="clear"></section>
-                        </div>
-
-                        <!-- <div id="cats" class="websection">
-                            <h2>pigeon &amp; bunny</h2>
-                            <div class="text-section" style="width: 75%;">
-                                                            <p>i adopted pigeon and bunny from <a href="https://www.kitteasf.com/" target="_blank">↪&#xFE0E; kittea</a> in 2020.</p>
-                            <p>their birthday is <span class="bold">05.04</span>, and they are about to turn 5 years old!</p>
-                            </div>
-                            <div class="text-section" style="width: 75%;">
-                            <p>pigeon (pictured on top) is very dog-like! she is extremely needy and plays fetch sometimes. i think it's because they lived with a bunch of dogs in one of their first foster homes.</p>
-                            <p>bunny is a little baby angel. she doesn't meow like a normal cat, instead she makes little chirping noises! she also has no teeth.</p>
-                            </div>
-                            <img id="cat-img" src="imgs/web/cats/1flip.png">
-                        </div> -->
-                        <div id="collection" class="websection">
-                            <h2>sonny angels</h2>
-                            <div class="text-section">
-                            <p>some blind box series i collect are sonny angel, smiski, skullpanda, molinta, azuki-san, nyota, aamy, susumi, peach riot, azura, and bad meaw.</p>
-                            <p>i eventually want to document everything, but it's a lot of work!</p>
-                            <p>in the meantime, please enjoy a snippet of my sonny angel collection</p>
-                            </div>
-                            <img style="width: 90%;" src="imgs/web/collection/1.png">
-                        </div>
-
-                        <div id="gamerecs" class="games websection">
-                            <h2>video games</h2>
-                            <div class="text-section">
-                                <p>i've been playing video games for as long as i can remember.</p>
-                                <p>i really want to create my own game someday, but for now i just enjoy playing them!</p>
-                                <p>nowadays, i really only play on switch bc i don't have a pc anymore.</p>
-                                <p>here are a few games that are special to me.</p>
-                            </div>
-                            <div class="game-thumbs">
-                                <img class="gamethumb" src="imgs/web/games/acnh.png">
-                                <img class="gamethumb" src="imgs/web/games/rhythm heaven.png">
-                                <img class="gamethumb" src="imgs/web/games/balatro.png">
-                                <img class="gamethumb" src="imgs/web/games/portal2.png">
-                                <img class="gamethumb" src="imgs/web/games/aa.png">
-                                <img class="gamethumb" src="imgs/web/games/katamari.png">
-                                <img class="gamethumb" src="imgs/web/games/papermario.png">
-                                <img class="gamethumb" src="imgs/web/games/mouthwashing.png">
-                                <img class="gamethumb" src="imgs/web/games/taiko.png">
-                                <img class="gamethumb" src="imgs/web/games/fea.png">
-                                <img class="gamethumb" src="imgs/web/games/pikmin.png">
-                                <img class="gamethumb" src="imgs/web/games/bioshock.png">
-                                <img class="gamethumb" src="imgs/web/games/stardew.png">
-                                <img class="gamethumb" src="imgs/web/games/inscryption.png">
-                                <img class="gamethumb" src="imgs/web/games/cotl.png">
-                                <img class="gamethumb" src="imgs/web/games/pmd.png">
-                                <img class="gamethumb" src="imgs/web/games/undertale.png">
-                                <img class="gamethumb" src="imgs/web/games/proximate.png">
-                                <img class="gamethumb" src="imgs/web/games/miku.png">
-                                <img class="gamethumb" src="imgs/web/games/twau.png">
+                            <div class="row g-2 mb-2">
+                                <div class="col">
+                                    <h4>tamanotchi</h4>
+                                    <section class="d-flex justify-content-between">
+                                        <a href="https://tamanotchi.world/21951c"><img
+                                                style="image-rendering: pixelated;"
+                                                src="https://tamanotchi.world/i/21951"
+                                                alt="It's tamaNOTchi! Click to feed!"></a>
+                                        <a href="https://tamanotchi.world/21946c"><img
+                                                style="image-rendering: pixelated;"
+                                                src="https://tamanotchi.world/i/21946"
+                                                alt="It's tamaNOTchi! Click to feed!"></a>
+                                        <a href="https://tamanotchi.world/21944c"><img
+                                                style="image-rendering: pixelated;"
+                                                src="https://tamanotchi.world/i/21944"
+                                                alt="It's tamaNOTchi! Click to feed!"></a>
+                                    </section>
+                                </div>
                             </div>
                         </div>
+                        <div class="col">
+                            <div class="row g-2 mb-2">
+                                <div class="col">
+                                    <h4>about me</h4>
+                                    <section>
+                                        <p>hi i'm maddy welcome to my page!</p>
+                                        <p>i live in new york with my two cats pigeon & bunny whom i love very much.
+                                            outside of being chronically online, i like to play video games, draw, and
+                                            spend egregious amounts of money on things
+                                            i don't need.</p>
+                                    </section>
+                                </div>
+                            </div>
+                            <div class="row g-2 mb-2">
+                                <div class="col">
+                                    <h4>interests &amp; favorites</h4>
+                                    <section style="padding: 4px;">
+                                        <table class="table table-hover">
+                                            <tr>
+                                                <td>animals</td>
+                                                <td>possums, pigeons, rats,</td>
+                                            </tr>
+                                            <tr>
+                                                <td>brands</td>
+                                                <td>vivienne westwood, acne studios, maison margiela, ottolinger, hyein
+                                                    seo, diesel,
+                                                    sandy
+                                                    liang, shushu/tong, simone rocha</td>
+                                            </tr>
+                                            <tr>
+                                                <td>video games</td>
+                                                <td>animal crossing, rhythm heaven, balatro, pokemon, katamari, portal,
+                                                    paper mario,
+                                                    ace
+                                                    attorney, professor layton, mouthwashing, bioshock, inscryption,
+                                                    fire emblem,
+                                                    zero
+                                                    escape</td>
+                                            </tr>
+                                            <tr>
+                                                <td>collectibles</td>
+                                                <td>blind boxes (sonny angel, smiski, molinta, skullpanda, aamy, bad
+                                                    meaw,
+                                                    azuki-san, nyota,
+                                                    susumi, peach riot, hirono), pokemon cards, legos, plushies, amiibo,
+                                                    keyboards,
+                                                    playing
+                                                    cards, dice</td>
+                                            </tr>
+                                        </table>
 
-                        <div id="pokemon" class="fav pokemon websection">
-                            <h2>pokemon</h2>
-                            <div class="text-section">
-                                <p><span class="bold">favorite pokemon</span></p>
-                                <p>some of my faves! chosen either for sentimental or aesthetic reasons.</p>
-                                <p>(not listed in any order)</p>
-                            </div>
-                            <div class="pokesprites">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/klefki.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/oricorio-pom-pom.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/haxorus.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/vaporeon.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/golisopod.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/meowth.png">
-                                <br>
-                                <img class="pkmnsprite" src="imgs/web/pokemon/spewpa.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/crustle.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/rattata.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/mr-mime.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/swoobat.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/mismagius.png">
-                            </div>
-                            <br>
-                            <div class="text-section">
-                                <p><span class="bold">favorite shinies</span></p>
-                                <p>i love shiny hunting more than anything in the world!</p>
-                                <p>eventually i'll populate with my shiny collection, but here are my faves for now.</p>
-                            </div>
-                            <div class="pokesprites">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/wooper.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/jumpluff.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/furret.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/oricorio-pau.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/toxapex.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/pachirisu.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/dragonair.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/vaporeon.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/oricorio-pom-pom.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/audino-mega.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/altaria.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/azumarill.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/latias.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/stufful.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/nihilego.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/oricorio-sensu.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/umbreon.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/gardevoir.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/sylveon.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/politoed.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/ninetales.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/whimsicott.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/venomoth.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/reuniclus.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/togedemaru.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/magnezone.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/eevee.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/mimikyu.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/golisopod.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/pheromosa.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/charizard.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/haxorus.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/oricorio.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/tapu-lele.png">
-                                <img class="pkmnsprite" src="imgs/web/pokemon/shiny/cutiefly.png">
+                                    </section>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-sm-3">
+                            <div class="row g-2 mb-2">
+                                <div class="col">
+                                    <h4>status <span class="h4-link"><a href="https://status.cafe/users/maddy">[see
+                                                all]</a></span></h4>
+                                    <section>
+                                        <div id='feed-reader'></div>
+                                        <img style="padding-left: 5%;width: 90%;margin-top: -20px;"
+                                            src="imgs/for-me/cheapycore.gif">
 
-                        <div id="acnh" class="acnh websection">
-                            <h2>animal crossing</h2>
-                            <div class="text-section">
-                                <p>i've played the gamecube version, wild world, city folk, new leaf, and new horizons.
-                                </p>
-                                <p>this section is dedicated to my new horizons island possum that will never be
-                                    complete bc
-                                    i
-                                    keep redesigning it.</p>
-                                <p>i've never worked harder on anything in my life so i hope u enjoy.</p>
-                            </div>
-                            <div class="text-section">
-                                <p><span class="bold">island name:</span> possum</p>
-                                <p><span class="bold">native fruit:</span> cherries</p>
-                                <p><span class="bold">started:</span> 03.20.2020</p>
-                            </div>
+                                        <p style="text-align:right;margin-top: -4px;"><a
+                                                href="https://cheapycore.com/">art by cheapy</a></p>
 
-                            <div class="acnh-villagers text-section">
-                                <img id="julian" src="imgs/web/acnh/julian.png">
-                                <img id="pietro" src="imgs/web/acnh/pietro.png">
-                                <img id="henry" src="imgs/web/acnh/henry.png">
-                                <img id="rosie" src="imgs/web/acnh/rosie.png">
-                                <img id="roscoe" src="imgs/web/acnh/roscoe.png">
-                                <img id="chevre" src="imgs/web/acnh/chevre.png">
-                                <img id="mac" src="imgs/web/acnh/mac.png">
-                                <img id="punchy" src="imgs/web/acnh/punchy.png">
-                                <img id="apollo" src="imgs/web/acnh/apollo.png">
-                                <img id="margie" src="imgs/web/acnh/margie.png">
-                            </div>
-                            <div class="screenshots">
-                                <img src="imgs/web/acnh/possum1.png">
-                                <img src="imgs/web/acnh/possum2.png">
-                                <img src="imgs/web/acnh/possum3.png">
-                                <img src="imgs/web/acnh/possum4.png">
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-
-
-                        <div id="balatro" class="games websection">
-                            <h2>balatro</h2>
-                            <div class="text-section">
-                                <p>balatro is my favorite indie game now and forever...</p>
-                                <p>so far i've 100%ed balatro on switch but i also play on mobile & steam</p>
-                                <p>my fave mod is <a href="https://www.nexusmods.com/balatro/mods/58"
-                                        target="_blank">pokermon</a> but i'm severely technologically challenged so i
-                                    probably need to redownload it...</p>
-                            </div>
-                            <div class="text-section">
-                                <p><span class="bold">favorite jokers</span></p>
-                            </div>
-                            <div class="cards">
-                                <img class="jokers" src="imgs/web/balatro/Baron.webp">
-                                <img class="jokers" src="imgs/web/balatro/Bloodstone.webp">
-                                <img class="jokers" src="imgs/web/balatro/Blueprint.webp">
-                                <img class="jokers" src="imgs/web/balatro/Burnt_Joker.webp">
-                                <img class="jokers" src="imgs/web/balatro/Business_Card.webp">
-                                <img class="jokers" src="imgs/web/balatro/Cartomancer.webp">
-                                <img class="jokers" src="imgs/web/balatro/Cavendish.webp">
-                                <img class="jokers" src="imgs/web/balatro/Chaos_the_Clown.webp">
-                                <img class="jokers" src="imgs/web/balatro/DNA.webp">
-                                <img class="jokers" src="imgs/web/balatro/Hallucination.webp">
-                                <img class="jokers" src="imgs/web/balatro/Hanging_Chad.webp">
-                                <img class="jokers" src="imgs/web/balatro/Lucky_Cat.webp">
-                                <img class="jokers" src="imgs/web/balatro/Midas_Mask.webp">
-                                <img class="jokers" src="imgs/web/balatro/Mime.webp">
-                                <img class="jokers" src="imgs/web/balatro/Oops_All_6s.webp">
-                                <img class="jokers" src="imgs/web/balatro/Perkeo.webp">
-                                <img class="jokers" src="imgs/web/balatro/Photograph.webp">
-                                <img class="jokers" src="imgs/web/balatro/Rocket.webp">
-                                <img class="jokers" src="imgs/web/balatro/Sixth_Sense.webp">
-                                <img class="jokers" src="imgs/web/balatro/Sock_and_Buskin.webp">
-                                <img class="jokers" src="imgs/web/balatro/Space_Joker.webp">
-                                <img class="jokers" src="imgs/web/balatro/Vagabond.webp">
+                                    </section>
+                                </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
-                <div class="clear"></div>
-            </div>
-        </div>
+                <div id="a1Content" style="display: none;" class="container scrollable">
+                    <div class="row g-2 mb-2">
+                        <div class="col-sm-3">
+                            <div class="row g-2 mb-2">
+                                <div class="col">
+                                    <h4>credits</h4>
+                                    <section>
+                                        <!-- <p>here are the specific resources i used to create this site! any
+                                            graphics/illustrations not listed are created by me.</p>
+                                        <p>i also have a comprehensive <a onclick="openSocialTab(s1);openWindow(w3);"
+                                                style="text-decoration: underline;">resources page</a> with helpful
+                                            links for
+                                            webcrafting.</p>
+                                        <p style="border-bottom: dashed 1px var(--primary);"></p>
+                                        <br> -->
+                                        <ul class="link-list">
+                                            <li><a href="https://foollovers.com/">fool lovers</a>
+                                                <br>wallpapers for windows
+                                            </li>
+                                            <li><a href="https://bechnokid.neocities.org/resources/statuscafefeed/">status
+                                                    cafe feed reader</a>
+                                            </li>
+                                            <li><a href="https://guestbooks.meadow.cafe/">guestbook embed</a>
+                                            </li>
+                                            <li><a href="https://oudkee.neocities.org/tutorials/tutcrt">crt effect</a>
+                                                <br>modified to create effect shown on site
+                                            </li>
 
+                                            <li><a href="https://pixelsafari.neocities.org/">pixel-safari</a>
+                                                <br>icons for page/site navigation
+                                            </li>
+                                            <li><a href="https://www.switchiconshowdown.com/">switch icons</a>
 
+                                            </li>
+                                            <li><a
+                                                    href="https://www.smogon.com/forums/threads/smogon-sprite-project.3647722/">smogon
+                                                    sprite project</a>
+                                            </li>
+                                            <li><a
+                                                    href="https://fateside.tumblr.com/post/149383267194/animal-crossing-pixel-masterpost">animal
+                                                    crossing sprites</a>
+                                            </li>
+                                            <li><a href="https://www.dafont.com/000webfont.font">000webfont typeface</a>
+                                                <br>for section headings
+                                            </li>
+                                            <li><a href="https://www.fontshare.com/fonts/satoshi">satoshi typeface</a>
+                                                <br>sans-serif body font
+                                            </li>
+                                        </ul>
+                                    </section>
+                                </div>
+                            </div>
+                            <div class="row"></div>
+                        </div>
+                        <div class="col">
+                            <div class="row g-2 mb-2">
+                                <div class="col">
+                                    <h4>about this site</h4>
+                                    <section>
+                                        <p>i created this site to document my interests &amp; have a centralized hub for
+                                            my work without having to rely on social media.</p>
+                                        <p>everything is hand-coded using html/css/js and <a
+                                                href="https://getbootstrap.com/">bootstrap</a> hosted publicly on <a
+                                                href="https://github.com/maddycha/maddycha.github.io">github</a>.
+                                            because i'm self-taught, my code &amp; worklflow is a bit unruly.</p>
+                                        <p>that being said, feel free to snoop around as much as you'd like &amp; i'd be
+                                            happy to answer any questions.</p>
+                                        <br>
+                                        <p>previous version: <a href="http://maddycha.com/v1.0">v1.0</a></p>
+                                    </section>
+                                </div>
+                            </div>
+                            <div class="row g-2 mb-2">
+                                <div class="col">
+                                    <h4>sitemap</h4>
+                                    <section>
+                                        <ul class="sitemap-list">
+                                            <li onclick="openWindow(w0);">about
+                                                <ul class="mb-2">
+                                                    <li onclick="openAboutTab(a0);openWindow(w0);">about me</li>
+                                                    <li onclick="openAboutTab(a1);openWindow(w0);">site info
+                                                        <br>
+                                                        <p>credits &amp; update log</p>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="mb-2" onclick="openWindow(w2);">art</li>
+                                            <li onclick="openWindow(w3);">social
+                                                <ul class="mb-2">
+                                                    <li onclick="openSocialTab(s0);openWindow(w3);">links
+                                                        <br>
+                                                        <p>my external links & button, cool sites, &amp; webrings</p>
+                                                    </li>
+                                                    <li onclick="openSocialTab(s1);openWindow(w3);">resources</li>
+                                                    <li onclick="openSocialTab(s2);openWindow(w3);">rhythm-ring
+                                                        <br>
+                                                        <p>rhythm heaven webring</p>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="mb-2" onclick="openWindow(w4);">guestbook</li>
 
+                                        </ul>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row g-2 mb-2">
+                                <div class="col">
+                                    <h4>to-do list</h4>
+                                    <section>
+                                        <ul class="todo-list">
+                                            <li>create desktop background image</li>
+                                            <li>create new desktop icons</li>
+                                            <li>work on mobile &amp; tablet views</li>
+                                            <li>redesign dress-up game</li>
+                                            <li>create shrines/interest pages</li>
+                                        </ul>
+                                    </section>
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col">
+                                    <h4>update log</h4>
+                                    <section>
+                                        <ul class="plus-list">
+                                            <h2>05.16.2025</h2>
+                                            <li>revamped site!</li>
+                                        </ul>
+                                        <ul class="plus-list">
+                                            <h2>05.01.2025</h2>
+                                            <li>created mobile/tablet view</li>
+                                            <li>created sitemap</li>
+                                            <li>added sticker sheet to links page</li>
+                                        </ul>
+                                        <ul class="plus-list">
+                                            <h2>04.23.2025</h2>
+                                            <li>updated linkback button</li>
+                                            <li>added webrings to links section</li>
+                                        </ul>
+                                        <ul class="plus-list">
+                                            <h2>04.14.2025</h2>
+                                            <li>site published</li>
+                                        </ul>
+                                        <ul class="plus-list">
+                                            <h2>04.16.2025</h2>
+                                            <li>balatro &amp; pokemon added to interests</li>
+                                            <li>added art gallery</li>
+                                        </ul>
+                                        <ul class="plus-list">
+                                            <h2>04.14.2025</h2>
+                                            <li>site published</li>
+                                        </ul>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div id="a2Content" style="display: none;" class="container scrollable">rejsl</div>
+                    <div id="a3Content" style="display: none;" class="container scrollable">rejsl</div> -->
 
-
-        <div class="section window" id="w1" onmousedown="orderDiv(this)">
-            <div class="row windownav" id="w1nav">
-                <p> ੈ✩‧₊ dressup</p>
-                <div class="x" onclick="closeWindow(w1)"><img class="icon" src="imgs/icons/x.png"></div>
-            </div>
-            <div class="windowcontent">
-                <div class="col dress-up">
-                    <img src="imgs/items/base.png" id="base-img">
-                    <img src="imgs/items/s1.png" id="shoes-img">
-                    <img src="imgs/items/b1.png" id="bottoms-img">
-                    <img src="imgs/items/t1.png" id="tops-img">
                 </div>
-                <div class="col dressup-text">
-                    <div class="row dressup-section" id="tops"></div>
-                    <div class="row dressup-section" id="bottoms"></div>
-                    <div class="row dressup-section" style="border: none" id="shoes"></div>
+
+                </div>
+
+            </div>
+
+            <div class="section window" id="w1" onmousedown="orderDiv(this)">
+                <div class="windownav" id="w1nav">
+                    <h3>dress up</h3>
+                    <div class="x" onclick="closeWindow(w1)">
+                        <h3>x</h3>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row g-2 mb-2">
+                        <div class="col">
+                            <div class="row g-2 mb-2">
+                                <div class="col">
+                                    <div class="row dressup-section" id="tops"></div>
+                                </div>
+                            </div>
+                            <div class="row g-2 mb-2">
+                                <div class="col">
+                                    <div class="row dressup-section" id="bottoms"></div>
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col">
+                                    <div class="row dressup-section" style="border: none" id="shoes"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col dress-up">
+                            <img src="imgs/items/base.png" id="base-img">
+                            <img src="imgs/items/s1.png" id="shoes-img">
+                            <img src="imgs/items/b1.png" id="bottoms-img">
+                            <img src="imgs/items/t1.png" id="tops-img">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-
-
-        <div class="section window" id="w2" onmousedown="orderDiv(this)">
-            <div class="row windownav" id="w2nav">
-                <p> ੈ✩‧₊ art</p>
-                <div class="x" onclick="closeWindow(w2)"><img class="icon" src="imgs/icons/x.png"></div>
-            </div>
-            <div id="art">
+            <div class="section window" id="w2" onmousedown="orderDiv(this)">
+                <div class="windownav" id="w0nav">
+                    <h3>art</h3>
+                    <div class="x" onclick="closeWindow(w2)">
+                        <h3>x</h3>
+                    </div>
+                </div>
                 <div class="bottom-rounded">
-                    <div class="artcontent windowcontent">
-                        <div id="gallery">
-                            <div class="clear"></div>
+                    <div class="artcontent">
+                        <div class="row" style="--bs-gutter-x:0;">
+                            <div class="col" id="previewer">
+                                <img id="preview-img" src="imgs/art/23.png">
+                            </div>
+                            <div class="col scrollable" id="gallery">
+                                <div class="clearfix"></div>
+                            </div>
+
                         </div>
-                        <div id="previewer"><img id="preview-img" src="imgs/art/23.png"></div>
-                        <div class="clear"></div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="section window" id="w3" onmousedown="orderDiv(this)">
-            <div class="row windownav" id="w3nav">
-                <p> ੈ✩‧₊ links</p>
-                <div class="x" onclick="closeWindow(w3)"><img class="icon" src="imgs/icons/x.png"></div>
-            </div>
-            <div class="web-bar">
-                <div class="browser">
-                    <p>https://maddycha.com/links</p>
-                </div>
-            </div>
-            <div class="bottom-rounded">
-                <div class="linkscontent windowcontent">
-                    <div class="links-top">
-                        <div class="links-section col-30">
-                            <h2>find me</h2>
-                            <p><a href="https://www.instagram.com/maddycha" target="_blank">↪&#xFE0E; instagram</a></p>
-                            <p><a href="https://twitter.com/maddycha" target="_blank">
-                                    <p>↪&#xFE0E; twitter
-                                </a></p>
-                            <p><a href="https://bsky.app/profile/maddycha.com" target="_blank">
-                                    <p>↪&#xFE0E; bluesky
-                                </a></p>
-                            <p><a href="https://giphy.com/maddycha" target="_blank">
-                                    <p>↪&#xFE0E; giphy
-                                </a></p>
-                            <p><a href="https://spacehey.com/maddycha" target="_blank">
-                                    <p>↪&#xFE0E; spacehey
-                                </a></p>
-                            <p><a href="https://forum.melonland.net/index.php?action=profile;u=2575" target="_blank">
-                                    <p>↪&#xFE0E; melonland
-                                </a></p>
-                        </div>
-                        <div class="links-section col-30">
-                            <h2>credit</h2>
-                            <p><a href="https://app.dithermark.com/" target="_blank">
-                                    <p>↪&#xFE0E; dithering effect
-                                </a></p>
-                            <p><a href="https://www.switchiconshowdown.com/" target="_blank">
-                                    <p>↪&#xFE0E; video game thumbnails
-                                </a></p>
-                            <p><a href="https://www.smogon.com/forums/threads/smogon-sprite-project.3647722/"
-                                    target="_blank">
-                                    <p>↪&#xFE0E; pokemon sprites
-                                </a></p>
-                            <p><a href="https://fateside.tumblr.com/post/149383267194/animal-crossing-pixel-masterpost"
-                                    target="_blank">
-                                    <p>↪&#xFE0E; animal crossing sprites
-                                </a></p>
-                            <!-- <p><a href="https://bechnokid.neocities.org/tutorials/statuscafefeed/" target="_blank">↪&#xFE0E;
-                            status
-                            cafe feed reader</a></p> -->
-                            <p><a href="https://guestbooks.meadow.cafe/" target="_blank">↪&#xFE0E; guestbook</a></p>
-                            <p><a href="https://oudkee.neocities.org/tutorials/tutcrt" target="_blank">↪&#xFE0E; crt
-                                    effect</a></p>
-                            <p><a href="http://www.rw-designer.com/cursor-set/aero-tailles-shadow-big-sized"
-                                    target="_blank">↪&#xFE0E; xl cursor set</a></p>
-                        </div>
-                        <div class="button links-section col-30">
-                            <h2>link back</h2>
-                            <div class="text-section" id="button-container">
-                                <img id="maddycha-button" style="image-rendering: pixelated" src="maddycha.gif"
-                                    alt="maddycha"></a>
-                            </div>
-                            <textarea
-                                class="button-textarea"><a href="https://maddycha.com/" target="_blank"><img style="image-rendering: pixelated;" src="https://maddycha.com/maddycha.gif" alt="maddycha"></a></textarea>
-                            <p>feel free to link back to my page using the button above!</p>
-                        </div>
-                    </div>
-
-
-                    <div class="links-top">
-                        <div class="links-section col-30">
-                            <h2>webrings</h2>
-                            <!-- <div class="text-section">
-                                <p>always looking to join more webrings! let me know if you'd think my site would be a
-                                    good
-                                    fit for yours.</p>
-                            </div> -->
-                            <div id="webrings">
-                                <div id="webring6" class="webring">
-                                    <script src="https://snewberry.neocities.org/catfolk/webstring.js"></script>
-                                </div>
-                                <div id="webring5" class="webring">
-                                    <script defer src="https://maddycha.com/rhythm-ring/js/rhythmring.js" type="text/javascript"></script>
-                                </div>
-                                <div id="webring3" class="webring">
-                                    <div id='nekowebring' style="padding: 0px;">
-                                        <script type="text/javascript"
-                                            src="https://webring.nekoweb.org/onionring-variables.js"></script>
-                                        <script type="text/javascript"
-                                            src="https://webring.nekoweb.org/onionring-widget.js"></script>
-                                    </div>
-                                </div>
-                                <div id="webring4" class="webring">
-                                    <div id='cutie-club'>
-                                        <script type="text/javascript"
-                                            src="https://ita.toys/cutie-club/onionring-variables.js"></script>
-                                        <script type="text/javascript"
-                                            src="https://ita.toys/cutie-club/onionring-widget.js"></script>
-                                    </div>
-                                </div>
-                                <div id="webring1" class="webring">
-                                    <div style="width: 100%; /* <- Set any width you'd like! */">
-                                        <script src="https://neocities.jeith.com/assets/wii-ring.js"></script>
-                                        <wii-ring site="https://maddycha.com"></wii-ring>
-                                    </div>
-                                </div>
-                                <object id="webring2" class="webring" id="melonland-surf-club"
-                                    data="https://melonland.net/surf-badge.svg?fill=#241f1f"
-                                    type="image/svg+xml"></object>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                        <div class="links-section col-30" style="flex-grow: 1.5;">
-                            <h2>cool sites</h2>
-                            <div class="text-section" style="width: 100%;">
-                                <!-- <p>if you'd like your site removed or button updated, please feel free to email me at <a
-                                        class="bold" href="mailto:maddycha@gmail.com"
-                                        target="_blank">maddycha@gmail.com</a>
-                                    or message me on discord <span class="bold">@ maddycha</span>.</p> -->
-                            </div>
-                            <div class="buttons" style="width: 100%;">
-                                <a href="https://tamanotchi.world/" target="_blank"><img
-                                        src="imgs/buttons/tamanotchi.gif" alt="tamanotchi"></a>
-                                <a href="https://forum.melonland.net/" target="_blank"><img
-                                        src="imgs/buttons/melonland.gif" alt="melonland"></a>
-                                <a href="https://discourse.32bit.cafe/" target="_blank"><img
-                                        src="imgs/buttons/32bitcafe.png" alt="32bitcafe"></a>
-                                <a href="https://districts.nekoweb.org/index.html" target="_blank"><img
-                                        src="imgs/buttons/districts.png" alt="districts"></a>
-                                <a href="https://snewdraws.net" target="_blank"><img style="image-rendering: pixelated"
-                                        src="imgs/buttons/snew.gif" alt="Snewdraws.net Button"></a>
-                                <a href="https://dog-house.neocities.org/" target="_blank"><img
-                                        src="imgs/buttons/doghouse.gif" alt="doghouse"></a>
-                                <a href="https://ribo.zone" target="_blank"><img src="imgs/buttons/ribose.png"
-                                        alt="ribozone"></a>
-                                <a href="https://helveticablanc.com/index.html" target="_blank"><img
-                                        src="imgs/buttons/helveticablanc.gif" alt="helveticablanc"></a>
-                                <a href="https://lazybones.neocities.org/" target="_blank"><img
-                                        src="imgs/buttons/lazybones.png" alt="lazybones"></a>
-                                <a href="https://amalinalai.github.io/precipice/" target="_blank"><img
-                                        src="imgs/buttons/amalinalai.gif" alt="amalinalai"></a>
-                                <a href="https://amfmradio.nekoweb.org/" target="_blank"><img
-                                        src="imgs/buttons/amfmradio.png" alt="amfmradio"></a>
-                                <a href="https://sweetfish.site/" target="_blank"><img src="imgs/buttons/sweetfish.png"
-                                        alt="sweetfish"></a>
-                                <a href="https://coils.neocities.org/" target="_blank"><img src="imgs/buttons/coils.png"
-                                        alt="coils"></a>
-                                <a href="https://plumes.neocities.org/" target="_blank"><img
-                                        src="imgs/buttons/plumes.gif" alt="plumes"></a>
-                                <a href="https://humanfinny.neocities.org/" target="_blank"><img
-                                        src="imgs/buttons/humanfinny.jpg" alt="humanfinny"></a>
-                                <a href="https://lostletters.neocities.org/" target="_blank"><img
-                                        src="imgs/buttons/lostletters.gif" alt="lostletters"></a>
-                                <a href="https://ghostingpen.neocities.org/" target="_blank"><img
-                                        src="imgs/buttons/ghostingpen.gif" alt="ghostingpen"></a>
-                                <a href="https://sixey.es/" target="_blank"><img src="imgs/buttons/sixeyes.gif"
-                                        alt="siexeyes"></a>
-                                <a href="https://daisy.nekoweb.org/" target="_blank"><img src="imgs/buttons/daisy.gif"
-                                        alt="daisy"></a>
-                                <a href="https://july.lol/" target="_blank"><img src="imgs/buttons/july.gif"
-                                        alt="july"></a>
-                                <a href="http://sugarstarluxe.neocities.org/" target="_blank"><img
-                                        src="imgs/buttons/sugarstarluxe.gif" alt="sugarstarluxe"></a>
-                                <a href="http://pameluft.neocities.org/" target="_blank"><img
-                                        src="imgs/buttons/pameluft.gif" alt="pameluft"></a>
-                                <a href="http://jeith.com/" target="_blank"><img src="imgs/buttons/jeith.gif"
-                                        alt="jeith"></a>
-                                <a href="https://rice.place/" target="_blank"><img src="imgs/buttons/riceplace.png"
-                                        alt="riceplace"></a>
-                                <a href="https://felixfever.nekoweb.org/" target="_blank"><img
-                                        src="imgs/buttons/felixfever.gif" alt="felixfever"></a>
-                                <a href="https://harlequi.nz/" target="_blank"><img src="imgs/buttons/harlequinz.png"
-                                        alt="harlequinz"></a>
-                                <a href="https://freakphone.net/" target="_blank"><img src="imgs/buttons/freakphone.gif"
-                                        alt="freakphone"></a>
-                                <a href="https://lied.neocities.org"><img
-                                        src="https://lied.neocities.org/img/88x31a.gif"></a>
-                                <a href="https://faegardens333.neocities.org/" target="_blank"><img
-                                        src="imgs/buttons/faegardens.gif" alt="faegardens"></a>
-                                <a href="https://lovesick.cafe/home" target="_blank"><img
-                                        src="imgs/buttons/lovesick.png" alt="lovesick"></a>
-                                <a href="https://wasongo.art/" target="_blank"><img src="imgs/buttons/wasongo.gif"
-                                        alt="wasongo"></a>
-                                <a href="http://fawn.nekoweb.org/" target="_blank"><img src="imgs/buttons/fawn.png"
-                                        alt="fawn"></a>
-                                <a href="https://cheapycore.com/" target="_blank"><img src="imgs/buttons/cheapcore.gif"
-                                        alt="cheapycore"></a>
-                                <a href="https://gspace48.neocities.org/" target="_blank"><img
-                                        src="imgs/buttons/gspace48.gif" alt="gspace48"></a>
-                                        <a href="https://cinni.net/" target="_blank"><img
-                                            src="imgs/buttons/cinni.gif" alt="cinni"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="links-section">
-                        <h2>sticker sheet <a href="https://stickersheetclub.neocities.org/"
-                                target="_blank">[stickersheet club]</a></h2>
-                        <div class="text-section left-50">
-                            <div class="sticker-sheet pixels" style="padding-bottom: 4px;">
-                                <img src="imgs/stickers/maddycha.gif">
-                                <img src="imgs/stickers/maddycha.gif">
-                                <img src="imgs/stickers/maddycha.gif">
-                            </div>
-                            <p>welcome to my sticker collection!</p>
-                            <p>feel free to add my sticker above to your page.</p>
-                            <p>click on the stickers to the right to visit their websites.</p>
-                        </div>
-                        <div class="sticker-sheet pixels left-50">
-                            <a href="https://eggqqe.neocities.org/" target="_blank"><img
-                                    src="imgs/stickers/eggqqe.png"></a>
-                            <a href="http://bloopywoopy.neocities.org/" target="_blank"><img
-                                    src="imgs/stickers/bloopywoopy.png"></a>
-                            <a href="https://cinni.net/" target="_blank"><img src="imgs/stickers/cinni.png"></a>
-                            <a href="https://mintiness.org/" target="_blank"><img src="imgs/stickers/mintiness.png"></a>
-                            <a href="http://cosmicorvid.space/" target="_blank"><img
-                                    src="imgs/stickers/cosmicorvid.png"></a>
-                            <a href="https://vampirevalentine.neocities.org/" target="_blank"><img
-                                    src="imgs/stickers/vampirevalentine.png"></a>
-                            <a href="https://pastelhello.com/" target="_blank"><img
-                                    src="imgs/stickers/pastelhello.gif"></a>
-                            <a href="https://rabbitnet.neocities.org/" target="_blank"><img
-                                    src="imgs/stickers/rabbitnet.png"></a>
-                            <a href="https://thegardenofmadeline.neocities.org/" target="_blank"><img
-                                    src="imgs/stickers/thegardenofmadeline.png"></a>
-                            <a href="https://wasongo.art/" target="_blank"><img src="imgs/stickers/wasongo.png"></a>
-                        </div>
-                        <div class="clear"></div>
+            <div class="section window" id="w3" onmousedown="orderDiv(this)">
+                <div class="windownav" id="w3nav">
+                    <h3>social</h3>
+                    <div class="x" onclick="closeWindow(w3)">
+                        <h3>x</h3>
                     </div>
                 </div>
-            </div>
-        </div>
+                <div class="web-bar">
+                    <div class="tabs d-flex">
+                        <h5 onclick="openSocialTab(this)" id="s0" class="s-active-tab"><img
+                                src="imgs/pixel-safari/paper6.gif"> links
+                        </h5>
+                        <h5 onclick="openSocialTab(this)" id="s1" class=""><img src="imgs/pixel-safari/bee3.gif">
+                            resources
+                        </h5>
+                        <!-- <h5 onclick="openSocialTab(this)" id="s2" class=""><img src="imgs/pixel-safari/disc3.gif">
+                            guestbook
+                        </h5> -->
+                        <h5 onclick="openSocialTab(this)" id="s2" class=""><img src="imgs/pixel-safari/disc3.gif">
+                            rhythm
+                            ring</h5>
+                        <div class="flex-fill" style="border-bottom: solid 1px var(--primary);"></div>
+                    </div>
+                    <div id="socialBrowser" class="browser">
+                        <h3 id="sUrl">https://maddycha.com/links</h3>
+                    </div>
+                </div>
+                <div class="bottom-rounded">
+                    <div id="s0Content" class="container scrollable">
+                        <div class="row g-2 mb-2">
+                            <div class="col-sm-3">
+                                <div class="row g-2 mb-2">
+                                    <div class="col">
+                                        <h4>find me</h4>
+                                        <section>
+                                            <p><a href="https://www.instagram.com/maddycha">instagram</a>
+                                            </p>
+                                            <p><a href="https://twitter.com/maddycha">twitter </a></p>
+                                            <p><a href="https://bsky.app/profile/maddycha.com">bluesky </a>
+                                            </p>
+                                            <p><a href="https://giphy.com/maddycha">giphy </a></p>
+                                            <p><a href="https://spacehey.com/maddycha">spacehey </a></p>
+                                            <p><a href="https://forum.melonland.net/index.php?action=profile;u=2575">melonland
+                                                </a></p>
+                                        </section>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="col">
+                                        <h4>link back</h4>
+                                        <section>
+                                            <img id="lb-button" style="display: block;margin-left:-4px;"
+                                                id="maddycha-button" style="image-rendering: pixelated"
+                                                src="maddycha.gif" alt="maddycha.com">
+                                            <p style='margin-top: 24px;'>feel free to link back to my page using the
+                                                code
+                                                below!</p>
+                                            <textarea
+                                                style="min-height: 48px;"><a href="https://maddycha.com/"><img style="image-rendering: pixelated;" src="https://maddycha.com/maddycha.gif" alt="maddycha"></a></textarea>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row g-2 mb-2">
+                                    <div class="col">
+                                        <h4>websites</h4>
+                                        <section>
+                                            <a href="https://tamanotchi.world/"><img src="imgs/buttons/tamanotchi.gif"
+                                                    alt="tamanotchi"></a><a href="https://forum.melonland.net/"><img
+                                                    src="imgs/buttons/melonland.gif" alt="melonland"></a><a
+                                                href="https://discourse.32bit.cafe/"><img
+                                                    src="imgs/buttons/32bitcafe.png" alt="32bitcafe"></a><a
+                                                href="https://districts.nekoweb.org/index.html"><img
+                                                    src="imgs/buttons/districts.png" alt="districts"></a><a
+                                                href="https://snewdraws.net"><img style="image-rendering: pixelated"
+                                                    src="imgs/buttons/snew.gif" alt="Snewdraws.net Button"></a><a
+                                                href="https://dog-house.neocities.org/"><img
+                                                    src="imgs/buttons/doghouse.gif" alt="doghouse"></a><a
+                                                href="https://ribo.zone"><img src="imgs/buttons/ribose.png"
+                                                    alt="ribozone"></a><a
+                                                href="https://helveticablanc.com/index.html"><img
+                                                    src="imgs/buttons/helveticablanc.gif" alt="helveticablanc"></a><a
+                                                href="https://lazybones.neocities.org/"><img
+                                                    src="imgs/buttons/lazybones.png" alt="lazybones"></a><a
+                                                href="https://amalinalai.github.io/precipice/"><img
+                                                    src="imgs/buttons/amalinalai.gif" alt="amalinalai"></a><a
+                                                href="https://amfmradio.nekoweb.org/"><img
+                                                    src="imgs/buttons/amfmradio.png" alt="amfmradio"></a><a
+                                                href="https://sweetfish.site/"><img src="imgs/buttons/sweetfish.png"
+                                                    alt="sweetfish"></a><a href="https://coils.neocities.org/"><img
+                                                    src="imgs/buttons/coils.png" alt="coils"></a><a
+                                                href="https://plumes.neocities.org/"><img src="imgs/buttons/plumes.gif"
+                                                    alt="plumes"></a><a href="https://humanfinny.neocities.org/"><img
+                                                    src="imgs/buttons/humanfinny.jpg" alt="humanfinny"></a><a
+                                                href="https://lostletters.neocities.org/"><img
+                                                    src="imgs/buttons/lostletters.gif" alt="lostletters"></a><a
+                                                href="https://ghostingpen.neocities.org/"><img
+                                                    src="imgs/buttons/ghostingpen.gif" alt="ghostingpen"></a><a
+                                                href="https://sixey.es/"><img src="imgs/buttons/sixeyes.gif"
+                                                    alt="siexeyes"></a><a href="https://daisy.nekoweb.org/"><img
+                                                    src="imgs/buttons/daisy.gif" alt="daisy"></a><a
+                                                href="https://july.lol/"><img src="imgs/buttons/july.gif"
+                                                    alt="july"></a><a href="http://sugarstarluxe.neocities.org/"><img
+                                                    src="imgs/buttons/sugarstarluxe.gif" alt="sugarstarluxe"></a><a
+                                                href="http://pameluft.neocities.org/"><img
+                                                    src="imgs/buttons/pameluft.gif" alt="pameluft"></a><a
+                                                href="http://jeith.com/"><img src="imgs/buttons/jeith.gif"
+                                                    alt="jeith"></a><a href="https://rice.place/"><img
+                                                    src="imgs/buttons/riceplace.png" alt="riceplace"></a><a
+                                                href="https://felixfever.nekoweb.org/"><img
+                                                    src="imgs/buttons/felixfever.gif" alt="felixfever"></a><a
+                                                href="https://harlequi.nz/"><img src="imgs/buttons/harlequinz.png"
+                                                    alt="harlequinz"></a><a href="https://freakphone.net/"><img
+                                                    src="imgs/buttons/freakphone.gif" alt="freakphone"></a><a
+                                                href="https://lied.neocities.org"><img
+                                                    src="https://lied.neocities.org/img/88x31a.gif"></a><a
+                                                href="https://faegardens333.neocities.org/"><img
+                                                    src="imgs/buttons/faegardens.gif" alt="faegardens"></a><a
+                                                href="https://lovesick.cafe/home"><img src="imgs/buttons/lovesick.png"
+                                                    alt="lovesick"></a><a href="https://wasongo.art/"><img
+                                                    src="imgs/buttons/wasongo.gif" alt="wasongo"></a><a
+                                                href="http://fawn.nekoweb.org/"><img src="imgs/buttons/fawn.png"
+                                                    alt="fawn"></a><a href="https://cheapycore.com/"><img
+                                                    src="imgs/buttons/cheapcore.gif" alt="cheapycore"></a><a
+                                                href="https://gspace48.neocities.org/"><img
+                                                    src="imgs/buttons/gspace48.gif" alt="gspace48"></a><a
+                                                href="https://cinni.net/"><img src="imgs/buttons/cinni.gif"
+                                                    alt="cinni"></a><a href="https://piranhebula.neocities.org/"><img
+                                                    src="imgs/buttons/piranhebula.gif" alt="piranhebula"></a><a
+                                                href="https://caitsith.neocities.org/myhomepage"><img
+                                                    src="imgs/buttons/caitsith.gif" alt="caitsith"></a><a
+                                                href="https://roboticoperatingbuddy.neocities.org/home"><img
+                                                    src="imgs/buttons/roboticoperatingbuddy.png"
+                                                    alt="roboticoperatingbuddy"></a>
+                                        </section>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="col">
+                                        <h4>sticker club <span class="h4-link"><a
+                                                    href="https://stickersheetclub.neocities.org/">[sticker
+                                                    sheet club]</a></span></h4>
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <img src="imgs/stickers/maddycha.gif">
+                                                </div>
+                                                <div class="col-sm-5" style="border-right: dashed 1px var(--primary);">
+                                                    <p>welcome to my sticker collection!</p>
+                                                    <p>feel free to add my sticker on the left to your page.</p>
+                                                    <p>click on the stickers to the right to visit the respective
+                                                        artists.
+                                                    </p>
+                                                </div>
+                                                <div class="col"><a href="https://eggqqe.neocities.org/"><img
+                                                            src="imgs/stickers/eggqqe.png"></a>
+                                                    <a href="http://bloopywoopy.neocities.org/"><img
+                                                            src="imgs/stickers/bloopywoopy.png"></a>
+                                                    <a href="https://cinni.net/"><img src="imgs/stickers/cinni.png"></a>
+                                                    <a href="https://mintiness.org/"><img
+                                                            src="imgs/stickers/mintiness.png"></a>
+                                                    <a href="http://cosmicorvid.space/"><img
+                                                            src="imgs/stickers/cosmicorvid.png"></a>
+                                                    <a href="https://vampirevalentine.neocities.org/"><img
+                                                            src="imgs/stickers/vampirevalentine.png"></a>
+                                                    <a href="https://pastelhello.com/"><img
+                                                            src="imgs/stickers/pastelhello.gif"></a>
+                                                    <a href="https://rabbitnet.neocities.org/"><img
+                                                            src="imgs/stickers/rabbitnet.png"></a>
+                                                    <a href="https://thegardenofmadeline.neocities.org/"><img
+                                                            src="imgs/stickers/thegardenofmadeline.png"></a>
+                                                    <a href="https://wasongo.art/"><img
+                                                            src="imgs/stickers/wasongo.png"></a>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="row mb-2 g-2">
+                                    <div class="col">
+                                        <h4>webrings</h4>
+                                        <section id="webrings">
+                                            <script id="rhythmring-wr" defer
+                                                src="https://maddycha.com/rhythm-ring/js/rhythmring.js"
+                                                type="text/javascript"></script>
+                                            <script id="catfolk-wr" defer
+                                                src="https://snewberry.neocities.org/catfolk/webstring.js"></script>
+                                            <div id='nekowebring' style="padding: 0px;">
+                                                <script defer type="text/javascript"
+                                                    src="https://webring.nekoweb.org/onionring-variables.js"></script>
+                                                <script defer type="text/javascript"
+                                                    src="https://webring.nekoweb.org/onionring-widget.js"></script>
+                                            </div>
+                                            <div id='cutie-club'>
+                                                <script defer type="text/javascript"
+                                                    src="https://ita.toys/cutie-club/onionring-variables.js"></script>
+                                                <script defer type="text/javascript"
+                                                    src="https://ita.toys/cutie-club/onionring-widget.js"></script>
+                                            </div>
+                                            <div id="wiiring-wr" style="width: 80%; /* <- Set any width you'd like! */">
+                                                <script defer
+                                                    src="https://neocities.jeith.com/assets/wii-ring.js"></script>
+                                                <wii-ring site="https://maddycha.com"></wii-ring>
+                                            </div>
+                                            <div style="width: 80%;margin: 0 auto;">
+                                                <object id="melonland-surf-club"
+                                                    data="https://melonland.net/surf-badge.svg?fill=#241f1f"
+                                                    type="image/svg+xml"></object>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="s1Content" style="display: none;" class="container scrollable">
+                        <div class="row g-2 mb-2">
+                            <div class="col-sm-2 position-fixed" style="padding-right: 26px;">
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <h4 class="s1-color">contents</h4>
+                                        <section>
+                                            <p><a href="#webcrafting" target="_self">webcrafting</a></p>
+                                            <p><a href="#communities" target="_self">communities</a></p>
+                                            <p><a href="#image-tools" target="_self">image tools</a></p>
+                                            <p><a href="#graphics" target="_self">graphics</a></p>
+                                            <p><a href="#typefaces" target="_self">typefaces</a></p>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
 
-        <div class="section window" id="w4" onmousedown="orderDiv(this)">
-            <div class="row windownav" id="w4nav">
-                <p> ੈ✩‧₊ guestbook</p>
-                <div class="x" onclick="closeWindow(w4)"><img class="icon" src="imgs/icons/x.png"></div>
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-5">
+                                <div class="row  mb-2">
+                                    <div class="col">
+                                        <h4 id="webcrafting" class="s1-color">webcrafting</h4>
+                                        <section>
+                                            <ul class="link-list">
+                                                <li><a href="https://webdev.yay.boo/">webdev frontend resources</a>
+                                                    <br>masterlist of resources including tools, software,
+                                                    accessibility,
+                                                    hosting, &amp; layouts.
+                                                </li>
+                                                <li><a href="https://goblin-heart.net/sadgrl/">sadgrl.online</a>
+                                                    <br>
+                                                    inclusive
+                                                    list of webcrafting resources including guides, layouts, &amp; tiled
+                                                    backgrounds.
+                                                </li>
+                                                <li><a href="https://scripted.neocities.org/">scripted</a>
+                                                    <br>various code snippets such as music players, scrollboxes, cursor
+                                                    effects, &amp; text
+                                                    effects.
+                                                </li>
+                                                <li><a href="https://www.mf2fm.com/rv/">rv's dhtml/js snippets</a>
+                                                    <br>mouse effects, text effects, and graphic effects code snippets.
+                                                </li>
+                                                <li><a href="https://getbootstrap.com/">bootstrap</a> customizable
+                                                    toolkit
+                                                    with prebuilt grid system &amp; components.</li>
+                                                <li><a href="https://ianlunn.github.io/Hover/">hover.css</a>
+                                                    <br>css hover effects with demos.
+                                                </li>
+                                                <li><a href="https://bechnokid.neocities.org/resources/statuscafefeed/">status
+                                                        cafe feed reader</a>
+                                                    <br>embed status.cafe posts onto personal sites.
+                                                </li>
+                                                <li><a href="https://guestbooks.meadow.cafe/">guestbook</a>
+                                                    <br>open source project to create &amp; embed guestbooks
+                                                </li>
+                                                <li><a href="https://oudkee.neocities.org/tutorials/tutcrt">crt
+                                                        effect</a>
+                                                    <br>code snippet to add crt effect to site (modified to
+                                                    create effect on this page).
+                                                </li>
+                                            </ul>
+                                        </section>
+                                    </div>
+                                </div>
+                                <div class="row g-2 mb-2">
+                                    <div class="col">
+                                        <h4 id="image-tools" class="s1-color">image tools</h4>
+                                        <section>
+                                            <ul class="link-list">
+                                                <li><a href="https://tinypng.com/">tinypng</a>
+                                                    <br>compress smart avif, webp, png,
+                                                    &amp; jpeg
+                                                    images for faster load times.
+                                                </li>
+                                                <li><a href="https://app.dithermark.com/">dithermark</a>
+                                                    <br>batch convert image
+                                                    dithering tool
+                                                    with extensive editing settings
+                                                </li>
+                                                <li><a href="https://doodad.dev/dither-me-this/">dither me this</a>
+                                                    <br>add
+                                                    dithering to images
+                                                    with presets including b&amp;w, rgb, cmyk, 3-bit, &amp; gameboy.
+                                                </li>
+                                            </ul>
+                                        </section>
+                                    </div>
+                                </div>
+
+                                <div class="row g-2 mb-2">
+                                    <div class="col">
+                                        <h4 id="typefaces" class="s1-color">typefaces</h4>
+                                        <section>
+                                            <ul class="link-list">
+                                                <li><a href="https://int10h.org/oldschool-pc-fonts/fontlist/">oldschool
+                                                        pc
+                                                        fonts</a>
+                                                    <br>classic
+                                                    text mode fonts, system fonts, and bios fonts from pre-gui eta
+                                                </li>
+                                                <li><a href="https://velvetyne.fr/">velvetyne</a>
+                                                    <br>open-source type foundry
+                                                    (experimental).
+                                                </li>
+                                                <li><a href="https://www.collletttivo.it/">collletttivo</a>
+                                                    <br>open-source type
+                                                    foundry
+                                                    (modern).
+                                                </li>
+                                                <li><a href="https://www.fontshare.com/">fontshare</a>
+                                                    <br>free fonts service
+                                                    providing
+                                                    professional grade fonts free for personal and commercial use.
+                                                </li>
+                                                <li><a href="https://www.fontbrief.com/fontbrief">fontbrief</a>
+                                                    <br>list of fonts
+                                                    filterable by
+                                                    personality (filter by free typefaces).
+                                                </li>
+                                                <li><a href="https://dirtylinestudio.com/freebies/">dirtyline studio</a>
+                                                    <br>digital
+                                                    type
+                                                    foundry (free typefaces linked).
+                                                </li>
+                                                <li><a href="https://uncut.wtf/">uncut.wtf</a>
+                                                    <br>free, online typeface catalogue
+                                                    featuring
+                                                    contemporary fonts
+                                                </li>
+                                            </ul>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="row g-2 mb-2">
+                                    <div class="col">
+                                        <h4 id="communities" class="s1-color">communities</h4>
+                                        <section>
+                                            <ul class="link-list">
+                                                <li><a href="https://unplatform.fromthesuperhighway.com/">unplatform</a>
+                                                    <br>guide
+                                                    on joining
+                                                    the indie web including a database of newsletters, social networks,
+                                                    and
+                                                    digital tools.
+                                                </li>
+                                                <li><a href="https://status.cafe/">status.cafe</a>
+                                                    <br>status updated with ability
+                                                    to embed to
+                                                    personal site (includes global feed of all user updates & forum).
+                                                </li>
+                                                <li><a href="https://forum.melonland.net/">melonland</a>
+                                                    <br>online arts forum
+                                                    focused on web
+                                                    revival.
+                                                </li>
+                                                <li><a href="https://spacehey.com/">spacehey</a>
+                                                    <br>modeled after original myspace,
+                                                    includes
+                                                    customizable profile pages & user blogs with rss feeds attached
+                                                </li>
+                                                <li><a href="https://32bit.cafe/">32bit cafe</a>
+                                                    <br>collective of developers,
+                                                    artists, etc.
+                                                    interested in the indie web (includes discourse forum, discord,
+                                                    pixelfed).
+                                                </li>
+                                                <li><a href="https://goblin-heart.net/sadgrl/cyberspace/webrings">sadgrl.online
+                                                        webring
+                                                        directory</a>
+                                                    <br>collection of webrings.
+                                                </li>
+                                            </ul>
+
+                                        </section>
+                                    </div>
+                                </div>
+                                <div class="row g-2 mb-2">
+                                    <div class="col">
+                                        <h4 id="graphics" class="s1-color">graphics</h4>
+                                        <section>
+                                            <ul class="link-list">
+                                                <li><a href="http://xyz.crd.co/">xyz</a>
+                                                    <br>consolidated resources including code
+                                                    snippets,
+                                                    fonts, pixel icons (by size), and links to other resources.
+                                                </li>
+                                                <li><a href="https://foollovers.com/">fool lovers</a>
+                                                    <br>wallpapers, icons,
+                                                    banners, dividers,
+                                                    frames.
+                                                </li>
+                                                <li><a href="https://www.asterism-m.com/item/">asterism</a>
+                                                    <br>backgrounds, icons,
+                                                    tables/plates.
+                                                </li>
+                                                <li><a href="https://maxbittker.github.io/broider/">broider</a>
+                                                    <br>9-patch border
+                                                    creation tool
+                                                    (creates css snippet).
+                                                </li>
+                                                <li><a href="https://pixelsafari.neocities.org/">pixel-safari</a>
+                                                    <br>dividers,
+                                                    favicons,
+                                                    stamps, blinkies, buttons.
+                                                </li>
+                                                <li><a href="https://www.switchiconshowdown.com/">switch icons</a>
+                                                    <br>switch game
+                                                    home screen
+                                                    icons.
+                                                </li>
+                                                <li><a
+                                                        href="https://www.smogon.com/forums/threads/smogon-sprite-project.3647722/">smogon
+                                                        sprite project</a>
+                                                    <br>fanmade pokemon sprites in gen 5 style.
+                                                </li>
+                                                <li><a
+                                                        href="https://fateside.tumblr.com/post/149383267194/animal-crossing-pixel-masterpost">animal
+                                                        crossing sprites</a>
+                                                    <br>fanmade 2d animal crossing sprites (includes items,
+                                                    npcs, and
+                                                    villagers).
+                                                </li>
+                                                <li><a href="https://www.rw-designer.com/cursor-library">rw cursor
+                                                        library</a>
+                                                    <br>library of
+                                                    mouse cursors for microsoft windows systems (this site uses "aero
+                                                    tailles shadow big sized" cursors).
+                                                </li>
+                                                <li><a href="https://www.oldbookillustrations.com/">old book
+                                                        illustrations</a>
+                                                    <br>public domain, royalty-free restoryed images scanned from old
+                                                    books.
+                                                </li>
+                                            </ul>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="s2Content" style="display: none; padding:0px" class="container scrollable">
+                        <iframe class="embed-full" scrollable="yes" src="https://maddycha.com/rhythm-ring"
+                            title="rhythm ring webring"></iframe>
+                    </div>
+                </div>
             </div>
-            <div class="bottom-rounded">
-                <div class="guestbookcontent windowcontent">
-                    <h2>leave message</h2>
-                    <div id="guestbooks___guestbook-form-container">
-                        <form id="guestbooks___guestbook-form"
-                            action="https://guestbooks.meadow.cafe/guestbook/508/submit" method="post">
-                            <div class="guestbooks___input-container">
-                                <input id="nameinput" placeholder="name" type="text" id="name" name="name" required>
-                            </div>
-                            <div class="guestbooks___input-container">
-                                <input id="siteinput" placeholder="website (optional)" type="url" id="website"
-                                    name="website">
-                            </div>
-                            <div id="guestbooks___challenge-answer-container"></div>
-                            <br />
-                            <div class="guestbooks___input-container">
-                                <textarea id="messageinput" placeholder="message (plain text only)..." id="text"
-                                    name="text" style="width: 100%; box-sizing: border-box; resize: vertical;"
-                                    required></textarea>
-                            </div>
-                            <br />
-                            <input type="submit" value="submit response">
-                            <div id="guestbooks___error-message"></div>
-                        </form>
+
+            <div class="section window" id="w4" onmousedown="orderDiv(this)">
+                <div class="windownav" id="w4nav">
+                    <h3>guestbook</h3>
+                    <div class="x" onclick="closeWindow(w4)">
+                        <h3>x</h3>
                     </div>
-                    <div class="break">
-                        <p>⋆ ˚｡⋆୨୧˚｡˚⋆ ˚｡⋆୨୧˚｡˚⋆ ˚｡⋆୨୧˚｡˚⋆ ˚｡⋆୨୧˚｡˚⋆ ˚｡⋆୨୧˚｡˚⋆ ˚｡⋆୨୧˚｡˚⋆</p>
+                </div>
+                <div class="bottom-rounded-no-webnav">
+                    <div class="container guestbookcontent scrollable" style="height: 100%;">
+                        <div class="row g-2 mb-2">
+                            <div class="col-sm-4 position-fixed" style="padding-right: 26px;">
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <section id="guestbooks___guestbook-form-container" class="box20">
+                                            <div class="icon01"></div>
+
+                                            <form id="guestbooks___guestbook-form"
+                                                action="https://guestbooks.meadow.cafe/guestbook/508/submit"
+                                                method="post">
+                                                <div class="guestbooks___input-container">
+                                                    <input id="nameinput" placeholder="name" type="text" id="name"
+                                                        name="name" required>
+                                                </div>
+                                                <div class="guestbooks___input-container">
+                                                    <input id="siteinput" placeholder="website (optional)" type="url"
+                                                        id="website" name="website">
+                                                </div>
+                                                <div id="guestbooks___challenge-answer-container"></div>
+                                                <br />
+                                                <div class="guestbooks___input-container">
+                                                    <textarea id="messageinput"
+                                                        placeholder="message (plain text only)..." id="text" name="text"
+                                                        style="width: 100%; box-sizing: border-box; resize: none; height: 90px;"
+                                                        required></textarea>
+                                                </div>
+                                                <br />
+                                                <input type="submit" value="submit response">
+                                                <div id="guestbooks___error-message"></div>
+                                            </form>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm offset-sm-5">
+                                <div id="guestbooks___guestbook-messages-container"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="guestbooks___guestbook-messages-container"></div>
                 </div>
             </div>
         </div>
@@ -793,9 +1047,12 @@ feel free to take inspo from my site and lmk if you have any questions!
 
 
 
+    <footer>
 
-    <script src="js/script.js" type="text/javascript"></script>
-    <script async src="https://guestbooks.meadow.cafe/resources/js/embed_script/508/script.js"></script>
+        <script src="js/script.js" type="text/javascript"></script>
+        <script async src="https://guestbooks.meadow.cafe/resources/js/embed_script/508/script.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.17/interact.min.js"></script>
+    </footer>
 </body>
 
 </html>
