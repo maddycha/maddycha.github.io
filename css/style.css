@@ -962,7 +962,7 @@ body {
         transform: scale(1);
         min-width: 100% !important;
         max-width: 100% !important;
-        height: calc(100vh - 60px);
+        height: calc(100dvh - 60px);
         position: fixed;
         top:0;
         display: block;
