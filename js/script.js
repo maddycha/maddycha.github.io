@@ -147,6 +147,24 @@ function openSocialTab(x) {
 }
 
 //window functionality
+
+function openMobileWindow(x){
+  var openW = x.id;
+  if(openW == "w0"){
+    document.getElementById("w0").style.display = "block";
+    document.getElementById("w3").style.display = "none";
+    document.getElementById("about-mobile").style.textDecoration = "underline";
+    document.getElementById("social-mobile").style.textDecoration = "none";
+  }
+  if(openW == "w3"){
+    document.getElementById("w0").style.display = "none";
+    document.getElementById("w3").style.display = "block";
+    document.getElementById("about-mobile").style.textDecoration = "none";
+    document.getElementById("social-mobile").style.textDecoration = "underline";
+
+  }
+}
+
 function openWindow(x) {
 
   if (sitemapOpen == true) {
@@ -343,35 +361,35 @@ function shoesUpdate(x) {
   }
 }
 
-window.addEventListener("load", function dressup() {
+// window.addEventListener("load", function dressup() {
 
-  for (var i = 1; i < topsBrands.length + 1; i++) {
-    var b = i - 1;
-    tops.push("imgs/items/t" + i + ".png");
-    document.getElementById('tops').innerHTML += "<div class='item' onclick='topsUpdate(" + b + ");'><h2 class='number'>0" + i + "</h2><p class='brand' id='" + b + "-topsbrand'>" + topsBrands[i - 1] + "</p>";
-  }
+//   for (var i = 1; i < topsBrands.length + 1; i++) {
+//     var b = i - 1;
+//     tops.push("imgs/items/t" + i + ".png");
+//     document.getElementById('tops').innerHTML += "<div class='item' onclick='topsUpdate(" + b + ");'><h2 class='number'>0" + i + "</h2><p class='brand' id='" + b + "-topsbrand'>" + topsBrands[i - 1] + "</p>";
+//   }
 
-  for (var i = 1; i < bottomsBrands.length + 1; i++) {
-    var b = i - 1;
-    bottoms.push("imgs/items/b" + i + ".png");
-    document.getElementById('bottoms').innerHTML += "<div class='item' onclick='bottomsUpdate(" + b + ");'><h2 class='number'>0" + i + "</h2><p class='brand' id='" + b + "-bottomsbrand'>" + bottomsBrands[i - 1] + "</p>";
-  }
+//   for (var i = 1; i < bottomsBrands.length + 1; i++) {
+//     var b = i - 1;
+//     bottoms.push("imgs/items/b" + i + ".png");
+//     document.getElementById('bottoms').innerHTML += "<div class='item' onclick='bottomsUpdate(" + b + ");'><h2 class='number'>0" + i + "</h2><p class='brand' id='" + b + "-bottomsbrand'>" + bottomsBrands[i - 1] + "</p>";
+//   }
 
-  for (var i = 1; i < shoesBrands.length + 1; i++) {
-    var b = i - 1;
-    shoes.push("imgs/items/s" + i + ".png");
-    document.getElementById('shoes').innerHTML += "<div class='item' onclick='shoesUpdate(" + b + ");'><h2 class='number'>0" + i + "</h2><p class='brand' id='" + b + "-shoesbrand'>" + shoesBrands[i - 1] + "</p>";
-  }
+//   for (var i = 1; i < shoesBrands.length + 1; i++) {
+//     var b = i - 1;
+//     shoes.push("imgs/items/s" + i + ".png");
+//     document.getElementById('shoes').innerHTML += "<div class='item' onclick='shoesUpdate(" + b + ");'><h2 class='number'>0" + i + "</h2><p class='brand' id='" + b + "-shoesbrand'>" + shoesBrands[i - 1] + "</p>";
+//   }
 
-  document.getElementById(String(0 + "-topsbrand")).style.textTransform = "uppercase";
-  document.getElementById(String(0 + "-topsbrand")).style.fontStyle = "italic";
+//   document.getElementById(String(0 + "-topsbrand")).style.textTransform = "uppercase";
+//   document.getElementById(String(0 + "-topsbrand")).style.fontStyle = "italic";
 
-  document.getElementById(String(0 + "-bottomsbrand")).style.textTransform = "uppercase";
-  document.getElementById(String(0 + "-bottomsbrand")).style.fontStyle = "italic";
+//   document.getElementById(String(0 + "-bottomsbrand")).style.textTransform = "uppercase";
+//   document.getElementById(String(0 + "-bottomsbrand")).style.fontStyle = "italic";
 
-  document.getElementById(String(0 + "-shoesbrand")).style.textTransform = "uppercase";
-  document.getElementById(String(0 + "-shoesbrand")).style.fontStyle = "italic";
-});
+//   document.getElementById(String(0 + "-shoesbrand")).style.textTransform = "uppercase";
+//   document.getElementById(String(0 + "-shoesbrand")).style.fontStyle = "italic";
+// });
 
 
 //date & time
