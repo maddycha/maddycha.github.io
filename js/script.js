@@ -153,14 +153,28 @@ function openMobileWindow(x){
   if(openW == "w0"){
     document.getElementById("w0").style.display = "block";
     document.getElementById("w3").style.display = "none";
-    document.getElementById("about-mobile").style.textDecoration = "underline";
+    windows[3].pos = false;
+
+    document.getElementById("social-mobile").classList.remove("mobile-active");
+    document.getElementById("social-mobile").classList.add("mobile-inactive");
+    document.getElementById("about-mobile").classList.remove("mobile-inactive");
+    document.getElementById("about-mobile").classList.add("mobile-active");
+
+    // document.getElementById("about-mobile").style.textDecoration = "underline";
     document.getElementById("social-mobile").style.textDecoration = "none";
   }
   if(openW == "w3"){
     document.getElementById("w0").style.display = "none";
     document.getElementById("w3").style.display = "block";
+
+    document.getElementById("about-mobile").classList.remove("mobile-active");
+    document.getElementById("about-mobile").classList.add("mobile-inactive");
+    document.getElementById("social-mobile").classList.remove("mobile-inactive");
+    document.getElementById("social-mobile").classList.add("mobile-active");
+
+    windows[3].pos = true;
     document.getElementById("about-mobile").style.textDecoration = "none";
-    document.getElementById("social-mobile").style.textDecoration = "underline";
+    // document.getElementById("social-mobile").style.textDecoration = "underline";
 
   }
 }

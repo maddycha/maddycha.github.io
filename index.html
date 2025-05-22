@@ -35,23 +35,23 @@ feel free to take inspo from my site and lmk if you have any questions!
 </head>
 
 <body>
-    <div id="mobilenav" class="d-block d-lg-none">
+    <div id="mobilenav">
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h2 onclick="openMobileWindow(w0);" id="about-mobile">about</h2>
+                    <h2 onclick="openMobileWindow(w0);" id="about-mobile" class="mobile-active">about</h2>
                 </div>
                 <div class="col">
                     <h2>maddycha</h2>
                 </div>
                 <div class="col">
-                    <h2 onclick="openMobileWindow(w3);" id="social-mobile">social</h2>
+                    <h2 onclick="openMobileWindow(w3);" id="social-mobile" class="mobile-inactive">social</h2>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="macnav" class="d-none d-lg-block">
+    <div id="macnav" class="mobile-none">
         <div class="container m-0 p-0" style="height: 40px;">
             <div class="row m-0 p-0 h-100">
                 <div class="col-sm-3" style="width: 285px;border-right: solid 1px var(--primary);">
@@ -107,7 +107,7 @@ feel free to take inspo from my site and lmk if you have any questions!
 
     <div id="laptop" onload="createWindows();">
 
-        <div class="icon-container d-none d-lg-block">
+        <div class="icon-container mobile-none">
             <div class="icon" id="w0icon" onclick="openWindow(w0)">
                 <img src="imgs/icons/about.png">
                 <h3>about</h3>
@@ -198,8 +198,8 @@ feel free to take inspo from my site and lmk if you have any questions!
                 <div id="a0Content" class="container scrollable">
                     <div class="row g-2">
                         <div class="col-sm-3">
-                            <div class="row g-2 mb-md-2">
-                                <div class="col">
+                            <div class="row g-2 mb-2">
+                                <div class="col  mobile-none">
                                     <h4>find me</h4>
                                     <section>
                                         <p><a href="https://www.instagram.com/maddycha">instagram</a>
@@ -207,14 +207,14 @@ feel free to take inspo from my site and lmk if you have any questions!
                                         <p><a href="https://twitter.com/maddycha">twitter </a></p>
                                         <p><a href="https://bsky.app/profile/maddycha.com">bluesky </a>
                                         </p>
-                                        <p class="d-none d-md-block"><a href="https://giphy.com/maddycha">giphy </a></p>
-                                        <p class="d-none d-md-block"><a href="https://spacehey.com/maddycha">spacehey </a></p>
-                                        <p class="d-none d-md-block"><a href="https://forum.melonland.net/index.php?action=profile;u=2575">melonland
+                                        <p class="mobile-none"><a href="https://giphy.com/maddycha">giphy </a></p>
+                                        <p class="mobile-none"><a href="https://spacehey.com/maddycha">spacehey </a></p>
+                                        <p class="mobile-none"><a href="https://forum.melonland.net/index.php?action=profile;u=2575">melonland
                                             </a></p>
                                     </section>
                                 </div>
                             </div>
-                            <div class="row g-2 mb-md-2 d-none d-md-block">
+                            <div class="row g-2 mb-md-2">
                                 <div class="col">
                                     <h4>tamanotchi</h4>
                                     <section class="d-flex justify-content-between">
@@ -296,10 +296,10 @@ feel free to take inspo from my site and lmk if you have any questions!
                                                 all]</a></span></h4>
                                     <section>
                                         <div id='feed-reader'></div>
-                                        <img class="d-none d-md-block" style="padding-left: 5%;width: 90%;margin-top: -20px;"
+                                        <img class="mobile-none" style="padding-left: 5%;width: 90%;margin-top: -20px;"
                                             src="imgs/for-me/cheapycore.gif">
 
-                                        <p class="d-none d-md-block" style="text-align:right;margin-top: -4px;"><a
+                                        <p class="mobile-none" style="text-align:right;margin-top: -4px;"><a
                                                 href="https://cheapycore.com/">art by cheapy</a></p>
 
                                     </section>
@@ -310,7 +310,7 @@ feel free to take inspo from my site and lmk if you have any questions!
                 </div>
                 <div id="a1Content" style="display: none;" class="container scrollable">
                     <div class="row g-2 mb-2">
-                        <div class="col-sm-3 order-6 d-none d-md-block">
+                        <div class="col-sm-3 order-6 mobile-none">
                             <div class="row">
                                 <div class="col">
                                     <h4>credits</h4>
@@ -372,7 +372,7 @@ feel free to take inspo from my site and lmk if you have any questions!
                                     </section>
                                 </div>
                             </div>
-                            <div class="row mb-md-2 d-none d-lg-block">
+                            <div class="row mb-md-2 mobile-none">
                                 <div class="col">
                                     <h4>sitemap</h4>
                                     <section>
@@ -515,7 +515,7 @@ feel free to take inspo from my site and lmk if you have any questions!
                         <!-- <h5 onclick="openSocialTab(this)" id="s2" class=""><img src="imgs/pixel-safari/disc3.gif">
                             guestbook
                         </h5> -->
-                        <h5 class="d-none d-lg-block" onclick="openSocialTab(this)" id="s2" class=""><img src="imgs/pixel-safari/disc3.gif">
+                        <h5 class="mobile-none" onclick="openSocialTab(this)" id="s2" class=""><img src="imgs/pixel-safari/disc3.gif">
                             rhythm
                             ring</h5>
                         <div class="flex-fill" style="border-bottom: solid 1px var(--primary);"></div>
@@ -529,7 +529,7 @@ feel free to take inspo from my site and lmk if you have any questions!
                         <div class="row g-2 mb-2">
                             <div class="col-sm-3">
                                 <div class="row g-2 mb-2">
-                                    <div class="col d-none d-lg-block">
+                                    <div class="col">
                                         <h4>find me</h4>
                                         <section>
                                             <p><a href="https://www.instagram.com/maddycha">instagram</a>
@@ -537,14 +537,14 @@ feel free to take inspo from my site and lmk if you have any questions!
                                             <p><a href="https://twitter.com/maddycha">twitter </a></p>
                                             <p><a href="https://bsky.app/profile/maddycha.com">bluesky </a>
                                             </p>
-                                            <p class="d-none d-md-block"><a href="https://giphy.com/maddycha">giphy </a></p>
-                                            <p class="d-none d-md-block"><a href="https://spacehey.com/maddycha">spacehey </a></p>
-                                            <p class="d-none d-md-block"><a href="https://forum.melonland.net/index.php?action=profile;u=2575">melonland
+                                            <p class="mobile-none"><a href="https://giphy.com/maddycha">giphy </a></p>
+                                            <p class="mobile-none"><a href="https://spacehey.com/maddycha">spacehey </a></p>
+                                            <p class="mobile-none"><a href="https://forum.melonland.net/index.php?action=profile;u=2575">melonland
                                                 </a></p>
                                         </section>
                                     </div>
                                 </div>
-                                <div class="row g-2 d-none d-lg-block">
+                                <div class="row g-2 mobile-none">
                                     <div class="col">
                                         <h4>link back</h4>
                                         <section>
@@ -636,7 +636,7 @@ feel free to take inspo from my site and lmk if you have any questions!
                                     </div>
                                 </div>
                                 <div class="row g-2">
-                                    <div class="col d-none d-lg-block">
+                                    <div class="col mobile-none">
                                         <h4>sticker club <span class="h4-link"><a
                                                     href="https://stickersheetclub.neocities.org/">[sticker
                                                     sheet club]</a></span></h4>
@@ -719,7 +719,7 @@ feel free to take inspo from my site and lmk if you have any questions!
                         <div class="row g-2 mb-2">
                             <div class="col-sm-2 position-fixed" style="padding-right: 26px;">
                                 <div class="row mb-2">
-                                    <div class="col d-none d-lg-block">
+                                    <div class="col mobile-none">
                                         <h4 class="s1-color">contents</h4>
                                         <section>
                                             <p><a href="#webcrafting" target="_self">webcrafting</a></p>
@@ -1008,7 +1008,7 @@ feel free to take inspo from my site and lmk if you have any questions!
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm offset-lg-5">
+                            <div class="col-sm offset-5">
                                 <div id="guestbooks___guestbook-messages-container"></div>
                             </div>
                         </div>

@@ -945,7 +945,21 @@ body {
 
 
 
-@media (max-width: 991.98px) {
+@media screen and (max-width: 991.98px) {
+
+    .mobile-active{
+        background: var(--primary);
+        color: var(--bg);
+        padding: 4px;
+        border-radius: 24px;
+        margin-top: -4px;
+    }
+    .mobile-inactive{
+        background: #00000010;
+        padding: 4px;
+        border-radius: 24px;
+        margin-top: -4px;
+    }
 
     #mobilenav{
         position:fixed;
@@ -953,8 +967,7 @@ body {
         bottom:0;
         width: 100%;
         text-align: center;
-        height: 60px;
-        padding-top: 8px;
+        height: 40px;
         background: var(--bg);
     }
 
@@ -962,16 +975,16 @@ body {
         transform: scale(1);
         min-width: 100% !important;
         max-width: 100% !important;
-        height: calc(100dvh - 60px);
+        height: calc(100dvh - 40px);
         position: fixed;
         top:0;
         display: block;
         overflow-x:hidden;
     }
 
-    #about-mobile{
+    /* #about-mobile{
         text-decoration: underline;
-    }
+    } */
 
     #w3{
         display: none;
@@ -982,6 +995,10 @@ body {
     }
 
     .x{
+        display: none;
+    }
+
+    .mobile-none{
         display: none;
     }
 
