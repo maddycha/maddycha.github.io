@@ -297,6 +297,126 @@ function closeDragElement() {
 }
 
 
+//gallery
+var art = [];
+var artNum = 24;
+
+window.addEventListener("load", function artLoad() {
+  for (var i = 0; i < artNum; i++) {
+    art.push("imgs/art/" + i + ".png");
+    document.getElementById('gallery').innerHTML = "<div class='artimg' onclick='artUpdate(" + i + ");'><img class='artimg-img' id='artimg-" + i + "' src='" + art[i] + "'></div>" + document.getElementById('gallery').innerHTML;
+  }
+  document.getElementById('gallery').innerHTML += "<div class='clear'></div>";
+});
+
+function artUpdate(x) {
+  var selected = "artimg-" + x;
+  document.getElementById("preview-img").src = art[x];
+  for (var i = 0; i < artNum; i++) {
+    var notselected = "artimg-" + i;
+    document.getElementById(notselected).style.border = "dotted 1px var(--primary)";
+    document.getElementById(notselected).style.opacity = "0.4";
+  }
+  document.getElementById(selected).style.border = "solid 1px var(--primary)";
+  document.getElementById(selected).style.opacity = "1";
+}
+
+//dress-up game
+var tops = [];
+var bottoms = [];
+var shoes = [];
+
+var topsBrands = ['hyein seo', 'welldone', 'empath', 'simone rocha', 'vivienne westwood'];
+var bottomsBrands = ['aelfric eden', 'diesel', 'sandy liang', 'misbhv'];
+var shoesBrands = ['buffalo', 'mschf', 'suicoke'];
+
+function topsUpdate(x) {
+  document.getElementById("tops-img").src = tops[x];
+  for (var i = 0; i < topsBrands.length + 1; i++) {
+    if (i !== x) {
+      if (document.getElementById(String(i + "-topsbrand")) !== null) {
+        document.getElementById(String(i + "-topsbrand")).style.textTransform = "lowercase";
+        document.getElementById(String(i + "-topsbrand")).style.fontStyle = "normal";
+      }
+    } else {
+      document.getElementById(String(i + "-topsbrand")).style.textTransform = "uppercase";
+      document.getElementById(String(i + "-topsbrand")).style.fontStyle = "italic";
+
+    }
+  }
+}
+function bottomsUpdate(x) {
+  document.getElementById("bottoms-img").src = bottoms[x];
+  for (var i = 0; i < bottomsBrands.length + 1; i++) {
+    if (i !== x) {
+      if (document.getElementById(String(i + "-bottomsbrand")) !== null) {
+        document.getElementById(String(i + "-bottomsbrand")).style.textTransform = "lowercase";
+        document.getElementById(String(i + "-bottomsbrand")).style.fontStyle = "normal";
+      }
+    } else {
+      document.getElementById(String(i + "-bottomsbrand")).style.textTransform = "uppercase";
+      document.getElementById(String(i + "-bottomsbrand")).style.fontStyle = "italic";
+
+    }
+  }
+}
+function shoesUpdate(x) {
+  document.getElementById("shoes-img").src = shoes[x];
+  for (var i = 0; i < shoesBrands.length + 1; i++) {
+    if (i !== x) {
+      if (document.getElementById(String(i + "-shoesbrand")) !== null) {
+        document.getElementById(String(i + "-shoesbrand")).style.textTransform = "lowercase";
+        document.getElementById(String(i + "-shoesbrand")).style.fontStyle = "normal";
+      }
+    } else {
+      document.getElementById(String(i + "-shoesbrand")).style.textTransform = "uppercase";
+      document.getElementById(String(i + "-shoesbrand")).style.fontStyle = "italic";
+    }
+  }
+}
+
+// window.addEventListener("load", function dressup() {
+
+//   for (var i = 1; i < topsBrands.length + 1; i++) {
+//     var b = i - 1;
+//     tops.push("imgs/items/t" + i + ".png");
+//     document.getElementById('tops').innerHTML += "<div class='item' onclick='topsUpdate(" + b + ");'><h2 class='number'>0" + i + "</h2><p class='brand' id='" + b + "-topsbrand'>" + topsBrands[i - 1] + "</p>";
+//   }
+
+//   for (var i = 1; i < bottomsBrands.length + 1; i++) {
+//     var b = i - 1;
+//     bottoms.push("imgs/items/b" + i + ".png");
+//     document.getElementById('bottoms').innerHTML += "<div class='item' onclick='bottomsUpdate(" + b + ");'><h2 class='number'>0" + i + "</h2><p class='brand' id='" + b + "-bottomsbrand'>" + bottomsBrands[i - 1] + "</p>";
+//   }
+
+//   for (var i = 1; i < shoesBrands.length + 1; i++) {
+//     var b = i - 1;
+//     shoes.push("imgs/items/s" + i + ".png");
+//     document.getElementById('shoes').innerHTML += "<div class='item' onclick='shoesUpdate(" + b + ");'><h2 class='number'>0" + i + "</h2><p class='brand' id='" + b + "-shoesbrand'>" + shoesBrands[i - 1] + "</p>";
+//   }
+
+//   document.getElementById(String(0 + "-topsbrand")).style.textTransform = "uppercase";
+//   document.getElementById(String(0 + "-topsbrand")).style.fontStyle = "italic";
+
+//   document.getElementById(String(0 + "-bottomsbrand")).style.textTransform = "uppercase";
+//   document.getElementById(String(0 + "-bottomsbrand")).style.fontStyle = "italic";
+
+//   document.getElementById(String(0 + "-shoesbrand")).style.textTransform = "uppercase";
+//   document.getElementById(String(0 + "-shoesbrand")).style.fontStyle = "italic";
+// });
+
+
+//date & time
+const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const day = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
+const d = new Date();
+let cMonth = month[d.getMonth()];
+let cDay = day[d.getDay()];
+let cDate = d.getDate();
+let cTime = d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+document.getElementById("date").innerHTML = cDay + " " + cMonth + " " + cDate;
+document.getElementById("time").innerHTML = cTime;
+
 var sitemapOpen = false;
 var content = document.getElementById("sitemap");
 //open sitemap from copy ul
@@ -317,6 +437,31 @@ function openSitemap() {
     sitemapOpen = false;
   }
 }
+
+//status.cafe
+const feedURL = 'https://status.cafe/users/maddy.atom'
+
+      fetch(feedURL)
+        .then(response => response.text())
+        .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+        .then(data => {
+          const entries = data.querySelectorAll("entry");
+          let html = ``;
+
+          for (i = 0; i < 1; i++) {
+            let title = entries[i].querySelector("title").innerHTML.slice(0, 5).trim();
+            let content = entries[i].querySelector("content").textContent.trim();
+            let dateString = entries[i].querySelector("published").innerHTML.slice(5,10);
+            html += `
+            <div class='status-entry'>
+              <div class='status-content'>${content}</div>
+              <h2 style='padding-left: 16px;'>${dateString}</h2>
+              </div>
+            `;
+          }
+          document.getElementById("feed-reader").innerHTML = html;
+        })
+
 
 
 // click effect
