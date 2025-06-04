@@ -79,6 +79,10 @@ feel free to take inspo from my site and lmk if you have any questions!
                                         <br>
                                         <p>rhythm heaven webring</p>
                                     </li>
+                                    <li onclick="openSocialTab(s3);openWindow(w3);">sites
+                                        <br>
+                                        <p>sites created by me</p>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="mb-2" onclick="openWindow(w4);">guestbook</li>
@@ -126,15 +130,13 @@ feel free to take inspo from my site and lmk if you have any questions!
             </div>
 
             <div class="center">
-                <img src="imgs/misc/test.png" style="height: 120vh; z-index: 0;opacity: 1.0;">
+                <img src="imgs/misc/test.webp" style="height: 120vh; z-index: 0;opacity: 1.0;">
 
                 <div class="alert">
                     <h2>this site is very much still under construction!!!!
                         <br>
                         <br>i just wanted to publish to get rid of the old one but obviously this entire desktop view is
                         a complete work in progress.
-                        <br>
-                        <br>also don't have responsive working yet my apologies!
                     </h2>
                 </div>            </div>
         </div>
@@ -398,6 +400,10 @@ feel free to take inspo from my site and lmk if you have any questions!
                                                         <br>
                                                         <p>rhythm heaven webring</p>
                                                     </li>
+                                                    <li onclick="openSocialTab(s3);openWindow(w3);">sites
+                                                        <br>
+                                                        <p>sites created by me</p>
+                                                    </li>
                                                 </ul>
                                             </li>
                                             <li class="mb-2" onclick="openWindow(w4);">guestbook</li>
@@ -520,12 +526,12 @@ feel free to take inspo from my site and lmk if you have any questions!
                         <h5 onclick="openSocialTab(this)" id="s1" class=""><img src="imgs/pixel-safari/bee3.gif">
                             resources
                         </h5>
-                        <!-- <h5 onclick="openSocialTab(this)" id="s2" class=""><img src="imgs/pixel-safari/disc3.gif">
-                            guestbook
-                        </h5> -->
                         <h5 class="mobile-none" onclick="openSocialTab(this)" id="s2" class=""><img src="imgs/pixel-safari/disc3.gif">
                             rhythm
                             ring</h5>
+                            <h5 class="mobile-none" onclick="openSocialTab(this)" id="s3" class=""><img src="imgs/xyz/6a223df8.gif">
+                                sites
+                            </h5>
                         <div class="flex-fill" style="border-bottom: solid 1px var(--primary);"></div>
                     </div>
                     <div id="socialBrowser" class="browser">
@@ -906,6 +912,10 @@ feel free to take inspo from my site and lmk if you have any questions!
                         <iframe class="embed-full" scrollable="yes" src="https://maddycha.com/rhythm-ring"
                             title="rhythm ring webring"></iframe>
                     </div>
+                    <div id="s3Content" style="display: none; padding:0px" class="container scrollable">
+                        <iframe class="embed-full" scrollable="yes" src="https://maddycha.com/sites"
+                            title="sites"></iframe>
+                    </div>
                 </div>
             </div>
 
@@ -917,7 +927,7 @@ feel free to take inspo from my site and lmk if you have any questions!
                     </div>
                 </div>
                 <div class="bottom-rounded-no-webnav">
-                    <div class="container guestbookcontent scrollable" style="height: 100%;">
+                    <div id="guestbook" class="container guestbookcontent scrollable" style="height: 100%;">
                         <div class="row g-2 mb-2">
                             <div class="col-sm-4 position-fixed" style="padding-right: 26px;">
                                 <div class="row mb-2">
@@ -954,6 +964,7 @@ feel free to take inspo from my site and lmk if you have any questions!
                             </div>
                             <div class="col-sm offset-5">
                                 <div id="guestbooks___guestbook-messages-container"></div>
+                                <div id="guestbook-pages"></div>
                             </div>
                         </div>
                     </div>
@@ -973,7 +984,7 @@ feel free to take inspo from my site and lmk if you have any questions!
 
         <script src="js/script.js" type="text/javascript"></script>
         <script src="js/populate.js" type="text/javascript"></script>
-        <script async src="https://guestbooks.meadow.cafe/resources/js/embed_script/508/script.js"></script>
+        <script async src="js/guestbook.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.17/interact.min.js"></script>
     </footer>
 </body>

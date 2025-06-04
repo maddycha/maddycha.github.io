@@ -85,7 +85,6 @@ function openAboutTab(x) {
   var aboutTabs = ["about-me", "site-info"];
   if (sitemapOpen == true) {
     content.style.maxHeight = null;
-    console.log("null");
     setTimeout(sitemapBottomDelay, 200);
     sitemapOpen = false;
   }
@@ -114,10 +113,9 @@ function openAboutTab(x) {
   }
 }
 function openSocialTab(x) {
-  var socialTabs = ["links", "resources", "rhythm-ring"];
+  var socialTabs = ["links", "resources", "rhythm-ring", "sites"];
   if (sitemapOpen == true) {
     content.style.maxHeight = null;
-    console.log("null");
     setTimeout(sitemapBottomDelay, 200);
     sitemapOpen = false;
   }
@@ -183,7 +181,6 @@ function openWindow(x) {
 
   if (sitemapOpen == true) {
     content.style.maxHeight = null;
-    console.log("null");
     setTimeout(sitemapBottomDelay, 200);
     sitemapOpen = false;
   }
@@ -311,7 +308,6 @@ function openSitemap() {
     sitemapOpen = true;
   } else {
     content.style.maxHeight = null;
-    console.log("null");
     setTimeout(sitemapBottomDelay, 200);
     // content.style.bottom = "39px";
     sitemapOpen = false;

@@ -595,6 +595,23 @@ section {
     background-color: transparent;
 }
 
+#guestbook-pages{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 12px;
+}
+#guestbook-pages p{
+    display: inline;
+    text-align: center;
+    padding: 4px;
+}
+
+.gb-active-page{
+    text-decoration: underline;
+    color: var(--black);
+}
+
 #nameinput {
     background-image: url('../imgs/icons/user.png');
 }
@@ -918,8 +935,6 @@ body {
     right: 0;
     padding-bottom: 8px;
 }
-
-
 
 
 
