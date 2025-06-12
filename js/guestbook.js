@@ -1,4 +1,6 @@
-var msgLoad = false;
+var currentPage = 1;
+var totalPages = 1;
+const perPage = 15;
 var form = document.getElementById("guestbooks___guestbook-form");
 var messagesContainer = document.getElementById(
   "guestbooks___guestbook-messages-container"
@@ -64,68 +66,53 @@ function guestbooks___populateQuestionChallenge() {
 }
 
 function guestbooks___loadMessages(page) {
-  var perPage = 15;
-    var apiUrl =
-    "https://guestbooks.meadow.cafe/api/v1/get-guestbook-messages/508";
+  if (page) {
+    currentPage = page;
+  }
+
+  var apiUrl =
+    "https://guestbooks.meadow.cafe/api/v2/get-guestbook-messages/508?page=" + currentPage + "&limit=" + perPage;
   fetch(apiUrl)
     .then(function (response) {
       return response.json();
     })
-    .then(function (messages) {
+    .then(function (data) {
+      var messages = data.messages || [];
+      var pagination = data.pagination || {};
 
-if(msgLoad == false){
-      for (var p = 1; p < Math.ceil(messages.length / perPage) + 1; p++) {
-        document.getElementById("guestbook-pages").innerHTML += "<p class='' onclick='guestbooks___loadMessages(" + p + ")' id='" + p + "'>" + p + "</p>";
-      }
-      document.getElementById('1').classList.add('gb-active-page');
-      msgLoad = true;
-    }
+      totalPages = pagination.totalPages || 1;
 
       if (messages.length === 0) {
         messagesContainer.innerHTML = "<p>There are no messages on this guestbook.</p>";
+        guestbooks___hidePaginationControls();
       } else {
-        messages.sort(function (a, b) {
-          return new Date(b.CreatedAt) - new Date(a.CreatedAt);
-        });
-        if(page == null){
-          rangeStart = 0;
-          rangeEnd = perPage;
-        } else{
+        // Scroll to top when changing pages
+        if (page && page !== 1) {
           document.getElementById("guestbook").scrollTo(0, 0);
-
-          rangeStart = (page-1)*perPage;
-          rangeEnd = (page-1)*perPage+perPage-1;
-          console.log("test");
-          for(var a = 1; a < Math.ceil(messages.length / perPage)+1; a++){
-            document.getElementById(a).classList.remove('gb-active-page');
-          }
-          document.getElementById(page).classList.add('gb-active-page');
         }
 
-        if(rangeEnd > messages.length){
-          rangeEnd = messages.length;
-        }
+        // Messages are already sorted by created_at DESC from the API
         messagesContainer.innerHTML = "";
-        for (var i = rangeStart; i < rangeEnd; i++) {
+        messages.forEach(function (message) {
           var messageContainer = document.createElement("div");
           var messageHeader = document.createElement("p");
           var boldElement = document.createElement("b");
 
           // add name with website (if present)
-          if (messages[i].Website) {
+          if (message.Website) {
             var link = document.createElement("a");
-            link.href = messages[i].Website ? messages[i].Website : "#";
-            link.textContent = messages[i].Name;
+            link.href = message.Website ? message.Website : "#";
+            link.textContent = message.Name;
             link.target = "_blank";
             boldElement.appendChild(link);
           } else {
-            var textNode = document.createTextNode(messages[i].Name);
+            var textNode = document.createTextNode(message.Name);
             boldElement.appendChild(textNode);
           }
           messageHeader.appendChild(boldElement);
 
           // add date
-          var createdAt = new Date(messages[i].CreatedAt);
+          var createdAt = new Date(message.CreatedAt);
           var formattedDate = createdAt.toLocaleDateString("en-US", {
             month: "short",
             day: "numeric",
@@ -138,23 +125,57 @@ if(msgLoad == false){
 
           // add actual quote
           var messageBody = document.createElement("blockquote");
-          messageBody.textContent = messages[i].Text;
+          messageBody.textContent = message.Text;
 
           messageContainer.appendChild(messageHeader);
           messageContainer.appendChild(messageBody);
 
           messagesContainer.appendChild(messageContainer);
-        }
+        });
 
-        // document.getElementById("guestbook-pages").innerHTML = "";
-        // for (var p = 1; p < Math.ceil(messages.length / perPage) + 1; p++) {
-        //   document.getElementById("guestbook-pages").innerHTML += "<p class='' onclick='guestbooks___loadMessages(" + p + ")' id='" + p + "'>" + p + "</p>";
-        // }
+        guestbooks___createPaginationControls(pagination);
       }
     })
     .catch(function (error) {
       console.error("Error fetching messages:", error);
     });
+}
+
+function guestbooks___createPaginationControls(pagination) {
+  var pagesContainer = document.getElementById("guestbook-pages");
+  if (!pagesContainer) return;
+
+  // Clear existing pagination
+  pagesContainer.innerHTML = "";
+
+  // Only show pagination if there's more than one page
+  if (pagination.totalPages <= 1) {
+    return;
+  }
+
+  // Generate page links
+  for (var i = 1; i <= pagination.totalPages; i++) {
+    var pageLink = document.createElement("p");
+    pageLink.id = i.toString();
+    pageLink.textContent = i.toString();
+    pageLink.className = i === pagination.page ? "gb-active-page" : "";
+
+    // Add click handler using closure to capture the page number
+    (function(pageNum) {
+      pageLink.onclick = function() {
+        guestbooks___loadMessages(pageNum);
+      };
+    })(i);
+
+    pagesContainer.appendChild(pageLink);
+  }
+}
+
+function guestbooks___hidePaginationControls() {
+  var pagesContainer = document.getElementById("guestbook-pages");
+  if (pagesContainer) {
+    pagesContainer.innerHTML = "";
+  }
 }
 guestbooks___populateQuestionChallenge();
 guestbooks___loadMessages();
