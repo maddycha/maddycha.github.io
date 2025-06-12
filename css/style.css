@@ -747,13 +747,17 @@ input[type=submit] {
     line-height: 40px;
 }
 
+#copy-open, #date, #time{
+    font-size: 20px;
+}
+
 #openwindows li {
     margin-right: 4px;
     border: dotted 1px var(--primary);
     width: 120px;
     display: inline-block;
     height: 32px;
-    padding-left: 8px;
+    padding-left: 2px;
     line-height: 28px;
 }
 
@@ -825,12 +829,11 @@ input[type=submit] {
 
 .center {
     position: fixed;
-    left: 45%;
-    top: 37%;
+    left: 50%;
+    top: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     max-height: 100vh;
-    width: 800;
     text-align: center;
 }
 
@@ -857,7 +860,7 @@ body {
 }
 
 .icon img {
-    width: 80px;
+    width: 72px;
 }
 
 .icon-container {
@@ -867,39 +870,62 @@ body {
 }
 
 .icon {
-    width: 100px;
+    width: 80px;
     height: 100px;
     text-align: center;
-    background: #ffffff;
+    background: var(--bg);
     border-radius: 24px;
     z-index: 1;
-    position: absolute;
+    position: fixed;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 #w0icon {
-    top: 10%;
-    left: 10%;
+    left: calc(50% - 200px);
+    top: calc(50% - 40px);
 }
 
 #w2icon {
-    left: 7%;
-    top: 60%;
+    left: calc(50% - 80px);
+    top: calc(50% - 140px);
 }
 
 #w3icon {
-    right: 7%;
-    top: 20%;
+    left: calc(50% + 240px);
+    top: calc(50% - 20px);
 }
 
 #w4icon {
-    right: 14%;
-    top: 70%;
+    left: calc(50% + 170px);
+    top: calc(50% + 100px);
+}
+
+#openwindows img{
+    width: 28px;
+    height: 28px;
+    float: left;
+    margin-right: 4px;
 }
 
 .icon h3 {
     font-size: 18px;
+    /* color: white; */
+    display: inline-block;
+    padding: 0px 6px;
 }
-
+#w0icon h3{
+    background: var(--red);
+}
+#w3icon h3{
+    background: var(--yellow);
+}
+#w2icon h3{
+    background: var(--green);
+}
+#w4icon h3{
+    background: var(--blue);
+}
 
 
 /* dressup (oudated) */

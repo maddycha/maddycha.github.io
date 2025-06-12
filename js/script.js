@@ -197,7 +197,7 @@ function openWindow(x) {
       if (windows[o].pos == false) {
         document.getElementById(openW).style.left = getRandom(0, rightLimit) + 'px'; // 👈🏼 Horizontally
         document.getElementById(openW).style.top = getRandom(0, bottomLimit) + 'px'; // 👈🏼 Vertically
-        document.getElementById('openwindows').innerHTML += "<li class='open' id='" + windows[o].openId + "' onclick='openWindow(" + openW + ")';'>" + windows[o].text + "</li>"
+        document.getElementById('openwindows').innerHTML += "<li class='open' id='" + windows[o].openId + "' onclick='openWindow(" + openW + ")';'><img src='imgs/icons/" + windows[o].text + ".png'>" + windows[o].text + "</li>"
         windows[o].pos = true;
       }
     }
