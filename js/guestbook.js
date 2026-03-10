@@ -179,3 +179,155 @@ function guestbooks___hidePaginationControls() {
 }
 guestbooks___populateQuestionChallenge();
 guestbooks___loadMessages();
+
+
+// ---- Proof of Work Bot Deterrent ----
+  
+  (function() {
+    var powChallenge = "";
+    var powNonce = "";
+    var powReady = false;
+    var powWorker = null;
+
+    var submitBtn = form.querySelector("input[type='submit'], button[type='submit']");
+    submitBtn.disabled = true;
+
+    // Build the verification UI: checkbox with inline label
+    var powContainer = document.getElementById("guestbooks___pow-status");
+    if (!powContainer) {
+      powContainer = document.createElement("div");
+      submitBtn.parentNode.insertBefore(powContainer, submitBtn);
+    }
+    powContainer.id = "guestbooks___pow-container";
+    powContainer.className = "guestbooks___pow-container";
+    powContainer.innerHTML = "";
+
+    var powLabel = document.createElement("label");
+    powLabel.className = "guestbooks___pow-checkbox-label";
+
+    var powCheckbox = document.createElement("input");
+    powCheckbox.type = "checkbox";
+    powCheckbox.id = "guestbooks___pow-checkbox";
+
+    var powLabelText = document.createElement("span");
+    powLabelText.id = "guestbooks___pow-status";
+    powLabelText.textContent = "I\u2019m not a robot";
+
+    powLabel.appendChild(powCheckbox);
+    powLabel.appendChild(powLabelText);
+    powContainer.appendChild(powLabel);
+
+    // Add hidden fields to carry the PoW data
+    var hiddenChallenge = document.createElement("input");
+    hiddenChallenge.type = "hidden";
+    hiddenChallenge.name = "powChallenge";
+    form.appendChild(hiddenChallenge);
+
+    var hiddenNonce = document.createElement("input");
+    hiddenNonce.type = "hidden";
+    hiddenNonce.name = "powNonce";
+    form.appendChild(hiddenNonce);
+
+    // Web Worker code for SHA-256 mining using SubtleCrypto
+    var workerCode = `
+      self.onmessage = async function(e) {
+        var challenge = e.data.challenge;
+        var difficulty = e.data.difficulty;
+        var batchSize = 5000;
+        var nonce = 0;
+
+        while (true) {
+          for (var i = 0; i < batchSize; i++) {
+            var nonceHex = nonce.toString(16);
+            var input = challenge + nonceHex;
+            var encoded = new TextEncoder().encode(input);
+            var hashBuf = await crypto.subtle.digest("SHA-256", encoded);
+            var hashArr = new Uint8Array(hashBuf);
+
+            if (hasLeadingZeroBits(hashArr, difficulty)) {
+              self.postMessage({ found: true, nonce: nonceHex, hashes: nonce + 1 });
+              return;
+            }
+            nonce++;
+          }
+          self.postMessage({ found: false, hashes: nonce });
+        }
+      };
+
+      function hasLeadingZeroBits(data, n) {
+        var fullBytes = Math.floor(n / 8);
+        var remainBits = n % 8;
+        for (var i = 0; i < fullBytes; i++) {
+          if (data[i] !== 0) return false;
+        }
+        if (remainBits > 0) {
+          var mask = 0xFF << (8 - remainBits);
+          if ((data[fullBytes] & mask) !== 0) return false;
+        }
+        return true;
+      }
+    `;
+
+    function guestbooks___fetchAndSolve() {
+      powReady = false;
+      powChallenge = "";
+      powNonce = "";
+      submitBtn.disabled = true;
+      powCheckbox.disabled = true;
+      powLabelText.textContent = "Verifying\u2026";
+      powLabelText.className = "guestbooks___pow-label-text--loading";
+
+      var apiUrl = "https://guestbooks.meadow.cafe/api/pow-challenge/508";
+      fetch(apiUrl)
+        .then(function(resp) { return resp.json(); })
+        .then(function(data) {
+          powChallenge = data.challenge;
+          var difficulty = data.difficulty;
+
+          if (powWorker) { powWorker.terminate(); }
+
+          var blob = new Blob([workerCode], { type: "application/javascript" });
+          powWorker = new Worker(URL.createObjectURL(blob));
+
+          powWorker.onmessage = function(e) {
+            if (e.data.found) {
+              powNonce = e.data.nonce;
+              powReady = true;
+              hiddenChallenge.value = powChallenge;
+              hiddenNonce.value = powNonce;
+              submitBtn.disabled = false;
+              powCheckbox.disabled = true;
+              powLabelText.textContent = "Verified \u2713";
+              powLabelText.className = "guestbooks___pow-label-text--verified";
+            }
+          };
+
+          powWorker.postMessage({ challenge: powChallenge, difficulty: difficulty });
+        })
+        .catch(function(err) {
+          console.error("PoW challenge fetch error:", err);
+          powCheckbox.checked = false;
+          powCheckbox.disabled = false;
+          powLabelText.textContent = "Verification failed \u2014 try again";
+          powLabelText.className = "guestbooks___pow-label-text--error";
+        });
+    }
+
+    // Only start PoW when the checkbox is clicked
+    powCheckbox.addEventListener("change", function() {
+      if (powCheckbox.checked) {
+        guestbooks___fetchAndSolve();
+      }
+    });
+
+    // After form submission, reset the checkbox for the next message
+    form.addEventListener("submit", function() {
+      setTimeout(function() {
+        powCheckbox.checked = false;
+        powCheckbox.disabled = false;
+        powLabelText.textContent = "I\u2019m not a robot";
+        powLabelText.className = "";
+        submitBtn.disabled = true;
+      }, 500);
+    });
+  })();
