@@ -113,7 +113,7 @@ function openAboutTab(x) {
   }
 }
 function openSocialTab(x) {
-  var socialTabs = ["links", "resources", "rhythm-ring", "sites"];
+  var socialTabs = ["links", "resources", "rhythm-ring"];
   if (sitemapOpen == true) {
     content.style.maxHeight = null;
     setTimeout(sitemapBottomDelay, 200);
