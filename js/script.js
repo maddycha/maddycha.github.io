@@ -1,363 +1,280 @@
 document.getElementsByTagName('img').ondragstart = function () { return false; };
-var style = window.getComputedStyle(document.body)
-
+var style = window.getComputedStyle(document.body);
 var getRandom = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
-var windows = [];
+// ===== WINDOW CONFIGURATION =====
+// To add a window: add an entry here, add HTML with matching id, add a desktop icon
+var WINDOW_LIST = [
+  { id: "w0", name: "about" },
+  { id: "w1", name: "dressup" },
+  { id: "w2", name: "art" },
+  { id: "w3", name: "social" },
+  { id: "w4", name: "guestbook" },
+];
 
-windows.push({ name: "w0", pos: false, text: "about", openId: "ow0" });
-windows.push({ name: "w1", pos: false, text: "dressup", openId: "ow1" });
-windows.push({ name: "w2", pos: false, text: "art", openId: "ow2" });
-windows.push({ name: "w3", pos: false, text: "social", openId: "ow3" });
-windows.push({ name: "w4", pos: false, text: "guestbook", openId: "ow4" });
-// windows.push({ name: "w5", pos: false, text: "collections", openId: "ow5" });
+// To add a tab: add an entry to the slugs array, add a CSS variable --{prefix}{index},
+// and add HTML tab header + content div with id {prefix}{index}Content
+var TAB_GROUPS = {
+  about: {
+    prefix: "a",
+    activeClass: "a-active-tab",
+    browserId: "aboutBrowser",
+    urlId: "aUrl",
+    slugs: ["about-me", "site-info"],
+    invertFirstTab: true,
+  },
+  social: {
+    prefix: "s",
+    activeClass: "s-active-tab",
+    browserId: "socialBrowser",
+    urlId: "sUrl",
+    slugs: ["links", "resources", "rhythm-ring"],
+    invertFirstTab: false,
+  },
+};
 
+// ===== INTERNAL STATE =====
+var windowOpen = {};
+var windowOpenIds = {};
+WINDOW_LIST.forEach(function (w) {
+  windowOpen[w.id] = false;
+  windowOpenIds[w.id] = "o" + w.id;
+});
+var windowsZ = WINDOW_LIST.map(function (w) { return w.id; });
 
-dragElement(document.getElementById("w0"));
-dragElement(document.getElementById("w1"));
-dragElement(document.getElementById("w2"));
-dragElement(document.getElementById("w3"));
-dragElement(document.getElementById("w4"));
-// dragElement(document.getElementById("w5"));
+WINDOW_LIST.forEach(function (w) {
+  dragElement(document.getElementById(w.id));
+});
 
-
-//ordering
-var windowsZ = ["w0", "w1", "w2", "w3", "w4"];
-var itemToFind = "";
-let divElement = document.getElementsByClassName("window");
-var found = windows.findIndex(el => el == itemToFind)
-
+// ===== Z-ORDER =====
 function orderDiv(x) {
-  itemToFind = x.id;
-  var foundIdx = windowsZ.findIndex(el => el == itemToFind);
-  windowsZ.splice(foundIdx, 1);
-  windowsZ.unshift(itemToFind);
+  var idx = windowsZ.indexOf(x.id);
+  if (idx > -1) {
+    windowsZ.splice(idx, 1);
+    windowsZ.unshift(x.id);
+  }
 }
-document.addEventListener('mousedown', function (b) {
+
+function updateZOrder() {
   for (var i = 0; i < windowsZ.length; i++) {
     document.getElementById(windowsZ[i]).style.zIndex = 10 - i;
   }
-  var activeW = windows[windowsZ[0].slice(1)].openId;
-  for (var p = 0; p < windows.length; p++) {
-    if (document.getElementById(windows[p].openId) != null) {
-      document.getElementById(windows[p].openId).classList.remove("active");
-    }
-    var checkW = windows[p];
-    if (windows[p].name == windowsZ[0]) {
-      if (windows[p].pos == true) {
-        document.getElementById(activeW).classList.add("active");
-      }
-    }
+  WINDOW_LIST.forEach(function (w) {
+    var el = document.getElementById(windowOpenIds[w.id]);
+    if (el) el.classList.remove("active");
+  });
+  var topId = windowsZ[0];
+  if (windowOpen[topId]) {
+    var el = document.getElementById(windowOpenIds[topId]);
+    if (el) el.classList.add("active");
   }
-  if (windows[3].pos == true) {
-    document.getElementById("webrings").style.display = "block";
-  } else {
-    document.getElementById("webrings").style.display = "none";
+  var webrings = document.getElementById("webrings");
+  if (webrings) {
+    webrings.style.display = windowOpen["w3"] ? "block" : "none";
   }
-});
-document.addEventListener('click', function (b) {
-  for (var i = 0; i < windowsZ.length; i++) {
-    document.getElementById(windowsZ[i]).style.zIndex = 10 - i;
-  }
-  var activeW = windows[windowsZ[0].slice(1)].openId;
-  for (var p = 0; p < windows.length; p++) {
-    if (document.getElementById(windows[p].openId) != null) {
-      document.getElementById(windows[p].openId).classList.remove("active");
-    }
-    var checkW = windows[p];
-    if (windows[p].name == windowsZ[0]) {
-      if (windows[p].pos == true) {
-        document.getElementById(activeW).classList.add("active");
-      }
-    }
-  }
-  if (windows[3].pos == true) {
-    document.getElementById("webrings").style.display = "block";
+}
 
-  } else {
-    document.getElementById("webrings").style.display = "none";
-  }
-});
+document.addEventListener('mousedown', updateZOrder);
+document.addEventListener('click', updateZOrder);
 
+// ===== TAB SWITCHING =====
+function openTab(groupName, tabElement) {
+  var group = TAB_GROUPS[groupName];
+  if (!group) return;
 
-//tab functionality
-function openAboutTab(x) {
-  var aboutTabs = ["about-me", "site-info"];
-  if (sitemapOpen == true) {
+  if (sitemapOpen) {
     content.style.maxHeight = null;
     setTimeout(sitemapBottomDelay, 200);
     sitemapOpen = false;
   }
-  for (var at = 0; at < aboutTabs.length; at++) {
-    document.getElementById("a" + at).classList.remove("a-active-tab");
-    document.getElementById("a" + at).style.background = style.getPropertyValue('--bg');
-    document.getElementById("a" + at).style.color = style.getPropertyValue('--primary');
-    document.getElementById("a" + at).style.borderBottomColor = style.getPropertyValue('--primary');
-    document.getElementById("a" + at + "Content").style.display = "none";
+
+  for (var i = 0; i < group.slugs.length; i++) {
+    var tabId = group.prefix + i;
+    var tab = document.getElementById(tabId);
+    tab.classList.remove(group.activeClass);
+    tab.style.background = style.getPropertyValue('--bg');
+    tab.style.color = style.getPropertyValue('--primary');
+    tab.style.borderBottomColor = style.getPropertyValue('--primary');
+    document.getElementById(tabId + "Content").style.display = "none";
   }
-  var openT = x.id;
-  var openTcontent = x.id + "Content";
-  document.getElementById(x.id).classList.add("a-active-tab");
-  aActive = document.getElementsByClassName("a-active-tab");
-  for (var i = 0; i < aActive.length; i++) {
-    if(aActive[i].id == "a0"){
-      aActive[i].style.color = style.getPropertyValue('--bg');
-    } else{
-      aActive[i].style.color = style.getPropertyValue('--primary');
-    }
-    aActive[i].style.background = style.getPropertyValue('--' + x.id + '');
-    aActive[i].style.borderBottomColor = style.getPropertyValue('--' + x.id + '');
-    document.getElementById("aboutBrowser").style.background = style.getPropertyValue('--' + x.id + '');
-    document.getElementById(aActive[i].id + "Content").style.display = "block";
-    document.getElementById("aUrl").innerHTML = "https://maddycha.com/"+aboutTabs[aActive[i].id.slice(1)];
-  }
-}
-function openSocialTab(x) {
-  var socialTabs = ["links", "resources", "rhythm-ring"];
-  if (sitemapOpen == true) {
-    content.style.maxHeight = null;
-    setTimeout(sitemapBottomDelay, 200);
-    sitemapOpen = false;
-  }
-  for (var at = 0; at < socialTabs.length; at++) {
-    document.getElementById("s" + at).classList.remove("s-active-tab");
-    document.getElementById("s" + at).style.background = style.getPropertyValue('--bg');
-    document.getElementById("s" + at).style.color = style.getPropertyValue('--primary');
-    document.getElementById("s" + at).style.borderBottomColor = style.getPropertyValue('--primary');
-    document.getElementById("s" + at + "Content").style.display = "none";
-  }
-  var openT = x.id;
-  var openTcontent = x.id + "Content";
-  document.getElementById(x.id).classList.add("s-active-tab");
-  sActive = document.getElementsByClassName("s-active-tab");
-  for (var i = 0; i < sActive.length; i++) {
-    // if(sActive[i].id == "s"){
-    //   sActive[i].style.color = style.getPropertyValue('--bg');
-    // } else{
-      sActive[i].style.color = style.getPropertyValue('--primary');
-    // }
-    sActive[i].style.background = style.getPropertyValue('--' + x.id + '');
-    sActive[i].style.borderBottomColor = style.getPropertyValue('--' + x.id + '');
-    document.getElementById("socialBrowser").style.background = style.getPropertyValue('--' + x.id + '');
-    document.getElementById(sActive[i].id + "Content").style.display = "block";
-    document.getElementById("sUrl").innerHTML = "https://maddycha.com/"+socialTabs[sActive[i].id.slice(1)];
-  }
+
+  var activeId = tabElement.id;
+  var tabIndex = parseInt(activeId.slice(1));
+  var colorVar = '--' + activeId;
+
+  tabElement.classList.add(group.activeClass);
+  tabElement.style.background = style.getPropertyValue(colorVar);
+  tabElement.style.borderBottomColor = style.getPropertyValue(colorVar);
+  tabElement.style.color = (group.invertFirstTab && tabIndex === 0)
+    ? style.getPropertyValue('--bg')
+    : style.getPropertyValue('--primary');
+
+  document.getElementById(group.browserId).style.background = style.getPropertyValue(colorVar);
+  document.getElementById(activeId + "Content").style.display = "block";
+  document.getElementById(group.urlId).innerHTML = "https://maddycha.com/" + group.slugs[tabIndex];
 }
 
-//window functionality
+function openAboutTab(x) { openTab("about", x); }
+function openSocialTab(x) { openTab("social", x); }
 
-function openMobileWindow(x){
-  var openW = x.id;
-  if(openW == "w0"){
-    document.getElementById("w0").style.display = "block";
-    document.getElementById("w3").style.display = "none";
-    windows[3].pos = false;
-
-    document.getElementById("social-mobile").classList.remove("mobile-active");
-    document.getElementById("social-mobile").classList.add("mobile-inactive");
-    document.getElementById("about-mobile").classList.remove("mobile-inactive");
-    document.getElementById("about-mobile").classList.add("mobile-active");
-
-    // document.getElementById("about-mobile").style.textDecoration = "underline";
-    document.getElementById("social-mobile").style.textDecoration = "none";
-  }
-  if(openW == "w3"){
-    document.getElementById("w0").style.display = "none";
-    document.getElementById("w3").style.display = "block";
-
-    document.getElementById("about-mobile").classList.remove("mobile-active");
-    document.getElementById("about-mobile").classList.add("mobile-inactive");
-    document.getElementById("social-mobile").classList.remove("mobile-inactive");
-    document.getElementById("social-mobile").classList.add("mobile-active");
-
-    windows[3].pos = true;
-    document.getElementById("about-mobile").style.textDecoration = "none";
-    // document.getElementById("social-mobile").style.textDecoration = "underline";
-
-  }
+// ===== MOBILE NAVIGATION =====
+function openMobileWindow(x) {
+  var isAbout = x.id === "w0";
+  document.getElementById("w0").style.display = isAbout ? "block" : "none";
+  document.getElementById("w3").style.display = isAbout ? "none" : "block";
+  windowOpen["w3"] = !isAbout;
+  document.getElementById("about-mobile").className = isAbout ? "mobile-active" : "mobile-inactive";
+  document.getElementById("social-mobile").className = isAbout ? "mobile-inactive" : "mobile-active";
 }
 
+// ===== WINDOW OPEN/CLOSE =====
 function openWindow(x) {
-
-  if (sitemapOpen == true) {
+  if (sitemapOpen) {
     content.style.maxHeight = null;
     setTimeout(sitemapBottomDelay, 200);
     sitemapOpen = false;
   }
 
-  var openW = x.id;
-  var bottomLimit = 2 + window.innerHeight - document.getElementById(openW).offsetHeight - document.getElementById("macnav").offsetHeight;
-  var rightLimit = 0 + window.innerWidth - document.getElementById(openW).offsetWidth;
-  var num = openW.slice(1);
-  var openPos = windows[num].pos;
+  var id = x.id;
+  var num = parseInt(id.slice(1));
+  var win = WINDOW_LIST[num];
 
-  for (var o = 0; o < windows.length; o++) {
-    if (o != num) {
-    } else {
-      if (windows[o].pos == false) {
-        document.getElementById(openW).style.left = getRandom(0, rightLimit) + 'px'; // 👈🏼 Horizontally
-        document.getElementById(openW).style.top = getRandom(0, bottomLimit) + 'px'; // 👈🏼 Vertically
-        document.getElementById('openwindows').innerHTML += "<li class='open' id='" + windows[o].openId + "' onclick='openWindow(" + openW + ")';'><img src='imgs/icons/" + windows[o].text + ".png'>" + windows[o].text + "</li>"
-        windows[o].pos = true;
-      }
-    }
+  if (!windowOpen[id]) {
+    var el = document.getElementById(id);
+    var bottomLimit = 2 + window.innerHeight - el.offsetHeight - document.getElementById("macnav").offsetHeight;
+    var rightLimit = window.innerWidth - el.offsetWidth;
+    el.style.left = getRandom(0, rightLimit) + 'px';
+    el.style.top = getRandom(0, bottomLimit) + 'px';
+    document.getElementById('openwindows').innerHTML +=
+      "<li class='open' id='" + windowOpenIds[id] + "' onclick='openWindow(" + id + ")'>" +
+      "<img src='imgs/icons/" + win.name + ".png'>" + win.name + "</li>";
+    windowOpen[id] = true;
   }
-  document.getElementById(openW).style.transform = "scale(1)";
-  itemToFind = openW;
-  var foundIdx = windowsZ.findIndex(el => el == itemToFind);
-  windowsZ.splice(foundIdx, 1);
-  windowsZ.unshift(itemToFind);
+
+  document.getElementById(id).style.transform = "scale(1)";
+  orderDiv(x);
 }
+
 function closeWindow(x) {
-  var closeW = x.id;
-  var num = closeW.slice(1);
-  document.getElementById(closeW).style.transform = "scale(0)";
-  windows[num].pos = false;
-  var cwId = windows[num].openId;
-  document.getElementById(cwId).remove();
-
-  for (var i = 0; i < windowsZ.length; i++) {
-    document.getElementById(windowsZ[i]).style.zIndex = 10 - i;
+  var id = x.id;
+  document.getElementById(id).style.transform = "scale(0)";
+  windowOpen[id] = false;
+  var openEl = document.getElementById(windowOpenIds[id]);
+  if (openEl) openEl.remove();
+  var idx = windowsZ.indexOf(id);
+  if (idx > -1) {
+    windowsZ.splice(idx, 1);
+    windowsZ.push(id);
   }
-  var activeW = windows[windowsZ[0].slice(1)].openId;
-  for (var p = 0; p < windows.length; p++) {
-    if (document.getElementById(windows[p].openId) != null) {
-      document.getElementById(windows[p].openId).classList.remove("active");
-    }
-    var checkW = windows[p];
-    if (windows[p].name == windowsZ[0]) {
-      if (windows[p].pos == true) {
-        document.getElementById(activeW).classList.add("active");
-      }
-    }
-  }
-  itemToFind = closeW;
-  var foundIdx = windowsZ.findIndex(el => el == itemToFind);
-  windowsZ.splice(foundIdx, 1);
-  windowsZ.push(itemToFind);
+  updateZOrder();
 }
 
-//drag functions
+// ===== DRAG =====
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "nav")) {
-    // if present, the header is where you move the DIV from:
-    document.getElementById(elmnt.id + "nav").onmousedown = dragMouseDown;
-  } else {
-    // otherwise, move the DIV from anywhere inside the DIV:
-    elmnt.onmousedown = dragMouseDown;
-  }
+  var handle = document.getElementById(elmnt.id + "nav") || elmnt;
+  handle.onmousedown = dragMouseDown;
+
   function dragMouseDown(e) {
     e = e || window.event;
     e.preventDefault();
-    // get the mouse cursor position at startup:
     pos3 = e.clientX;
     pos4 = e.clientY;
     document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
   }
 
   function elementDrag(e) {
     e = e || window.event;
     e.preventDefault();
-    // calculate the new cursor position:
     pos1 = pos3 - e.clientX;
     pos2 = pos4 - e.clientY;
     pos3 = e.clientX;
     pos4 = e.clientY;
 
-    bottomLimit = window.innerHeight - elmnt.offsetHeight - document.getElementById("macnav").offsetHeight + 2;
-    rightLimit = 1 + window.innerWidth - elmnt.offsetWidth;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    var bottomLimit = window.innerHeight - elmnt.offsetHeight - document.getElementById("macnav").offsetHeight + 2;
+    var rightLimit = 1 + window.innerWidth - elmnt.offsetWidth;
+    elmnt.style.top = Math.max(-1, Math.min(elmnt.offsetTop - pos2, bottomLimit)) + "px";
+    elmnt.style.left = Math.max(-1, Math.min(elmnt.offsetLeft - pos1, rightLimit)) + "px";
+  }
 
-    if (elmnt.offsetTop - pos2 <= -1) {
-      elmnt.style.top = -1 + "px";
-    }
-    if (elmnt.offsetLeft - pos2 <= -1) {
-      elmnt.style.left = -1 + "px";
-    }
-    if (elmnt.offsetTop - pos2 >= bottomLimit) {
-      elmnt.style.top = bottomLimit + "px";
-    }
-    if (elmnt.offsetLeft - pos2 >= rightLimit) {
-      elmnt.style.left = rightLimit + "px";
-    }
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
   }
 }
-function closeDragElement() {
-  // stop moving when mouse button is released:
-  document.onmouseup = null;
-  document.onmousemove = null;
-}
 
-
+// ===== SITEMAP =====
 var sitemapOpen = false;
 var content = document.getElementById("sitemap");
-//open sitemap from copy ul
 
 function sitemapBottomDelay() {
   content.style.bottom = "39px";
 }
+
 function openSitemap() {
-  if (sitemapOpen == false) {
+  if (!sitemapOpen) {
     content.style.maxHeight = content.scrollHeight + "px";
     content.style.bottom = "40px";
-    sitemapOpen = true;
   } else {
     content.style.maxHeight = null;
     setTimeout(sitemapBottomDelay, 200);
-    // content.style.bottom = "39px";
-    sitemapOpen = false;
   }
+  sitemapOpen = !sitemapOpen;
 }
 
+// ===== CLICK EFFECT =====
+document.querySelector("body").addEventListener("click", function (e) {
+  var container = document.createElement("div");
+  container.classList.add("explode");
+  container.style.top = e.clientY + "px";
+  container.style.left = e.clientX + "px";
+  document.body.appendChild(container);
+  setTimeout(function () { container.remove(); }, 1200);
 
-// click effect
+  for (var i = 0; i < 2; i++) {
+    (function (idx) {
+      setTimeout(function () {
+        var star = document.createElement("p");
+        var j = 0;
+        var xDir = Math.random() < 0.5 ? -1 : 1;
+        var xDist = Math.random() * 100;
+        star.textContent = "+";
+        container.appendChild(star);
 
-// include this line when the page loads
-document.querySelector("body").addEventListener("click", explodeOnClick);
+        var timer = setInterval(function () {
+          var yTrans = -(-(1 / 40) * (j - 20) ** 2 + 10) + "px";
+          var xTrans = xDir * (xDist * (j / 100)) + "px";
+          star.style.transform = "translateX(" + xTrans + ") translateY(" + yTrans + ")";
+          j += 1;
+        }, 25);
 
-/**
- * Creates a container at the point of the page where the user clicked.  Populates that container with little "+" signs, sets an interval timer which regularly calculates the point on a curve give the time passed (x), updates the position of each '+' sign to be at the calculated position (given the time that's passed).
- * e {Event} - object representing the 'click' of the page
- **/
-function explodeOnClick(e) {
-  let toPopulate = document.createElement("div");
-  toPopulate.classList.add("explode");
-
-  toPopulate.style.top = e.clientY + "px";
-  toPopulate.style.left = e.clientX + "px";
-
-  document.querySelector("body").appendChild(toPopulate);
-
-  setTimeout(() => toPopulate.remove(), 1200);
-
-  // populate 1 star for testing
-  for (let i = 0; i < 2; i++) {
-    setTimeout(() => {
-      let newStar = document.createElement("p");
-      let j = 0;
-      let xDirection = Math.random() < 0.5 ? -1 : 1; // left or right
-      let xDistance = Math.random() * 100; // Random distance between 0 to 100px for where to fall
-      newStar.textContent = "+";
-      toPopulate.appendChild(newStar);
-
-      let timerId = setInterval(() => {
-        // Calculate new y position based on the parabolic equation
-        let yTrans = -(-(1 / 40) * (j - 20) ** 2 + 10) + "px";
-        let xTrans = xDirection * (xDistance * (j / 100)) + "px";
-        newStar.style.transform = `translateX(${xTrans}) translateY(${yTrans})`;
-
-        j += 1;
-      }, 25);
-
-      setTimeout(() => {
-        clearInterval(timerId);
-        newStar.remove();
-      }, 5000);
-    }, Math.floor(i / 3) * 50);
+        setTimeout(function () {
+          clearInterval(timer);
+          star.remove();
+        }, 5000);
+      }, Math.floor(idx / 3) * 50);
+    })(i);
   }
-}
+});
+
+// ===== DATE & TIME =====
+var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+var days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
+var d = new Date();
+document.getElementById("date").innerHTML = days[d.getDay()] + " " + months[d.getMonth()] + " " + d.getDate();
+document.getElementById("time").innerHTML = d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+
+// ===== STATUS.CAFE FEED =====
+fetch('https://status.cafe/users/maddy.atom')
+  .then(function (response) { return response.text(); })
+  .then(function (str) { return new DOMParser().parseFromString(str, "text/xml"); })
+  .then(function (data) {
+    var entries = data.querySelectorAll("entry");
+    if (entries.length === 0) return;
+    var entryContent = entries[0].querySelector("content").textContent.trim();
+    var dateStr = entries[0].querySelector("published").innerHTML.slice(5, 10);
+    document.getElementById("feed-reader").innerHTML =
+      "<div class='status-entry'><div class='status-content'>" + entryContent +
+      "</div><h2 style='padding-left: 16px;'>" + dateStr + "</h2></div>";
+  });
