@@ -6,6 +6,18 @@ var messagesContainer = document.getElementById(
   "guestbooks___guestbook-messages-container"
 );
 
+var guestbookPowReady = false;
+
+function updateGuestbookSubmit() {
+  var nameVal = document.getElementById("nameinput").value.trim();
+  var msgVal = document.getElementById("messageinput").value.trim();
+  var submitBtn = form.querySelector("input[type='submit']");
+  submitBtn.disabled = !(nameVal && msgVal && guestbookPowReady);
+}
+
+document.getElementById("nameinput").addEventListener("input", updateGuestbookSubmit);
+document.getElementById("messageinput").addEventListener("input", updateGuestbookSubmit);
+
 form.addEventListener("submit", async function (event) {
   event.preventDefault();
 
@@ -65,10 +77,18 @@ function guestbooks___populateQuestionChallenge() {
     `;
 }
 
-function guestbooks___loadMessages(page) {
+var isLoadingMessages = false;
+var allMessagesLoaded = false;
+
+function guestbooks___loadMessages(page, append) {
+  if (isLoadingMessages) return;
   if (page) {
     currentPage = page;
   }
+  if (!append) {
+    allMessagesLoaded = false;
+  }
+  isLoadingMessages = true;
 
   var apiUrl =
     "https://guestbooks.meadow.cafe/api/v2/get-guestbook-messages/508?page=" + currentPage + "&limit=" + perPage;
@@ -82,101 +102,76 @@ function guestbooks___loadMessages(page) {
 
       totalPages = pagination.totalPages || 1;
 
-      if (messages.length === 0) {
+      if (messages.length === 0 && !append) {
         messagesContainer.innerHTML = "<p>There are no messages on this guestbook.</p>";
-        guestbooks___hidePaginationControls();
       } else {
-        // Scroll to top when changing pages
-        if (page && page !== 1) {
-          document.getElementById("guestbook").scrollTo(0, 0);
+        if (!append) {
+          messagesContainer.innerHTML = "";
         }
 
-        // Messages are already sorted by created_at DESC from the API
-        messagesContainer.innerHTML = "";
-        messages.forEach(function (message) {
+        messages.forEach(function (message, index) {
           var messageContainer = document.createElement("div");
-          var messageHeader = document.createElement("p");
-          var boldElement = document.createElement("b");
+          messageContainer.style.opacity = "0";
+          messageContainer.style.animation = "noteIn 0.4s ease forwards";
+          messageContainer.style.animationDelay = (index * 0.06) + "s";
 
-          // add name with website (if present)
+          var messageHeader = document.createElement("div");
+          messageHeader.style.display = "flex";
+          messageHeader.style.justifyContent = "space-between";
+          messageHeader.style.alignItems = "baseline";
+
+          var nameElement = document.createElement("h3");
           if (message.Website) {
             var link = document.createElement("a");
             link.href = message.Website ? message.Website : "#";
             link.textContent = message.Name;
             link.target = "_blank";
-            boldElement.appendChild(link);
+            nameElement.appendChild(link);
           } else {
-            var textNode = document.createTextNode(message.Name);
-            boldElement.appendChild(textNode);
+            nameElement.textContent = message.Name;
           }
-          messageHeader.appendChild(boldElement);
+          messageHeader.appendChild(nameElement);
 
-          // add date
           var createdAt = new Date(message.CreatedAt);
-          var formattedDate = createdAt.toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          });
+          var mm = String(createdAt.getMonth() + 1).padStart(2, "0");
+          var dd = String(createdAt.getDate()).padStart(2, "0");
+          var yy = String(createdAt.getFullYear()).slice(-2);
 
           var dateElement = document.createElement("small");
-          dateElement.textContent = " - " + formattedDate;
+          dateElement.textContent = mm + "." + dd + "." + yy;
           messageHeader.appendChild(dateElement);
+          messageContainer.appendChild(messageHeader);
 
-          // add actual quote
           var messageBody = document.createElement("blockquote");
+          messageBody.style.paddingTop = "8px";
           messageBody.textContent = message.Text;
 
-          messageContainer.appendChild(messageHeader);
           messageContainer.appendChild(messageBody);
 
           messagesContainer.appendChild(messageContainer);
         });
-
-        guestbooks___createPaginationControls(pagination);
       }
+
+      if (currentPage >= totalPages) {
+        allMessagesLoaded = true;
+      }
+      isLoadingMessages = false;
     })
     .catch(function (error) {
       console.error("Error fetching messages:", error);
+      isLoadingMessages = false;
     });
 }
 
-function guestbooks___createPaginationControls(pagination) {
-  var pagesContainer = document.getElementById("guestbook-pages");
-  if (!pagesContainer) return;
-
-  // Clear existing pagination
-  pagesContainer.innerHTML = "";
-
-  // Only show pagination if there's more than one page
-  if (pagination.totalPages <= 1) {
-    return;
+document.getElementById("guestbook").addEventListener("scroll", function () {
+  var el = this;
+  if (!isLoadingMessages && !allMessagesLoaded &&
+      el.scrollTop + el.clientHeight >= el.scrollHeight - 150) {
+    currentPage++;
+    guestbooks___loadMessages(currentPage, true);
   }
+});
 
-  // Generate page links
-  for (var i = 1; i <= pagination.totalPages; i++) {
-    var pageLink = document.createElement("p");
-    pageLink.id = i.toString();
-    pageLink.textContent = i.toString();
-    pageLink.className = i === pagination.page ? "gb-active-page" : "";
-
-    // Add click handler using closure to capture the page number
-    (function(pageNum) {
-      pageLink.onclick = function() {
-        guestbooks___loadMessages(pageNum);
-      };
-    })(i);
-
-    pagesContainer.appendChild(pageLink);
-  }
-}
-
-function guestbooks___hidePaginationControls() {
-  var pagesContainer = document.getElementById("guestbook-pages");
-  if (pagesContainer) {
-    pagesContainer.innerHTML = "";
-  }
-}
 guestbooks___populateQuestionChallenge();
 guestbooks___loadMessages();
 
@@ -295,7 +290,8 @@ guestbooks___loadMessages();
               powReady = true;
               hiddenChallenge.value = powChallenge;
               hiddenNonce.value = powNonce;
-              submitBtn.disabled = false;
+              guestbookPowReady = true;
+              updateGuestbookSubmit();
               powCheckbox.disabled = true;
               powLabelText.textContent = "Verified \u2713";
               powLabelText.className = "guestbooks___pow-label-text--verified";
@@ -327,7 +323,8 @@ guestbooks___loadMessages();
         powCheckbox.disabled = false;
         powLabelText.textContent = "I\u2019m not a robot";
         powLabelText.className = "";
-        submitBtn.disabled = true;
+        guestbookPowReady = false;
+        updateGuestbookSubmit();
       }, 500);
     });
   })();
