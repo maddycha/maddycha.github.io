@@ -228,7 +228,7 @@ guestbooks___loadMessages();
       self.onmessage = async function(e) {
         var challenge = e.data.challenge;
         var difficulty = e.data.difficulty;
-        var batchSize = 5000;
+        var batchSize = 50000;
         var nonce = 0;
 
         while (true) {
@@ -293,8 +293,9 @@ guestbooks___loadMessages();
               guestbookPowReady = true;
               updateGuestbookSubmit();
               powCheckbox.disabled = true;
-              powLabelText.textContent = "Verified \u2713";
+              powLabelText.textContent = "Verified";
               powLabelText.className = "guestbooks___pow-label-text--verified";
+              powCheckbox.classList.add("pow-verified");
             }
           };
 
@@ -323,6 +324,7 @@ guestbooks___loadMessages();
         powCheckbox.disabled = false;
         powLabelText.textContent = "I\u2019m not a robot";
         powLabelText.className = "";
+        powCheckbox.classList.remove("pow-verified");
         guestbookPowReady = false;
         updateGuestbookSubmit();
       }, 500);

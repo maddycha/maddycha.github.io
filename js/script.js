@@ -145,20 +145,20 @@ function openWindow(x) {
   }
   
   var el = document.getElementById(id);
-  el.style.transform = "scale(1) translateY(0)";
+  el.style.transform = "scale(1)";
   el.style.opacity = "1";
   el.style.pointerEvents = "auto";
-  el.style.transition = "transform 0.3s cubic-bezier(0.2, 0, 0, 1), opacity 0.25s ease";
+  el.style.transition = "transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1)";
   orderDiv(x);
 }
 
 function closeWindow(x) {
   var id = x.id;
   var el = document.getElementById(id);
-  el.style.transform = "scale(0.95) translateY(8px)";
+  el.style.transform = "scale(0.92)";
   el.style.opacity = "0";
   el.style.pointerEvents = "none";
-  el.style.transition = "transform 0.3s cubic-bezier(0.2, 0, 0, 1), opacity 0.25s ease, pointer-events 0s 0.3s";
+  el.style.transition = "transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), pointer-events 0s 0.2s";
   windowOpen[id] = false;
   var openEl = document.getElementById(windowOpenIds[id]);
   if (openEl) openEl.remove();
@@ -169,7 +169,7 @@ function closeWindow(x) {
       windowsZ.push(id);
     }
     updateZOrder();
-  }, 300);
+  }, 200);
 }
 // #endregion
 
@@ -371,47 +371,61 @@ window.addEventListener('click', (event) => {
   var bottomsBrands = ['aelfric eden', 'diesel', 'sandy liang', 'misbhv'];
   var shoesBrands = ['buffalo', 'mschf', 'suicoke'];
   
+  function bounceDressup() {
+    var el = document.querySelector(".dressup-imgs");
+    el.classList.remove("item-bounce");
+    el.getBoundingClientRect();
+    el.classList.add("item-bounce");
+  }
+
   function topsUpdate(x) {
     document.getElementById("tops-img").src = tops[x];
+    bounceDressup();
     for (var i = 0; i < topsBrands.length + 1; i++) {
       if (i !== x) {
         if (document.getElementById(String(i + "-topsbrand")) !== null) {
           document.getElementById(String(i + "-topsbrand")).style.textTransform = "lowercase";
           document.getElementById(String(i + "-topsbrand")).style.fontStyle = "normal";
+          document.getElementById(String(i + "-topsbrand")).parentElement.style.opacity = "";
         }
       } else {
         document.getElementById(String(i + "-topsbrand")).style.textTransform = "uppercase";
         document.getElementById(String(i + "-topsbrand")).style.fontStyle = "italic";
-        
+        document.getElementById(String(i + "-topsbrand")).parentElement.style.opacity = "1";
       }
     }
   }
   function bottomsUpdate(x) {
     document.getElementById("bottoms-img").src = bottoms[x];
+    bounceDressup();
     for (var i = 0; i < bottomsBrands.length + 1; i++) {
       if (i !== x) {
         if (document.getElementById(String(i + "-bottomsbrand")) !== null) {
           document.getElementById(String(i + "-bottomsbrand")).style.textTransform = "lowercase";
           document.getElementById(String(i + "-bottomsbrand")).style.fontStyle = "normal";
+          document.getElementById(String(i + "-bottomsbrand")).parentElement.style.opacity = "";
         }
       } else {
         document.getElementById(String(i + "-bottomsbrand")).style.textTransform = "uppercase";
         document.getElementById(String(i + "-bottomsbrand")).style.fontStyle = "italic";
-        
+        document.getElementById(String(i + "-bottomsbrand")).parentElement.style.opacity = "1";
       }
     }
   }
   function shoesUpdate(x) {
     document.getElementById("shoes-img").src = shoes[x];
+    bounceDressup();
     for (var i = 0; i < shoesBrands.length + 1; i++) {
       if (i !== x) {
         if (document.getElementById(String(i + "-shoesbrand")) !== null) {
           document.getElementById(String(i + "-shoesbrand")).style.textTransform = "lowercase";
           document.getElementById(String(i + "-shoesbrand")).style.fontStyle = "normal";
+          document.getElementById(String(i + "-shoesbrand")).parentElement.style.opacity = "";
         }
       } else {
         document.getElementById(String(i + "-shoesbrand")).style.textTransform = "uppercase";
         document.getElementById(String(i + "-shoesbrand")).style.fontStyle = "italic";
+        document.getElementById(String(i + "-shoesbrand")).parentElement.style.opacity = "1";
       }
     }
   }
@@ -436,20 +450,38 @@ window.addEventListener('click', (event) => {
       document.getElementById('shoes').innerHTML += "<div class='item' onclick='shoesUpdate(" + b + ");'><h4 class='number'>0" + i + "</h4><h5 class='brand' id='" + b + "-shoesbrand'>" + shoesBrands[i - 1] + "</h5>";
     }
     
-    document.getElementById(String(0 + "-topsbrand")).style.textTransform = "uppercase";
-    document.getElementById(String(0 + "-topsbrand")).style.fontStyle = "italic";
-    
-    document.getElementById(String(0 + "-bottomsbrand")).style.textTransform = "uppercase";
-    document.getElementById(String(0 + "-bottomsbrand")).style.fontStyle = "italic";
-    
-    document.getElementById(String(0 + "-shoesbrand")).style.textTransform = "uppercase";
-    document.getElementById(String(0 + "-shoesbrand")).style.fontStyle = "italic";
+    requestAnimationFrame(function() {
+      var brands = document.querySelectorAll(".brand");
+      for (var b = 0; b < brands.length; b++) {
+        brands[b].style.minWidth = "";
+        brands[b].style.textTransform = "uppercase";
+        brands[b].style.fontStyle = "italic";
+      }
+      requestAnimationFrame(function() {
+        var brands = document.querySelectorAll(".brand");
+        for (var b = 0; b < brands.length; b++) {
+          brands[b].style.minWidth = brands[b].offsetWidth + "px";
+          brands[b].style.textTransform = "";
+          brands[b].style.fontStyle = "";
+        }
+        document.getElementById(String(0 + "-topsbrand")).style.textTransform = "uppercase";
+        document.getElementById(String(0 + "-topsbrand")).style.fontStyle = "italic";
+        document.getElementById(String(0 + "-topsbrand")).parentElement.style.opacity = "1";
+        document.getElementById(String(0 + "-bottomsbrand")).style.textTransform = "uppercase";
+        document.getElementById(String(0 + "-bottomsbrand")).style.fontStyle = "italic";
+        document.getElementById(String(0 + "-bottomsbrand")).parentElement.style.opacity = "1";
+        document.getElementById(String(0 + "-shoesbrand")).style.textTransform = "uppercase";
+        document.getElementById(String(0 + "-shoesbrand")).style.fontStyle = "italic";
+        document.getElementById(String(0 + "-shoesbrand")).parentElement.style.opacity = "1";
+      });
+    });
   });
   
   // #endregion
   
   // #region ===== CUSTOM CURSOR =====
   (function() {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
     var cursor = document.getElementById("custom-cursor");
     var cursorText = cursor.querySelector("span");
     var isDragging = false;
@@ -461,7 +493,7 @@ window.addEventListener('click', (event) => {
 
     var openSelectors = "a, .icon, #guestbook-pages p";
     var closeSelectors = ".x";
-    var interactSelectors = ".switch, .theme-circle, .art, .controls i, .item, .guestbookcontent input, .guestbookcontent textarea, input[type=submit]:not(:disabled), #guestbooks___pow-checkbox, #copy-open, #openwindows li, #sitemap li";
+    var interactSelectors = ".switch, .theme-circle, .art, .controls i, .item, .guestbookcontent input, .guestbookcontent textarea, input[type=submit]:not(:disabled), #guestbooks___pow-checkbox, #guestbooks___pow-status, #guestbooks___challenge-answer-container, #copy-open, #openwindows li, #sitemap li";
 
     document.addEventListener("mouseover", function(e) {
       if (isDragging) return;
@@ -505,6 +537,38 @@ window.addEventListener('click', (event) => {
         cursorText.textContent = "";
       }
     });
+  })();
+  // #endregion
+
+  // #region ===== DESKTOP CIRCLE SCRIBBLE =====
+  (function() {
+    var w0 = document.getElementById("w0");
+    var path = w0.querySelector(".circle-scribble path");
+    if (!path) return;
+
+    w0.addEventListener("mouseenter", function() {
+      if (!windowOpen["w0"]) return;
+      path.style.transition = "none";
+      path.style.strokeDashoffset = "500";
+      path.getBoundingClientRect();
+      path.style.transition = "stroke-dashoffset 0.9s cubic-bezier(0.4, 0, 0.2, 1)";
+      path.style.strokeDashoffset = "0";
+    });
+
+    w0.addEventListener("mouseleave", function() {
+      if (!windowOpen["w0"]) return;
+      path.style.transition = "stroke-dashoffset 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+      path.style.strokeDashoffset = "-500";
+    });
+
+    var originalClose = window.closeWindow;
+    window.closeWindow = function(x) {
+      if (x.id === "w0") {
+        path.style.transition = "none";
+        path.style.strokeDashoffset = "500";
+      }
+      originalClose(x);
+    };
   })();
   // #endregion
 
