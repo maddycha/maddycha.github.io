@@ -540,6 +540,31 @@ window.addEventListener('click', (event) => {
   })();
   // #endregion
 
+  // #region ===== MOBILE CIRCLE SCRIBBLE =====
+  (function() {
+    if (!window.matchMedia("(pointer: coarse)").matches) return;
+    var mobile = document.getElementById("mobile");
+    if (!mobile) return;
+    var path = mobile.querySelector(".circle-scribble path");
+    if (!path) return;
+
+    function runCycle() {
+      path.style.transition = "none";
+      path.style.strokeDashoffset = "500";
+      path.getBoundingClientRect();
+      path.style.transition = "stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1)";
+      path.style.strokeDashoffset = "0";
+      setTimeout(function() {
+        path.style.transition = "stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
+        path.style.strokeDashoffset = "-500";
+      }, 2200);
+      setTimeout(runCycle, 10000);
+    }
+
+    setTimeout(runCycle, 1000);
+  })();
+  // #endregion
+
   // #region ===== DESKTOP CIRCLE SCRIBBLE =====
   (function() {
     var w0 = document.getElementById("w0");
