@@ -548,20 +548,16 @@ window.addEventListener('click', (event) => {
     var path = mobile.querySelector(".circle-scribble path");
     if (!path) return;
 
-    function runCycle() {
-      path.style.transition = "none";
-      path.style.strokeDashoffset = "500";
-      path.getBoundingClientRect();
-      path.style.transition = "stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1)";
-      path.style.strokeDashoffset = "0";
-      setTimeout(function() {
-        path.style.transition = "stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
-        path.style.strokeDashoffset = "-500";
-      }, 2200);
-      setTimeout(runCycle, 10000);
-    }
-
-    setTimeout(runCycle, 1000);
+    var animate = document.createElementNS("http://www.w3.org/2000/svg", "animate");
+    animate.setAttribute("attributeName", "stroke-dashoffset");
+    animate.setAttribute("values", "500;0;0;-500;-500");
+    animate.setAttribute("keyTimes", "0;0.12;0.22;0.28;1");
+    animate.setAttribute("dur", "10s");
+    animate.setAttribute("begin", "1s");
+    animate.setAttribute("repeatCount", "indefinite");
+    animate.setAttribute("calcMode", "spline");
+    animate.setAttribute("keySplines", "0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1");
+    path.appendChild(animate);
   })();
   // #endregion
 
