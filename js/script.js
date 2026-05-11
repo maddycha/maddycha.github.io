@@ -559,22 +559,28 @@ window.addEventListener('click', (event) => {
       if (!startTime) startTime = now;
       var elapsed = now - startTime - 1000;
       if (elapsed < 0) {
+        path.style.strokeDasharray = "500";
         path.style.strokeDashoffset = "500";
         requestAnimationFrame(tick);
         return;
       }
       var t = (elapsed % 10000) / 10000;
-      var offset;
       if (t < 0.12) {
-        offset = 500 - 500 * ease(t / 0.12);
+        var p = ease(t / 0.12);
+        path.style.strokeDasharray = "500";
+        path.style.strokeDashoffset = String(500 - 500 * p);
       } else if (t < 0.22) {
-        offset = 0;
+        path.style.strokeDasharray = "500";
+        path.style.strokeDashoffset = "0";
       } else if (t < 0.28) {
-        offset = -500 * ease((t - 0.22) / 0.06);
+        var p = ease((t - 0.22) / 0.06);
+        var x = 500 * p;
+        path.style.strokeDashoffset = "0";
+        path.style.strokeDasharray = "0 " + x + " " + (500 - x);
       } else {
-        offset = -500;
+        path.style.strokeDasharray = "500";
+        path.style.strokeDashoffset = "500";
       }
-      path.style.strokeDashoffset = String(offset);
       requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
