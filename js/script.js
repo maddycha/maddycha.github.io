@@ -559,7 +559,7 @@ window.addEventListener('click', (event) => {
       if (!startTime) startTime = now;
       var elapsed = now - startTime - 1000;
       if (elapsed < 0) {
-        path.setAttribute("stroke-dashoffset", "500");
+        path.style.strokeDashoffset = "500";
         requestAnimationFrame(tick);
         return;
       }
@@ -574,7 +574,7 @@ window.addEventListener('click', (event) => {
       } else {
         offset = -500;
       }
-      path.setAttribute("stroke-dashoffset", String(offset));
+      path.style.strokeDashoffset = String(offset);
       requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
