@@ -548,16 +548,36 @@ window.addEventListener('click', (event) => {
     var path = mobile.querySelector(".circle-scribble path");
     if (!path) return;
 
-    var animate = document.createElementNS("http://www.w3.org/2000/svg", "animate");
-    animate.setAttribute("attributeName", "stroke-dashoffset");
-    animate.setAttribute("values", "500;0;0;-500;-500");
-    animate.setAttribute("keyTimes", "0;0.12;0.22;0.28;1");
-    animate.setAttribute("dur", "10s");
-    animate.setAttribute("begin", "1s");
-    animate.setAttribute("repeatCount", "indefinite");
-    animate.setAttribute("calcMode", "spline");
-    animate.setAttribute("keySplines", "0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1");
-    path.appendChild(animate);
+    path.style.animation = "none";
+
+    function ease(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    var startTime = null;
+    function tick(now) {
+      if (!startTime) startTime = now;
+      var elapsed = now - startTime - 1000;
+      if (elapsed < 0) {
+        path.setAttribute("stroke-dashoffset", "500");
+        requestAnimationFrame(tick);
+        return;
+      }
+      var t = (elapsed % 10000) / 10000;
+      var offset;
+      if (t < 0.12) {
+        offset = 500 - 500 * ease(t / 0.12);
+      } else if (t < 0.22) {
+        offset = 0;
+      } else if (t < 0.28) {
+        offset = -500 * ease((t - 0.22) / 0.06);
+      } else {
+        offset = -500;
+      }
+      path.setAttribute("stroke-dashoffset", String(offset));
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
   })();
   // #endregion
 
