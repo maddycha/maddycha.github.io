@@ -12,6 +12,9 @@ var WINDOW_LIST = [
   { id: "w2", name: "art" },
   { id: "w3", name: "social" },
   { id: "w4", name: "guestbook" },
+  { id: "w5", name: "work" },
+  { id: "w6", name: "resume" },
+  { id: "w7", name: "settings" },
 ];
 
 // To add a tab: add an entry to the slugs array, add a CSS variable --{prefix}{index},
@@ -61,7 +64,9 @@ function orderDiv(x) {
 
 function updateZOrder() {
   for (var i = 0; i < windowsZ.length; i++) {
-    document.getElementById(windowsZ[i]).style.zIndex = 10 - i;
+    var winEl = document.getElementById(windowsZ[i]);
+    winEl.style.zIndex = 10 - i;
+    winEl.classList.remove("window-active");
   }
   WINDOW_LIST.forEach(function (w) {
     var el = document.getElementById(windowOpenIds[w.id]);
@@ -71,6 +76,7 @@ function updateZOrder() {
   if (windowOpen[topId]) {
     var el = document.getElementById(windowOpenIds[topId]);
     if (el) el.classList.add("active");
+    document.getElementById(topId).classList.add("window-active");
   }
   var webrings = document.getElementById("webrings");
   if (webrings) {
@@ -124,7 +130,8 @@ function openWindow(x) {
   var id = x.id;
   var num = parseInt(id.slice(1));
   var win = WINDOW_LIST[num];
-  
+  var wasOpen = windowOpen[id];
+
   if (!windowOpen[id]) {
     var el = document.getElementById(id);
     var bottomLimit = 2 + window.innerHeight - el.offsetHeight - document.getElementById("macnav").offsetHeight;
@@ -145,10 +152,26 @@ function openWindow(x) {
   }
   
   var el = document.getElementById(id);
-  el.style.transform = "scale(1)";
-  el.style.opacity = "1";
-  el.style.pointerEvents = "auto";
-  el.style.transition = "transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1)";
+  if (id === "w4") {
+    var gbScroll = document.getElementById("guestbook-messages-scroll");
+    if (gbScroll) gbScroll.scrollTop = gbScroll.scrollHeight;
+  }
+  if (wasOpen) {
+    el.style.transition = "transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)";
+    el.style.transform = "scale(1.01)";
+    setTimeout(function() {
+      el.style.transition = "transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)";
+      el.style.transform = "scale(1)";
+    }, 200);
+  } else {
+    el.style.transform = "scale(1.01)";
+    el.style.opacity = "1";
+    el.style.pointerEvents = "auto";
+    el.style.transition = "transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1)";
+    setTimeout(function() {
+      el.style.transform = "scale(1)";
+    }, 200);
+  }
   orderDiv(x);
 }
 
@@ -250,29 +273,8 @@ window.addEventListener('click', (event) => {
   
   // #region ==== SETTINGS ====
 
-  // ---- EDIT THEMES HERE ----
-  var THEMES = [
-    { circle: "#000000", primary: "#000000", secondary: "#242424", bg: "#ffffff", s3: "#eeeeee" },
-    { circle: "#3E2518", primary: "#3E2518", secondary: "#5C3D2E", bg: "#ffffff", s3: "#eeeeee" },
-    { circle: "#152D4F", primary: "#152D4F", secondary: "#2A4268", bg: "#ffffff", s3: "#eeeeee" },
-    { circle: "#2A4422", primary: "#2A4422", secondary: "#3E5C34", bg: "#ffffff", s3: "#eeeeee" },
-    { circle: "#6B1A3E", primary: "#6B1A3E", secondary: "#883058", bg: "#ffffff", s3: "#eeeeee" },
-    { circle: "#3A2460", primary: "#3A2460", secondary: "#523A7A", bg: "#ffffff", s3: "#eeeeee" },
-  ];
-
-  var currentTheme = 0;
-
-  (function() {
-    var container = document.getElementById("theme-colors");
-    for (var i = 0; i < THEMES.length; i++) {
-      var circle = document.createElement("div");
-      circle.className = "theme-circle" + (i === 0 ? " selected" : "");
-      circle.style.background = THEMES[i].circle;
-      circle.setAttribute("data-theme", i);
-      circle.setAttribute("onclick", "setTheme(" + i + ")");
-      container.appendChild(circle);
-    }
-  })();
+  var THEME_LIGHT = { primary: "#000000", secondary: "#242424", bg: "#ffffff", s3: "#eeeeee" };
+  var THEME_DARK = { primary: "#ffffff", secondary: "#eeeeee", bg: "#242424", s3: "#161616" };
 
   function hexToRgb(hex) {
     return [
@@ -293,30 +295,44 @@ window.addEventListener('click', (event) => {
     );
   }
 
-  function setTheme(index) {
-    var theme = THEMES[index];
+  function applyTheme(theme, isDark) {
     root.style.setProperty("--primary", theme.primary);
     root.style.setProperty("--secondary", theme.secondary);
     root.style.setProperty("--bg", theme.bg);
     root.style.setProperty("--s3", theme.s3);
-
-    var circles = document.querySelectorAll(".theme-circle");
-    for (var i = 0; i < circles.length; i++) {
-      circles[i].classList.remove("selected");
-      if (circles[i].getAttribute("data-theme") == index) {
-        circles[i].classList.add("selected");
-      }
+    if (isDark) {
+      document.getElementById("theme-matrix").setAttribute("values",
+        "1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0");
+      document.body.classList.add("theme-dark");
+    } else {
+      updateThemeFilter(theme.primary, theme.bg);
+      document.body.classList.remove("theme-dark");
     }
-    updateThemeFilter(theme.primary, theme.bg);
-    currentTheme = index;
+  }
+
+  function toggleDarkMode(checkbox) {
+    var theme = checkbox.checked ? THEME_DARK : THEME_LIGHT;
+    applyTheme(theme, checkbox.checked);
   }
 
   function crtSetting(checkbox){
     document.getElementById("crt").style.display = checkbox.checked ? "block" : "none";
   }
+  function copyEmail(e) {
+    e.preventDefault();
+    navigator.clipboard.writeText("maddycha@gmail.com");
+    var cursor = document.getElementById("custom-cursor");
+    var cursorText = cursor.querySelector("span");
+    cursorText.textContent = "copied";
+    cursor.classList.add("cursor-copied");
+    setTimeout(function() {
+      cursorText.textContent = "copy";
+      cursor.classList.remove("cursor-copied");
+    }, 1500);
+  }
   // #endregion
-  
-  
+
+
   // #region ===== CLICK EFFECT =====
   document.querySelector("body").addEventListener("click", function (e) {
     var container = document.createElement("div");
@@ -450,7 +466,7 @@ window.addEventListener('click', (event) => {
       document.getElementById('shoes').innerHTML += "<div class='item' onclick='shoesUpdate(" + b + ");'><h4 class='number'>0" + i + "</h4><h5 class='brand' id='" + b + "-shoesbrand'>" + shoesBrands[i - 1] + "</h5>";
     }
     
-    requestAnimationFrame(function() {
+    function measureBrands() {
       var brands = document.querySelectorAll(".brand");
       for (var b = 0; b < brands.length; b++) {
         brands[b].style.minWidth = "";
@@ -474,6 +490,13 @@ window.addEventListener('click', (event) => {
         document.getElementById(String(0 + "-shoesbrand")).style.fontStyle = "italic";
         document.getElementById(String(0 + "-shoesbrand")).parentElement.style.opacity = "1";
       });
+    }
+
+    Promise.all([
+      document.fonts.load("35px 'Instrument Serif'"),
+      document.fonts.load("italic 35px 'Instrument Serif'")
+    ]).then(function() {
+      requestAnimationFrame(measureBrands);
     });
   });
   
@@ -493,7 +516,7 @@ window.addEventListener('click', (event) => {
 
     var openSelectors = "a, .icon, #guestbook-pages p";
     var closeSelectors = ".x";
-    var interactSelectors = ".switch, .theme-circle, .art, .controls i, .item, .guestbookcontent input, .guestbookcontent textarea, input[type=submit]:not(:disabled), #guestbooks___pow-checkbox, #guestbooks___pow-status, #guestbooks___challenge-answer-container, #copy-open, #openwindows li, #sitemap li";
+    var interactSelectors = ".switch, .theme-circle, .art, .controls i, .item, .work-item, .gb-scroll-bottom, .guestbookcontent input, .guestbookcontent textarea, input[type=submit]:not(:disabled), #guestbooks___pow-checkbox, #guestbooks___pow-status, #guestbooks___challenge-answer-container, #copy-open, #openwindows li, #sitemap li";
 
     document.addEventListener("mouseover", function(e) {
       if (isDragging) return;
@@ -504,6 +527,9 @@ window.addEventListener('click', (event) => {
       } else if (target.closest(interactSelectors)) {
         cursor.className = "cursor-interact";
         cursorText.textContent = "";
+      } else if (target.closest(".copy-email")) {
+        cursor.className = "cursor-label";
+        cursorText.textContent = "copy";
       } else if (target.closest(openSelectors)) {
         cursor.className = "cursor-label";
         cursorText.textContent = "open";
@@ -617,6 +643,53 @@ window.addEventListener('click', (event) => {
       originalClose(x);
     };
   })();
+  // #endregion
+
+  // #region ===== WORK PROJECTS =====
+  var WORK_PROJECTS = [
+    { name: "draw in chat", img: "draw in chat.gif", tag: "2025" },
+    { name: "drag-and-drop", img: "drag-and-drop.gif", tag: "2025" },
+    { name: "music sticker", img: "music sticker.gif", tag: "2024" },
+    { name: "media gallery", img: "media gallery.gif", tag: "2024" },
+  ];
+
+  window.addEventListener("load", function() {
+    var workList = document.getElementById("work-list");
+    if (!workList) return;
+
+    for (var i = 0; i < WORK_PROJECTS.length; i++) {
+      var num = (i + 1 < 10 ? "0" : "") + (i + 1);
+      var item = document.createElement("div");
+      item.className = "work-item";
+      item.setAttribute("data-img", "imgs/work/" + WORK_PROJECTS[i].img);
+      item.innerHTML =
+        "<h2>" + WORK_PROJECTS[i].name + "</h2>" +
+        "<span class='work-item-tag'>" + WORK_PROJECTS[i].tag + "</span>";
+      workList.appendChild(item);
+    }
+
+    var preview = document.getElementById("work-preview");
+    var items = workList.querySelectorAll(".work-item");
+
+    for (var i = 0; i < items.length; i++) {
+      items[i].addEventListener("mouseenter", function() {
+        preview.src = this.getAttribute("data-img");
+        preview.classList.add("visible");
+      });
+      items[i].addEventListener("mouseleave", function() {
+        preview.classList.remove("visible");
+      });
+    }
+
+    var w5El = document.getElementById("w5");
+    w5El.addEventListener("mousemove", function(e) {
+      if (!preview.classList.contains("visible")) return;
+      var rect = w5El.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width - 0.5;
+      var y = (e.clientY - rect.top) / rect.height - 0.5;
+      preview.style.transform = "translate(calc(-50% + " + (x * 15) + "px), calc(-50% + " + (y * 15) + "px))";
+    });
+  });
   // #endregion
 
   // // #region ===== STATUS.CAFE FEED =====

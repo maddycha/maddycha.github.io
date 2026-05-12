@@ -1,12 +1,13 @@
 var currentPage = 1;
 var totalPages = 1;
-const perPage = 15;
+const perPage = 8;
 var form = document.getElementById("guestbooks___guestbook-form");
 var messagesContainer = document.getElementById(
   "guestbooks___guestbook-messages-container"
 );
 
 var guestbookPowReady = false;
+var gbSmoothNext = false;
 
 function updateGuestbookSubmit() {
   var nameVal = document.getElementById("nameinput").value.trim();
@@ -16,7 +17,11 @@ function updateGuestbookSubmit() {
 }
 
 document.getElementById("nameinput").addEventListener("input", updateGuestbookSubmit);
-document.getElementById("messageinput").addEventListener("input", updateGuestbookSubmit);
+document.getElementById("messageinput").addEventListener("input", function() {
+  updateGuestbookSubmit();
+  this.style.height = "auto";
+  this.style.height = this.scrollHeight + "px";
+});
 
 form.addEventListener("submit", async function (event) {
   event.preventDefault();
@@ -37,7 +42,16 @@ form.addEventListener("submit", async function (event) {
 
   if (response.ok) {
     form.reset();
-    guestbooks___loadMessages(1);
+    var msgInput = document.getElementById("messageinput");
+    msgInput.style.transition = "height 0.2s ease";
+    msgInput.style.height = "";
+    setTimeout(function() { msgInput.style.transition = ""; }, 250);
+    var loadedCount = messagesContainer.querySelectorAll("[data-month]").length + 1;
+    isLoadingMessages = false;
+    allMessagesLoaded = false;
+    currentPage = 1;
+    gbSmoothNext = true;
+    guestbooks___loadMessages(1, false, Math.max(loadedCount, perPage));
     errorContainer.innerHTML = "";
   } else {
     const err = await response.text();
@@ -79,8 +93,9 @@ function guestbooks___populateQuestionChallenge() {
 
 var isLoadingMessages = false;
 var allMessagesLoaded = false;
+var gbLoadId = 0;
 
-function guestbooks___loadMessages(page, append) {
+function guestbooks___loadMessages(page, append, limitOverride) {
   if (isLoadingMessages) return;
   if (page) {
     currentPage = page;
@@ -89,18 +104,24 @@ function guestbooks___loadMessages(page, append) {
     allMessagesLoaded = false;
   }
   isLoadingMessages = true;
+  gbLoadId++;
+  var thisLoadId = gbLoadId;
 
+  var useLimit = limitOverride || perPage;
   var apiUrl =
-    "https://guestbooks.meadow.cafe/api/v2/get-guestbook-messages/508?page=" + currentPage + "&limit=" + perPage;
+    "https://guestbooks.meadow.cafe/api/v2/get-guestbook-messages/508?page=" + currentPage + "&limit=" + useLimit;
   fetch(apiUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
+      if (thisLoadId !== gbLoadId) return;
       var messages = data.messages || [];
       var pagination = data.pagination || {};
 
       totalPages = pagination.totalPages || 1;
+
+      var scrollEl = document.getElementById("guestbook-messages-scroll");
 
       if (messages.length === 0 && !append) {
         messagesContainer.innerHTML = "<p>There are no messages on this guestbook.</p>";
@@ -109,16 +130,27 @@ function guestbooks___loadMessages(page, append) {
           messagesContainer.innerHTML = "";
         }
 
-        messages.forEach(function (message, index) {
-          var messageContainer = document.createElement("div");
-          messageContainer.style.opacity = "0";
-          messageContainer.style.animation = "noteIn 0.4s ease forwards";
-          messageContainer.style.animationDelay = (index * 0.06) + "s";
+        var monthNames = ["january", "february", "march", "april", "may", "june",
+          "july", "august", "september", "october", "november", "december"];
 
-          var messageHeader = document.createElement("div");
-          messageHeader.style.display = "flex";
-          messageHeader.style.justifyContent = "space-between";
-          messageHeader.style.alignItems = "baseline";
+        messages.reverse();
+        var fragment = document.createDocumentFragment();
+        var lastMonthKey = "";
+
+        messages.forEach(function (message, index) {
+          var createdAt = new Date(message.CreatedAt);
+          var monthKey = createdAt.getFullYear() + "-" + createdAt.getMonth();
+
+          if (monthKey !== lastMonthKey) {
+            var divider = document.createElement("div");
+            divider.className = "gb-month-divider";
+            divider.textContent = monthNames[createdAt.getMonth()] + " " + createdAt.getFullYear();
+            fragment.appendChild(divider);
+            lastMonthKey = monthKey;
+          }
+
+          var messageContainer = document.createElement("div");
+          messageContainer.setAttribute("data-month", monthKey);
 
           var nameElement = document.createElement("h3");
           if (message.Website) {
@@ -130,31 +162,68 @@ function guestbooks___loadMessages(page, append) {
           } else {
             nameElement.textContent = message.Name;
           }
-          messageHeader.appendChild(nameElement);
+          messageContainer.appendChild(nameElement);
 
-          var createdAt = new Date(message.CreatedAt);
+          var messageBody = document.createElement("blockquote");
+          messageBody.textContent = message.Text;
+          messageContainer.appendChild(messageBody);
+
           var mm = String(createdAt.getMonth() + 1).padStart(2, "0");
           var dd = String(createdAt.getDate()).padStart(2, "0");
           var yy = String(createdAt.getFullYear()).slice(-2);
 
           var dateElement = document.createElement("small");
           dateElement.textContent = mm + "." + dd + "." + yy;
-          messageHeader.appendChild(dateElement);
-          messageContainer.appendChild(messageHeader);
+          messageContainer.appendChild(dateElement);
 
-          var messageBody = document.createElement("blockquote");
-          messageBody.style.paddingTop = "8px";
-          messageBody.textContent = message.Text;
-
-          messageContainer.appendChild(messageBody);
-
-          messagesContainer.appendChild(messageContainer);
+          fragment.appendChild(messageContainer);
         });
+
+        if (append) {
+          var existingFirst = messagesContainer.querySelector(".gb-month-divider");
+          if (existingFirst) {
+            var newLastMonth = lastMonthKey;
+            var existingFirstMonth = existingFirst.nextElementSibling
+              ? existingFirst.nextElementSibling.getAttribute("data-month") : "";
+            if (newLastMonth === existingFirstMonth) {
+              existingFirst.remove();
+            }
+          }
+          messagesContainer.insertBefore(fragment, messagesContainer.firstChild);
+        } else {
+          messagesContainer.appendChild(fragment);
+        }
       }
 
       if (currentPage >= totalPages) {
         allMessagesLoaded = true;
       }
+
+      if (!append) {
+        var el = document.getElementById("guestbook-messages-scroll");
+        if (el) {
+          if (gbSmoothNext) {
+            gbSmoothNext = false;
+            setTimeout(function() {
+              var target = el.scrollHeight;
+              el.scrollTo({ top: target, behavior: "smooth" });
+              setTimeout(function() {
+                if (el.scrollTop < el.scrollHeight - el.clientHeight - 5) {
+                  el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+                }
+              }, 600);
+            }, 200);
+          } else {
+            el.style.setProperty("scroll-behavior", "auto", "important");
+            el.scrollTop = el.scrollHeight;
+            requestAnimationFrame(function() {
+              el.scrollTop = el.scrollHeight;
+              el.style.removeProperty("scroll-behavior");
+            });
+          }
+        }
+      }
+
       isLoadingMessages = false;
     })
     .catch(function (error) {
@@ -163,14 +232,37 @@ function guestbooks___loadMessages(page, append) {
     });
 }
 
-document.getElementById("guestbook").addEventListener("scroll", function () {
-  var el = this;
-  if (!isLoadingMessages && !allMessagesLoaded &&
-      el.scrollTop + el.clientHeight >= el.scrollHeight - 150) {
+function gbUpdateScrollBtn() {
+  var el = document.getElementById("guestbook-messages-scroll");
+  var btn = document.getElementById("gb-scroll-bottom");
+  var input = document.getElementById("guestbooks___guestbook-form-container");
+  if (!el || !btn || !input) return;
+  var distFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
+  if (distFromBottom > 400) {
+    btn.classList.add("visible");
+    btn.style.bottom = (input.offsetHeight + 8) + "px";
+  } else {
+    btn.classList.remove("visible");
+  }
+}
+
+function gbCheckLoad() {
+  var el = document.getElementById("guestbook-messages-scroll");
+  if (!el) return;
+  gbUpdateScrollBtn();
+  if (!isLoadingMessages && !allMessagesLoaded && el.scrollTop <= 400) {
     currentPage++;
     guestbooks___loadMessages(currentPage, true);
   }
-});
+}
+var gbScroll = document.getElementById("guestbook-messages-scroll");
+if (gbScroll) {
+  gbScroll.addEventListener("scroll", gbCheckLoad);
+  gbScroll.addEventListener("wheel", function() {
+    setTimeout(gbCheckLoad, 50);
+    setTimeout(gbCheckLoad, 150);
+  });
+}
 
 guestbooks___populateQuestionChallenge();
 guestbooks___loadMessages();
@@ -188,10 +280,10 @@ guestbooks___loadMessages();
     submitBtn.disabled = true;
 
     // Build the verification UI: checkbox with inline label
-    var powContainer = document.getElementById("guestbooks___pow-status");
+    var powContainer = document.getElementById("guestbooks___challenge-answer-container");
     if (!powContainer) {
       powContainer = document.createElement("div");
-      submitBtn.parentNode.insertBefore(powContainer, submitBtn);
+      form.appendChild(powContainer);
     }
     powContainer.id = "guestbooks___pow-container";
     powContainer.className = "guestbooks___pow-container";
