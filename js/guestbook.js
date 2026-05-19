@@ -164,7 +164,8 @@ function guestbooks___loadMessages(page, append, limitOverride) {
           }
           messageContainer.appendChild(nameElement);
 
-          var messageBody = document.createElement("blockquote");
+          var messageBody = document.createElement("p");
+          messageBody.className = "gb-message-text";
           messageBody.textContent = message.Text;
           messageContainer.appendChild(messageBody);
 

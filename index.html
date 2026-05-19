@@ -5,10 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <link rel="stylesheet" href="fonts/google/google-fonts.css">
+    <link rel="stylesheet" href="fonts/aspekta/aspekta.css">
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <link rel='stylesheet' href='fonts/fonts.css' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="shortcut icon" type="image/png" href="imgs/misc/favicon.png" />
@@ -31,33 +29,6 @@
         </filter>
     </svg>
     
-    <div id="mobile" class="center">
-        <section>
-            <article>
-                <h1 class="circle-target">maddy cha
-                    <svg class="circle-scribble" viewBox="0 0 210 55" preserveAspectRatio="none">
-                        <path d="M 12,32 C 5,18 20,4 58,2 C 96,0 148,-1 175,7 C 198,13 205,26 196,36 C 184,48 140,52 102,51 C 60,50 22,48 12,40 C 4,34 8,30 16,29"/>
-                    </svg>
-                </h1>
-                <p>
-                    product designer based in NY
-                    <br>
-                    currently at instagram
-                    <br>
-                    <br>
-                </p>
-            </article>
-            <article>
-                <a href="https://instagram.com/maddycha">instagram</a>
-                <hr>
-                <a href="https://twitter.com/maddycha">twitter</a>
-                <hr>
-                <a href="#" class="copy-email" onclick="copyEmail(event)">maddycha@gmail.com</a>
-            </article>            
-            <img id="m-main" src="imgs/misc/main.png">
-            
-        </section>
-    </div>
     <div id="desktop">
         <!-- #region macnav -->
         <div id="macnav" class="mobile-none">
@@ -82,19 +53,19 @@
         <!-- #region desktop icons -->
         <div id="laptop" onload="createWindows();">
             <div class="icon-container mobile-none">
-                <div class="icon" id="w0icon" onclick="openWindow(w0)">
-                    <img src="imgs/icons/about.png">
-                    <h3>about</h3>
+                <div class="icon" id="settingsicon" onclick="openWindow(settings)">
+                    <img src="imgs/icons/settings.png">
+                    <h3>settings</h3>
                 </div>
-                <div class="icon" id="w2icon" onclick="openWindow(w2)">
-                    <img src="imgs/icons/art.png">
-                    <h3>art</h3>
+                <div class="icon" id="resumeicon" onclick="openWindow(resume)">
+                    <img src="imgs/icons/resume.png">
+                    <h3>resume</h3>
                 </div>
-                <div class="icon" id="w1icon" onclick="openWindow(w1)">
+                <div class="icon" id="dressupicon" onclick="openWindow(dressup)">
                     <img src="imgs/icons/dressup.png">
                     <h3>dress up</h3>
                 </div>
-                <div class="icon" id="w4icon" onclick="openWindow(w4)">
+                <div class="icon" id="guestbookicon" onclick="openWindow(guestbook)">
                     <img src="imgs/icons/guestbook.png">
                     <h3>guestbook</h3>
                 </div>
@@ -102,65 +73,50 @@
                     <img id="d-main" src="imgs/misc/main.png" style="height: 240px; z-index: 0;opacity: 1.0;">
                 </div>
             </div>
-            <!-- temporarily hidden
             <div class="icon-container mobile-none">
-                <div class="icon" id="w5icon" onclick="openWindow(w5)">
+                <div class="icon" id="abouticon" onclick="openWindow(about)">
+                    <img src="imgs/icons/about.png">
+                    <h3>about</h3>
+                </div>
+                <div class="icon" id="articon" onclick="openWindow(art)">
+                    <img src="imgs/icons/art.png">
+                    <h3>art</h3>
+                </div>
+                <div class="icon" id="workicon" onclick="openWindow(work)">
                     <img src="imgs/icons/work.png">
                     <h3>work</h3>
                 </div>
-                <div class="icon" id="w6icon" onclick="openWindow(w6)">
-                    <img src="imgs/icons/resume.png">
-                    <h3>resume</h3>
-                </div>
-                <div class="icon" id="w7icon" onclick="openWindow(w7)">
-                    <img src="imgs/icons/settings.png">
-                    <h3>settings</h3>
-                </div>
             </div>
-            -->
         </div>
         <!-- #endregion -->
         
-        <!-- #region w0-about -->
-        <div class="window" id="w0" onmousedown="orderDiv(this);">
-            <header class="windownav" id="w0nav">
+        <!-- #region about-about -->
+        <div class="window" id="about" onmousedown="orderDiv(this);">
+            <header class="windownav" id="aboutnav">
                 <h3></h3>
-                <aside class="x" onclick="closeWindow(w0)">
+                <aside class="x" onclick="closeWindow(about)">
                     <h3>x</h3>
                 </aside>
             </header>
             <section>
                 <article>
-                    <h1 class="circle-target">maddy cha
-                        <svg class="circle-scribble" viewBox="0 0 210 55" preserveAspectRatio="none">
-                            <path d="M 12,32 C 5,18 20,4 58,2 C 96,0 148,-1 175,7 C 198,13 205,26 196,36 C 184,48 140,52 102,51 C 60,50 22,48 12,40 C 4,34 8,30 16,29"/>
-                        </svg>
-                    </h1>
-                    <p>
-                        product designer based in NY
-                        <br>
-                        currently at instagram
-                        <br>
-                        <br>
-                    </p>
+                    <h1><span>maddy cha</span><br><span class="dim">product designer for</span> <span>instagram</span> <span class="dim">based in</span> <span>ny</span></h1>
                 </article>
-                <article>
-                    <a href="https://instagram.com/maddycha">instagram</a>
-                    <hr>
-                    <a href="https://twitter.com/maddycha">twitter</a>
-                    <hr>
-                    <a href="#" class="copy-email" onclick="copyEmail(event)">maddycha@gmail.com</a>
+                <article class="about-links">
+                    <a href="https://instagram.com/maddycha" data-label="instagram" data-value="@maddycha">instagram</a>
+                    <a href="https://twitter.com/maddycha" data-label="twitter" data-value="@maddycha">twitter</a>
+                    <a href="#" class="copy-email" onclick="copyEmail(event)" data-label="email" data-value="maddycha@gmail.com">maddycha@gmail.com</a>
                 </article>
             </section>
         </div>
         <!--#endregion-->
         
-        <!-- #region w1-dressup -->
-        <div class="window mobile-none" id="w1" onmousedown="orderDiv(this)">
-            <header class="windownav" id="w1nav">
+        <!-- #region dressup-dressup -->
+        <div class="window mobile-none" id="dressup" onmousedown="orderDiv(this)">
+            <header class="windownav" id="dressupnav">
                 <img src="imgs/icons/dressup.png">
                 <h3>dress up</h3>
-                <aside class="x" onclick="closeWindow(w1)">
+                <aside class="x" onclick="closeWindow(dressup)">
                     <h3>x</h3>
                 </aside>
             </header>
@@ -180,21 +136,21 @@
         </div>
         <!--#endregion-->
         
-        <!-- #region w2-art -->
-        <div class="section window mobile-none" id="w2" onmousedown="orderDiv(this)">
-            <header class="windownav" id="w2nav">
+        <!-- #region art-art -->
+        <div class="section window mobile-none" id="art" onmousedown="orderDiv(this)">
+            <header class="windownav" id="artnav">
                 <img src="imgs/icons/art.png">
                 <h3>art</h3>
-                <aside class="x" onclick="closeWindow(w2)">
+                <aside class="x" onclick="closeWindow(art)">
                     <h3>x</h3>
                 </aside>
             </header>
             <div class="scroll-container">
                 <section class="artcontent" style="padding: 0px">
                     <article id="previewer">
-                        <img id="preview-bg" src="imgs/art/23.png">
+                        <img id="preview-bg" src="">
                         <div class="controls"><i onclick="artPrevious()" class="fa-solid fa-chevron-left"></i><i onclick="artForward()" class="fa-solid fa-chevron-right"></i></div>
-                        <img id="preview-img" src="imgs/art/23.png">
+                        <img id="preview-img" src="">
                     </article>
                     <article class="scroll" >
                         <div id="gallery"></div>
@@ -206,11 +162,11 @@
         
         <!--#endregion-->
         
-        <!-- #region w3-social -->
-        <div class="window mobile-none" id="w3" onmousedown="orderDiv(this);">
-            <header class="windownav" id="w3nav">
+        <!-- #region social-social -->
+        <div class="window mobile-none" id="social" onmousedown="orderDiv(this);">
+            <header class="windownav" id="socialnav">
                 <h3></h3>
-                <aside class="x" onclick="closeWindow(w3)">
+                <aside class="x" onclick="closeWindow(social)">
                     <h3>x</h3>
                 </aside>
             </header>
@@ -222,23 +178,23 @@
         </div>
         <!--#endregion-->
         
-        <!-- #region w4-guestbook -->
-        <div class="window mobile-none" id="w4" onmousedown="orderDiv(this)">
-            <header class="windownav" id="w4nav">
+        <!-- #region guestbook-guestbook -->
+        <div class="window mobile-none" id="guestbook" onmousedown="orderDiv(this)">
+            <header class="windownav" id="guestbooknav">
                 <img src="imgs/icons/guestbook.png">
                 <h3>guestbook</h3>
-                <aside class="x" onclick="closeWindow(w4)">
+                <aside class="x" onclick="closeWindow(guestbook)">
                     <h3>x</h3>
                 </aside>
             </header>
             <div class="guestbook-layout">
-                <div class="guestbook-messages-scroll scroll guestbookcontent" id="guestbook-messages-scroll">
+                <div class="guestbook-messages-scroll guestbookcontent" id="guestbook-messages-scroll">
                     <article id="guestbook_messages">
                         <article id="guestbooks___guestbook-messages-container"></article>
                         <article id="guestbook-pages"></article>
                     </article>
                 </div>
-                <div class="gb-scroll-bottom" id="gb-scroll-bottom" onclick="document.getElementById('guestbook-messages-scroll').scrollTo({top:document.getElementById('guestbook-messages-scroll').scrollHeight,behavior:'smooth'})">↓</div>
+                <div class="gb-scroll-bottom" id="gb-scroll-bottom" onclick="document.getElementById('guestbook-messages-scroll').scrollTo({top:document.getElementById('guestbook-messages-scroll').scrollHeight,behavior:'smooth'})"><i class="fa-solid fa-arrow-down"></i></div>
                 <div class="guestbook-input guestbookcontent" id="guestbooks___guestbook-form-container">
                     <form id="guestbooks___guestbook-form"
                     action="https://guestbooks.meadow.cafe/guestbook/508/submit"
@@ -261,40 +217,39 @@
         </div>
         <!--#endregion-->
 
-        <!-- #region w5-work -->
-        <div class="window mobile-none" id="w5" onmousedown="orderDiv(this)">
-            <header class="windownav" id="w5nav">
+        <!-- #region work-work -->
+        <div class="window mobile-none" id="work" onmousedown="orderDiv(this)">
+            <header class="windownav" id="worknav">
                 <img src="imgs/icons/work.png">
                 <h3>work</h3>
-                <aside class="x" onclick="closeWindow(w5)">
+                <aside class="x" onclick="closeWindow(work)">
                     <h3>x</h3>
                 </aside>
             </header>
-            <div class="scroll-container">
-                <section class="work-section scroll">
-                    <div class="work-header">
-                        <h6>Instagram Direct</h6>
-                        <h6>launched</h6>
-                    </div>
+            <div class="work-layout">
+                <div class="work-preview-area">
+                    <video class="work-preview" id="work-preview" muted loop playsinline></video>
+                </div>
+                <div class="work-list-area scroll">
+                    <h1 class="work-title"></h1>
                     <div class="work-list" id="work-list"></div>
-                </section>
+                </div>
             </div>
-            <img class="work-preview" id="work-preview">
         </div>
         <!--#endregion-->
 
-        <!-- #region w6-resume -->
-        <div class="window mobile-none" id="w6" onmousedown="orderDiv(this)">
-            <header class="windownav resume-titlebar" id="w6nav">
+        <!-- #region resume-resume -->
+        <div class="window mobile-none" id="resume" onmousedown="orderDiv(this)">
+            <header class="windownav resume-titlebar" id="resumenav">
                 <img src="imgs/icons/resume.png">
                 <h3>resume</h3>
-                <aside class="x" onclick="closeWindow(w6)">
+                <aside class="x" onclick="closeWindow(resume)">
                     <h3>x</h3>
                 </aside>
             </header>
             <div class="resume-toolbar">
                 <div class="toolbar-group">
-                    <div class="toolbar-select">DM Mono</div>
+                    <div class="toolbar-select">Aspekta</div>
                     <div class="toolbar-select toolbar-select-sm">12</div>
                 </div>
                 <div class="toolbar-group">
@@ -310,48 +265,36 @@
                 </div>
             </div>
             <div class="scroll-container resume-scroll">
-                <section class="resume-content scroll">
+                <section class="resume-content">
+                    <h2>Currently designing expressive messaging tools for Instagram. Full resume available upon request.</h2>
                     <div class="resume-section">
-                        <h2>Experience</h2>
-                        <div class="resume-item">
-                            <p>Instagram</p>
-                            <p>Senior Product Designer</p>
-                            <p>2025 - Present</p>
-                        </div>
-                        <div class="resume-item">
-                            <p>Instagram</p>
-                            <p>Product Designer</p>
-                            <p>2023 - 2024</p>
-                        </div>
-                        <div class="resume-item">
-                            <p>Messenger</p>
-                            <p>Product Designer</p>
-                            <p>2020 - 2022</p>
-                        </div>
-                                                <div class="resume-item">
-                            <p>Twitter</p>
-                            <p>Product Design Intern</p>
-                            <p>2019</p>
-                        </div>
-                        <div class="resume-item">
-                            <p>Livity</p>
-                            <p>Graphic Designer</p>
-                            <p>2018</p>
-                        </div>
-                                                <div class="resume-item">
-                            <p>NVIDIA</p>
-                            <p>Graphic Design Intern</p>
-                            <p>2018</p>
+                        <p class="resume-section-title">Experience</p>
+                        <div class="resume-items">
+                            <div class="resume-item">
+                                <p>Instagram</p>
+                                <p>2022 — Present</p>
+                            </div>
+                            <div class="resume-item">
+                                <p>Messenger</p>
+                                <p>2020 — 2022</p>
+                            </div>
+                            <div class="resume-item">
+                                <p>Twitter</p>
+                                <p>2019</p>
+                            </div>
                         </div>
                     </div>
                     <div class="resume-section">
-                        <h2>Education</h2>
-                        <div class="resume-item">
-                            <p>Carnegie Mellon University</p>
-                            <p>BDes Communication Design
-                                <br>BHCI Human Computer Interaction
-                                <br>Minor in Media Design</p>
-                                                    <p>2016 — 2020</p>
+                        <p class="resume-section-title">Education</p>
+                        <div class="resume-items">
+                            <div class="resume-item">
+                                <p>Carnegie Mellon</p>
+                                <div>
+                                    <p>BDes Communication Design</p>
+                                    <p>BHCI Human-Computer Interaction</p>
+                                    <p>Minor in Media Design</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -359,12 +302,12 @@
         </div>
         <!--#endregion-->
 
-        <!-- #region w7-settings -->
-        <div class="window mobile-none" id="w7" onmousedown="orderDiv(this)">
-            <header class="windownav" id="w7nav">
+        <!-- #region settings-settings -->
+        <div class="window mobile-none" id="settings" onmousedown="orderDiv(this)">
+            <header class="windownav" id="settingsnav">
                 <img src="imgs/icons/settings.png">
                 <h3>settings</h3>
-                <aside class="x" onclick="closeWindow(w7)">
+                <aside class="x" onclick="closeWindow(settings)">
                     <h3>x</h3>
                 </aside>
             </header>
@@ -380,7 +323,7 @@
                 </div>
                 <div class="settings-group">
                     <div class="settings-row">
-                        <h3>scanlines</h3>
+                        <h3>CRT effect</h3>
                         <label class="switch">
                             <input type="checkbox" checked onchange="crtSetting(this)">
                             <span class="slider round"></span>
@@ -395,11 +338,10 @@
     
     <!-- #region footer -->
     <footer>
-        <script src="js/script.js" type="text/javascript"></script>
-        <script src="js/populate.js" type="text/javascript"></script>
-        <script async src="js/guestbook.js" type="text/javascript"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.17/interact.min.js"></script>
-        <script src="https://kit.fontawesome.com/09d51ffe32.js" crossorigin="anonymous"></script>
+        <script src="js/script.js"></script>
+        <script src="js/populate.js"></script>
+        <script async src="js/guestbook.js"></script>
+        <script defer src="https://kit.fontawesome.com/09d51ffe32.js" crossorigin="anonymous"></script>
     </footer>
     <!-- #endregion -->
 </body>
