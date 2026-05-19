@@ -3,8 +3,10 @@ const root = document.documentElement;
 var style = window.getComputedStyle(document.body);
 var getRandom = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 var mobileQuery = window.matchMedia("(max-width: 768px)");
-var isMobile = mobileQuery.matches || (window.matchMedia("(pointer: coarse)").matches && window.matchMedia("(max-width: 1000px)").matches);
+var tabletQuery = window.matchMedia("(pointer: coarse) and (max-width: 1000px)");
+var isMobile = mobileQuery.matches || tabletQuery.matches;
 mobileQuery.addEventListener("change", function() { location.reload(); });
+tabletQuery.addEventListener("change", function() { location.reload(); });
 
 
 // #region ===== WINDOW CONFIGURATION =====
@@ -477,7 +479,11 @@ window.addEventListener('click', (event) => {
       var toast = document.createElement("span");
       toast.textContent = "copied";
       toast.className = "copy-toast";
+      var afterStyle = window.getComputedStyle(link, "::after");
+      var afterWidth = link.querySelector(".copy-toast") ? 0 : afterStyle.width;
       link.appendChild(toast);
+      var emailWidth = parseFloat(window.getComputedStyle(link, "::after").width) || 0;
+      toast.style.right = (emailWidth + 6) + "px";
       setTimeout(function() { toast.remove(); }, 1500);
     } else {
       var cursor = document.getElementById("custom-cursor");
