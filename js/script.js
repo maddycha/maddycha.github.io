@@ -18,6 +18,7 @@ var WINDOW_LIST = [
   { id: "social", name: "social" },
   { id: "guestbook", name: "guestbook" },
   { id: "work", name: "work" },
+  { id: "games", name: "game log" },
   { id: "resume", name: "resume" },
   { id: "settings", name: "settings" },
 ];
@@ -290,6 +291,35 @@ function openWindow(x) {
       }
     }, typeDuration);
   }
+  if (!wasOpen && id === "games") {
+    var gScreen = document.querySelector("#games .games-screen");
+    if (gScreen) {
+      gScreen.setAttribute("data-view", "home");
+      gScreen.classList.remove("show-detail");
+    }
+    var gamesParts = [
+      document.querySelector("#games .games-topbar"),
+      document.querySelector("#games .games-stage")
+    ];
+    for (var gp = 0; gp < gamesParts.length; gp++) {
+      if (!gamesParts[gp]) continue;
+      gamesParts[gp].style.transition = "none";
+      gamesParts[gp].style.opacity = "";
+      gamesParts[gp].style.transform = "";
+    }
+    requestAnimationFrame(function() {
+      for (var gp = 0; gp < gamesParts.length; gp++) {
+        (function(idx) {
+          if (!gamesParts[idx]) return;
+          setTimeout(function() {
+            gamesParts[idx].style.transition = "opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+            gamesParts[idx].style.opacity = "1";
+            gamesParts[idx].style.transform = "none";
+          }, idx * 60);
+        })(gp);
+      }
+    });
+  }
   if (wasOpen) {
     el.style.transition = "transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)";
     el.style.transform = "scale(1.01)";
@@ -301,7 +331,8 @@ function openWindow(x) {
     el.style.transform = "scale(1.01)";
     el.style.opacity = "1";
     el.style.pointerEvents = "auto";
-    el.style.transition = "transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1)";
+    // opacity ramps in fast so the window isn't blank for long; the scale/position settles a touch slower
+    el.style.transition = "transform 0.26s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.12s cubic-bezier(0.4, 0, 0.2, 1)";
     setTimeout(function() {
       el.style.transform = "scale(1)";
     }, 200);
@@ -350,12 +381,14 @@ function dragElement(elmnt) {
   
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   var handle = document.getElementById(elmnt.id + "nav") || elmnt;
-  handle.onmousedown = dragMouseDown;
-  
+  handle.addEventListener("mousedown", dragMouseDown);
+
   function dragMouseDown(e) {
-    
-    
+
+
     e = e || window.event;
+    // don't start a drag from inside an interactive screen area (e.g. the Switch LCD)
+    if (e.target && e.target.closest && e.target.closest(".window-nodrag")) return;
     e.preventDefault();
     pos3 = e.clientX;
     pos4 = e.clientY;
@@ -683,8 +716,8 @@ window.addEventListener('click', (event) => {
     });
 
     var openSelectors = "a, .icon, #guestbook-pages p";
-    var closeSelectors = ".x";
-    var interactSelectors = ".switch, .theme-circle, .art, .controls i, .item, .work-item, .gb-scroll-bottom, .guestbookcontent input, .guestbookcontent textarea, input[type=submit]:not(:disabled), #guestbooks___pow-checkbox, #guestbooks___pow-status, #guestbooks___challenge-answer-container, #copy-open, #openwindows li, #sitemap li";
+    var closeSelectors = ".x, .games-close, .gd-close";
+    var interactSelectors = ".switch, .theme-circle, .art, .controls i, .item, .work-item, .game-tile, .games-nav-btn, #games-profile-img, .games-home-btn, .gp-row, .gd-nav, .gd-shot, .gb-scroll-bottom, .guestbookcontent input, .guestbookcontent textarea, input[type=submit]:not(:disabled), #guestbooks___pow-checkbox, #guestbooks___pow-status, #guestbooks___challenge-answer-container, #copy-open, #openwindows li, #sitemap li";
 
     document.addEventListener("mouseover", function(e) {
       if (isDragging) return;
@@ -718,6 +751,17 @@ window.addEventListener('click', (event) => {
     var navs = document.querySelectorAll(".windownav");
     for (var i = 0; i < navs.length; i++) {
       navs[i].addEventListener("mousedown", function() {
+        isDragging = true;
+        cursor.className = "cursor-drag";
+        cursorText.textContent = "";
+      });
+    }
+
+    // Switch console: dragging from the bezel/joy-cons (but not the screen)
+    var gamesDragZones = document.querySelectorAll(".joycon, .games-bezel");
+    for (var gi = 0; gi < gamesDragZones.length; gi++) {
+      gamesDragZones[gi].addEventListener("mousedown", function(e) {
+        if (e.target.closest(".window-nodrag")) return;
         isDragging = true;
         cursor.className = "cursor-drag";
         cursorText.textContent = "";
@@ -818,6 +862,312 @@ window.addEventListener('click', (event) => {
       var y = (e.clientY - centerY) / rect.height;
       preview.style.transform = "translate(" + (x * 20) + "px, " + (y * 20) + "px)";
     });
+  });
+  // #endregion
+
+  // #region ===== GAMES =====
+  // To add a game: add an entry below and drop its thumbnail in imgs/games/.
+  // status: playing | completed | backlog  (drives the status filters, detail page, and thumb badge)
+  // favorite: true puts it in the Favorites filter
+  // hours = play time (placeholder); shots = optional screenshot filenames in imgs/games/
+  var GAMES = [
+    { name: "Balatro",                              img: "balatro.jpg",                  favorite: true,  status: "playing",   hours: 47,  rating: 0, notes: "", shots: [] },
+    { name: "Tomodachi Life: Living the Dream",     img: "tomodachi-life.jpg",           favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
+    { name: "Animal Crossing: New Horizons",        img: "animal-crossing.jpg",          favorite: true,  status: "playing",   hours: 320, rating: 0, notes: "", shots: [] },
+    { name: "Pokopia",                              img: "pokopia.jpg",                  favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
+    { name: "Phoenix Wright: Ace Attorney Trilogy",  img: "ace-attorney-trilogy.jpg",     favorite: true,  status: "completed", hours: 38,  rating: 0, notes: "", shots: [] },
+    { name: "The Great Ace Attorney",               img: "great-ace-attorney.jpg",       favorite: false, status: "playing",   hours: 22,  rating: 0, notes: "", shots: [] },
+    { name: "Portal 2",                             img: "portal-2.jpg",                 favorite: true,  status: "completed", hours: 14,  rating: 0, notes: "", shots: [] },
+    { name: "Katamari Damacy",                      img: "katamari-damacy.jpg",          favorite: true,  status: "completed", hours: 9,   rating: 0, notes: "", shots: [] },
+    { name: "Pokémon Scarlet",                      img: "pokemon-scarlet.jpg",          favorite: false, status: "completed", hours: 65,  rating: 0, notes: "", shots: [] },
+    { name: "Fire Emblem: Three Houses",            img: "fire-emblem-three-houses.jpg", favorite: true,  status: "completed", hours: 90,  rating: 0, notes: "", shots: [] },
+    { name: "Paper Mario: The Thousand-Year Door",  img: "paper-mario-ttyd.jpg",         favorite: true,  status: "playing",   hours: 31,  rating: 0, notes: "", shots: [] },
+    { name: "Pikmin 4",                             img: "pikmin-4.jpg",                 favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
+    { name: "Blue Prince",                          img: "blue-prince.jpg",              favorite: true,  status: "playing",   hours: 18,  rating: 0, notes: "", shots: [] },
+    { name: "Persona 5 Royal",                      img: "persona-5-royal.jpg",          favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
+    { name: "Danganronpa 2",                        img: "danganronpa-2.jpg",            favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
+    { name: "Pokémon Unite",                        img: "pokemon-unite.jpg",            favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
+    { name: "Cult of the Lamb",                     img: "cult-of-the-lamb.jpg",         favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
+    { name: "Stardew Valley",                       img: "stardew-valley.jpg",           favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
+  ];
+
+  // bottom-bar navigation
+  var GAME_NAV = [
+    { view: "home",    icon: "fa-house",     label: "home" },
+    { view: "gallery", icon: "fa-images",    label: "gallery" }
+    // news removed for now
+    // { view: "news",    icon: "fa-newspaper", label: "news" }
+  ];
+
+  // news / blog posts (placeholder — edit freely)
+  var NEWS = [
+    { date: "Jun 2026", title: "Currently obsessed with Blue Prince", body: "Started this one on a whim and can't stop thinking about it between sessions." },
+    { date: "May 2026", title: "Cleared the Ace Attorney trilogy", body: "Finally got through every case. The Great Ace Attorney is up next." },
+    { date: "Apr 2026", title: "Backlog spring cleaning", body: "Added a pile of games I keep meaning to start. No promises on when." }
+  ];
+
+  // Nintendo eShop (US) product pages, keyed by thumbnail filename
+  var ESHOP_BASE = "https://www.nintendo.com/us/store/products/";
+  var GAME_ESHOP = {
+    "balatro.jpg": "balatro-switch",
+    "tomodachi-life.jpg": "tomodachi-life-living-the-dream-switch",
+    "animal-crossing.jpg": "animal-crossing-new-horizons-switch",
+    "pokopia.jpg": "pokemon-pokopia-switch-2",
+    "ace-attorney-trilogy.jpg": "phoenix-wright-ace-attorney-trilogy-switch",
+    "great-ace-attorney.jpg": "the-great-ace-attorney-chronicles-switch",
+    "portal-2.jpg": "portal-companion-collection-switch",
+    "katamari-damacy.jpg": "katamari-damacy-reroll-switch",
+    "pokemon-scarlet.jpg": "pokemon-scarlet-switch",
+    "fire-emblem-three-houses.jpg": "fire-emblem-three-houses-switch",
+    "paper-mario-ttyd.jpg": "paper-mario-the-thousand-year-door-switch",
+    "pikmin-4.jpg": "pikmin-4-switch",
+    "blue-prince.jpg": "blue-prince-switch-2",
+    "persona-5-royal.jpg": "persona-5-royal-switch",
+    "danganronpa-2.jpg": "danganronpa-2-goodbye-despair-anniversary-edition-switch",
+    "pokemon-unite.jpg": "pokemon-unite-switch",
+    "cult-of-the-lamb.jpg": "cult-of-the-lamb-switch",
+    "stardew-valley.jpg": "stardew-valley-switch"
+  };
+  function gamesEshopUrl(g) {
+    if (g.eshop) return g.eshop;
+    var slug = GAME_ESHOP[g.img];
+    return slug ? (ESHOP_BASE + slug + "/") : ("https://www.nintendo.com/us/search/?q=" + encodeURIComponent(g.name));
+  }
+
+  function gamesShowView(name) {
+    var s = document.querySelector("#games .games-screen");
+    if (!s) return;
+    s.setAttribute("data-view", name);
+    var btns = s.querySelectorAll(".games-nav-btn");
+    for (var b = 0; b < btns.length; b++) {
+      btns[b].classList.toggle("is-active", btns[b].getAttribute("data-view") === name);
+    }
+  }
+  function gamesOpenProfile() {
+    // disabled for now — keep for later
+    // gamesShowView("profile");
+  }
+  function gamesGoHome() { gamesShowView("home"); }
+
+  // ----- game detail overlay -----
+  var gamesDetailIndex = -1;
+  function gamesPopulateDetail(idx) {
+    var g = GAMES[idx];
+    if (!g) return;
+    gamesDetailIndex = idx;
+    document.getElementById("gd-thumb").src = "imgs/games/" + g.img;
+    document.getElementById("gd-name").textContent = g.name;
+    var st = document.getElementById("gd-status");
+    st.textContent = g.status || "";
+    st.className = "games-status" + (g.status ? " status-" + g.status : "");
+    var eshop = document.getElementById("gd-eshop");
+    if (eshop) eshop.href = gamesEshopUrl(g);
+    var notesEl = document.getElementById("gd-notes");
+    notesEl.textContent = g.notes ? g.notes : "No notes yet.";
+    notesEl.classList.toggle("gd-empty", !g.notes);
+    var shotsEl = document.getElementById("gd-shots");
+    var html = "";
+    if (g.shots && g.shots.length) {
+      for (var s = 0; s < g.shots.length; s++) html += "<div class='gd-shot'><img src='imgs/games/" + g.shots[s] + "' alt=''></div>";
+    } else {
+      for (var p = 0; p < 3; p++) html += "<div class='gd-shot gd-shot-empty'></div>";
+    }
+    shotsEl.innerHTML = html;
+    // little content refresh as you flip between games
+    var body = document.getElementById("gd-body");
+    body.style.transition = "none";
+    body.style.opacity = "0";
+    body.style.transform = "translateY(8px)";
+    requestAnimationFrame(function() {
+      body.style.transition = "opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1), transform 0.22s cubic-bezier(0.4, 0, 0.2, 1)";
+      body.style.opacity = "1";
+      body.style.transform = "none";
+    });
+  }
+  function gamesOpenDetail(idx) {
+    // disabled for now — keep for later
+    // gamesPopulateDetail(idx);
+    // var s = document.querySelector("#games .games-screen");
+    // if (s) s.classList.add("show-detail");
+  }
+  function gamesCloseDetail() {
+    var s = document.querySelector("#games .games-screen");
+    if (s) s.classList.remove("show-detail");
+  }
+  function gamesDetailBackdrop(e) {
+    // close only when the dark area itself is clicked, not the window or arrows
+    if (e.target && e.target.id === "games-detail-overlay") gamesCloseDetail();
+  }
+  function gamesDetailStep(dir) {
+    var tiles = document.querySelectorAll("#games-row .game-tile");
+    var vis = [];
+    for (var i = 0; i < tiles.length; i++) {
+      if (tiles[i].style.display !== "none") vis.push(parseInt(tiles[i].getAttribute("data-idx"), 10));
+    }
+    if (!vis.length) return;
+    var pos = vis.indexOf(gamesDetailIndex);
+    pos = (pos === -1) ? 0 : (pos + dir + vis.length) % vis.length;
+    gamesPopulateDetail(vis[pos]);
+  }
+
+  window.addEventListener("load", function() {
+    var row = document.getElementById("games-row");
+    if (!row) return;
+
+    // build game tiles
+    for (var i = 0; i < GAMES.length; i++) {
+      (function(idx) {
+        var g = GAMES[idx];
+        var tile = document.createElement("div");
+        tile.className = "game-tile";
+        tile.setAttribute("data-tags", g.status + (g.favorite ? " favorites" : ""));
+        tile.setAttribute("data-idx", idx);
+        tile.innerHTML =
+          "<img src='imgs/games/" + g.img + "' alt='" + g.name + "'>" +
+          "<span class='game-label'><span class='game-label-text'>" + g.name + "</span></span>";
+        tile.addEventListener("click", function() { gamesOpenDetail(idx); });
+        row.appendChild(tile);
+      })(i);
+    }
+
+    // build the bottom nav (home / gallery / news / shop)
+    var navbar = document.getElementById("games-nav");
+    for (var f = 0; f < GAME_NAV.length; f++) {
+      (function(item) {
+        var btn = document.createElement("button");
+        btn.className = "games-nav-btn" + (item.view === "home" ? " is-active" : "");
+        btn.setAttribute("data-view", item.view);
+        btn.innerHTML = "<i class='fa-solid " + item.icon + "'></i>" +
+          "<span class='games-nav-label'>" + item.label + "</span>";
+        btn.addEventListener("click", function() { gamesShowView(item.view); });
+        navbar.appendChild(btn);
+      })(GAME_NAV[f]);
+    }
+
+    // gallery: every screenshot across all games
+    var galleryGrid = document.getElementById("gallery-grid");
+    if (galleryGrid) {
+      var shotHtml = "";
+      for (var gi = 0; gi < GAMES.length; gi++) {
+        var gg = GAMES[gi];
+        if (gg.shots && gg.shots.length) {
+          for (var sh = 0; sh < gg.shots.length; sh++) {
+            shotHtml += "<div class='gallery-shot'><img src='imgs/games/" + gg.shots[sh] + "' alt='" + gg.name + "'></div>";
+          }
+        }
+      }
+      galleryGrid.innerHTML = shotHtml ||
+        "<p class='gallery-empty'>No screenshots yet, check back later for updates.</p>";
+    }
+
+    // news / blog
+    var newsList = document.getElementById("news-list");
+    if (newsList) {
+      var newsHtml = "";
+      for (var n = 0; n < NEWS.length; n++) {
+        newsHtml +=
+          "<div class='news-item'>" +
+            "<p class='news-date'>" + NEWS[n].date + "</p>" +
+            "<p class='news-title'>" + NEWS[n].title + "</p>" +
+            "<p class='news-text'>" + NEWS[n].body + "</p>" +
+          "</div>";
+      }
+      newsList.innerHTML = newsHtml;
+    }
+
+
+    var gpSub = document.getElementById("gp-sub");
+    if (gpSub) gpSub.textContent = "Player since 2020 · " + GAMES.length + " games logged";
+
+    // build the profile "play activity" list (top games by hours)
+    var gpList = document.getElementById("gp-list");
+    if (gpList) {
+      var act = GAMES.slice().sort(function(a, b) { return (b.hours || 0) - (a.hours || 0); }).slice(0, 5);
+      var maxH = (act[0] && act[0].hours) || 1;
+      var totalH = 0;
+      for (var th = 0; th < GAMES.length; th++) totalH += GAMES[th].hours || 0;
+      var html = "";
+      for (var a = 0; a < act.length; a++) {
+        var g = act[a];
+        var w = Math.max(3, Math.round((g.hours / maxH) * 100));
+        html +=
+          "<div class='gp-row'>" +
+            "<img src='imgs/games/" + g.img + "' alt='" + g.name + "'>" +
+            "<div class='gp-row-main'>" +
+              "<div class='gp-row-top'><span class='gp-row-name'>" + g.name + "</span>" +
+              "<span class='gp-row-hrs'>" + g.hours + " h</span></div>" +
+              "<div class='gp-bar'><span style='width:" + w + "%'></span></div>" +
+            "</div>" +
+          "</div>";
+      }
+      gpList.innerHTML = html;
+      var totalEl = document.getElementById("gp-total");
+      if (totalEl) totalEl.textContent = totalH + " h total";
+    }
+
+    // JS-managed hover: tracks the tile under the cursor, snaps to the closest tile
+    // while within the thumbnails' vertical band, and stays correct while scrolling.
+    var ROW_VPAD = 28; // matches .games-row vertical padding
+    var hoverX = null, hoverY = null;
+    function gamesSetHover() {
+      var all = row.querySelectorAll(".game-tile");
+      var target = null;
+      if (hoverX !== null) {
+        var rr = row.getBoundingClientRect();
+        if (hoverY >= rr.top + ROW_VPAD && hoverY <= rr.bottom - ROW_VPAD) {
+          var bestDist = Infinity;
+          for (var i = 0; i < all.length; i++) {
+            if (all[i].style.display === "none") continue;
+            var r = all[i].getBoundingClientRect();
+            var dx = hoverX < r.left ? r.left - hoverX : (hoverX > r.right ? hoverX - r.right : 0);
+            if (dx < bestDist) { bestDist = dx; target = all[i]; }
+          }
+        }
+      }
+      for (var j = 0; j < all.length; j++) all[j].classList.toggle("is-hover", all[j] === target);
+      row.classList.toggle("has-hover", !!target);
+      if (target && !target._mqChecked) gamesCheckMarquee(target);
+    }
+
+    // marquee-scroll the title only when it's wider than the thumbnail
+    function gamesCheckMarquee(tile) {
+      var label = tile.querySelector(".game-label");
+      var text = tile.querySelector(".game-label-text");
+      if (!label || !text) return;
+      var single = text.scrollWidth;
+      if (single - label.clientWidth > 2) {
+        var gap = 30; // must match the gap in .game-label.is-marquee .game-label-text
+        var name = text.textContent;
+        // duplicate the title so it can loop seamlessly in one direction
+        text.innerHTML = "<span class='gl-seg'>" + name + "</span><span class='gl-seg'>" + name + "</span>";
+        label.classList.add("is-marquee");
+        label.style.setProperty("--marquee-shift", -(single + gap) + "px");
+        label.style.setProperty("--marquee-dur", Math.max(3, (single + gap) / 24).toFixed(1) + "s");
+      } else {
+        label.classList.remove("is-marquee");
+      }
+      tile._mqChecked = true;
+    }
+    row.addEventListener("mousemove", function(e) { hoverX = e.clientX; hoverY = e.clientY; gamesSetHover(); });
+    row.addEventListener("mouseleave", function() { hoverX = hoverY = null; gamesSetHover(); });
+    row.addEventListener("scroll", function() { gamesSetHover(); });
+
+    // vertical wheel scrolls the row horizontally (hover re-evaluates via the scroll handler)
+    row.addEventListener("wheel", function(e) {
+      if (e.deltaY === 0) return;
+      e.preventDefault();
+      hoverX = e.clientX; hoverY = e.clientY;
+      row.scrollLeft += e.deltaY;
+    }, { passive: false });
+
+    // live clock
+    function gamesUpdateClock() {
+      var el = document.getElementById("games-clock");
+      if (!el) return;
+      el.textContent = new Date().toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+    }
+    gamesUpdateClock();
+    setInterval(gamesUpdateClock, 15000);
   });
   // #endregion
 

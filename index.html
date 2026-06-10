@@ -82,9 +82,15 @@
                     <img src="imgs/icons/art.png">
                     <h3>art</h3>
                 </div>
+                <!-- temporarily hidden
                 <div class="icon" id="workicon" onclick="openWindow(work)">
                     <img src="imgs/icons/work.png">
                     <h3>work</h3>
+                </div>
+                -->
+                <div class="icon" id="gamesicon" onclick="openWindow(games)">
+                    <img src="imgs/icons/games.png">
+                    <h3>game log</h3>
                 </div>
             </div>
         </div>
@@ -233,6 +239,136 @@
                 <div class="work-list-area scroll">
                     <h1 class="work-title"></h1>
                     <div class="work-list" id="work-list"></div>
+                </div>
+            </div>
+        </div>
+        <!--#endregion-->
+
+        <!-- #region games-games -->
+        <div class="window mobile-none games-switch" id="games" onmousedown="orderDiv(this)">
+            <!-- left joy-con (drag handle) -->
+            <div class="joycon joycon-left">
+                <span class="jc-sym jc-minus">&#8722;</span>
+                <div class="jc-cluster">
+                    <span class="jc-stick"></span>
+                    <span class="jc-diamond jc-dpad"><i></i><i></i><i></i><i></i></span>
+                </div>
+                <div class="jc-extra">
+                    <span class="jc-small jc-capture"></span>
+                </div>
+            </div>
+
+            <!-- console bezel + screen -->
+            <div class="games-bezel">
+                <div class="games-screen window-nodrag" data-view="home">
+                    <!-- system bar -->
+                    <div class="games-topbar">
+                        <div class="games-topbar-left">
+                            <div class="games-profile">
+                                <img id="games-profile-img" src="imgs/misc/portrait.png" onclick="gamesOpenProfile()" onerror="this.onerror=null;this.src='imgs/misc/thumb.png'">
+                                <span class="games-profile-name" style="display:none">maddy</span>
+                            </div>
+                            <button class="games-home-btn" onclick="gamesGoHome()"><i class="fa-solid fa-chevron-left"></i> Home</button>
+                        </div>
+                        <div class="games-statusbar">
+                            <span id="games-clock" class="games-clock"></span>
+                            <i class="fa-solid fa-wifi"></i>
+                            <span class="games-battery">
+                                <span id="games-battery-pct" class="games-battery-pct">82%</span>
+                                <i id="games-battery-icon" class="fa-solid fa-battery-three-quarters"></i>
+                            </span>
+                            <button class="games-close" onclick="closeWindow(games)" aria-label="close">&#10005;</button>
+                        </div>
+                    </div>
+
+                    <div class="games-content">
+                        <!-- home: game log -->
+                        <div class="games-view games-view-home">
+                            <div class="games-stage">
+                                <div class="games-row" id="games-row"></div>
+                                <div class="games-meta">
+                                    <p class="games-detail-notes" id="games-detail-notes"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- gallery: screenshots -->
+                        <div class="games-view games-view-gallery">
+                            <p class="view-title">Gallery</p>
+                            <div class="gallery-grid" id="gallery-grid"></div>
+                        </div>
+
+                        <!-- news / blog -->
+                        <div class="games-view games-view-news">
+                            <p class="view-title">News</p>
+                            <div class="news-list" id="news-list"></div>
+                        </div>
+
+                        <!-- profile / play activity (Switch 2 style) -->
+                        <div class="games-view games-view-profile">
+                            <div class="gp-body">
+                                <div class="gp-header">
+                                    <img class="gp-avatar" src="imgs/misc/portrait.png" onerror="this.onerror=null;this.src='imgs/misc/thumb.png'">
+                                    <div class="gp-id">
+                                        <h1 class="gp-name">maddy</h1>
+                                        <p class="gp-sub" id="gp-sub">Player since 2020</p>
+                                    </div>
+                                </div>
+                                <div class="gp-activity">
+                                    <div class="gp-activity-head">
+                                        <span>Play Activity</span>
+                                        <span class="gp-total" id="gp-total"></span>
+                                    </div>
+                                    <div class="gp-list" id="gp-list"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- bottom navigation -->
+                    <div class="games-nav" id="games-nav"></div>
+
+                    <!-- game detail: window over a dark overlay -->
+                    <div class="games-detail-overlay" id="games-detail-overlay" onclick="gamesDetailBackdrop(event)">
+                        <div class="gd-window">
+                            <button class="gd-close" onclick="gamesCloseDetail()" aria-label="close">&#10005;</button>
+                            <button class="gd-nav gd-prev" onclick="gamesDetailStep(-1)" aria-label="previous"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="gd-nav gd-next" onclick="gamesDetailStep(1)" aria-label="next"><i class="fa-solid fa-chevron-right"></i></button>
+                            <div class="gd-body" id="gd-body">
+                                <div class="gd-head">
+                                    <img class="gd-thumb" id="gd-thumb" src="">
+                                    <div class="gd-meta">
+                                        <div class="gd-meta-top">
+                                            <span class="games-status" id="gd-status"></span>
+                                            <a class="gd-eshop" id="gd-eshop" href="" rel="noopener">eShop <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                        </div>
+                                        <h1 class="gd-name" id="gd-name"></h1>
+                                    </div>
+                                </div>
+                                <div class="gd-section">
+                                    <p class="gd-section-title">Notes</p>
+                                    <p class="gd-notes" id="gd-notes"></p>
+                                </div>
+                                <div class="gd-section">
+                                    <p class="gd-section-title">Screenshots</p>
+                                    <div class="gd-shots" id="gd-shots"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- right joy-con (drag handle) -->
+            <div class="joycon joycon-right">
+                <span class="jc-sym jc-plus">+</span>
+                <div class="jc-cluster">
+                    <span class="jc-diamond jc-abxy"><i></i><i></i><i></i><i></i></span>
+                    <span class="jc-stick"></span>
+                </div>
+                <div class="jc-extra">
+                    <span class="jc-small jc-home"></span>
+                    <span class="jc-small jc-c">C</span>
                 </div>
             </div>
         </div>
