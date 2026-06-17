@@ -101,7 +101,7 @@
             <header class="windownav" id="aboutnav">
                 <h3></h3>
                 <aside class="x" onclick="closeWindow(about)">
-                    <h3>x</h3>
+                    <svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="7" x2="17" y2="17"></line><line x1="17" y1="7" x2="7" y2="17"></line></svg>
                 </aside>
             </header>
             <section>
@@ -123,7 +123,7 @@
                 <img src="imgs/icons/dressup.png">
                 <h3>dress up</h3>
                 <aside class="x" onclick="closeWindow(dressup)">
-                    <h3>x</h3>
+                    <svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="7" x2="17" y2="17"></line><line x1="17" y1="7" x2="7" y2="17"></line></svg>
                 </aside>
             </header>
             <section class="dress-up">
@@ -148,7 +148,7 @@
                 <img src="imgs/icons/art.png">
                 <h3>art</h3>
                 <aside class="x" onclick="closeWindow(art)">
-                    <h3>x</h3>
+                    <svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="7" x2="17" y2="17"></line><line x1="17" y1="7" x2="7" y2="17"></line></svg>
                 </aside>
             </header>
             <div class="scroll-container">
@@ -173,7 +173,7 @@
             <header class="windownav" id="socialnav">
                 <h3></h3>
                 <aside class="x" onclick="closeWindow(social)">
-                    <h3>x</h3>
+                    <svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="7" x2="17" y2="17"></line><line x1="17" y1="7" x2="7" y2="17"></line></svg>
                 </aside>
             </header>
             <section>
@@ -190,7 +190,7 @@
                 <img src="imgs/icons/guestbook.png">
                 <h3>guestbook</h3>
                 <aside class="x" onclick="closeWindow(guestbook)">
-                    <h3>x</h3>
+                    <svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="7" x2="17" y2="17"></line><line x1="17" y1="7" x2="7" y2="17"></line></svg>
                 </aside>
             </header>
             <div class="guestbook-layout">
@@ -229,7 +229,7 @@
                 <img src="imgs/icons/work.png">
                 <h3>work</h3>
                 <aside class="x" onclick="closeWindow(work)">
-                    <h3>x</h3>
+                    <svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="7" x2="17" y2="17"></line><line x1="17" y1="7" x2="7" y2="17"></line></svg>
                 </aside>
             </header>
             <div class="work-layout">
@@ -265,8 +265,8 @@
                     <div class="games-topbar">
                         <div class="games-topbar-left">
                             <div class="games-profile">
-                                <img id="games-profile-img" src="imgs/misc/portrait.png" onclick="gamesOpenProfile()" onerror="this.onerror=null;this.src='imgs/misc/thumb.png'">
-                                <span class="games-profile-name" style="display:none">maddy</span>
+                                <img id="games-profile-img" src="imgs/misc/pfp.jpg" onclick="gamesOpenProfile()" onerror="this.onerror=null;this.src='imgs/misc/thumb.png'">
+                                <span class="games-profile-name" onclick="gamesOpenProfile()">MADDY</span>
                             </div>
                             <button class="games-home-btn" onclick="gamesGoHome()"><i class="fa-solid fa-chevron-left"></i> Home</button>
                         </div>
@@ -277,7 +277,6 @@
                                 <span id="games-battery-pct" class="games-battery-pct">82%</span>
                                 <i id="games-battery-icon" class="fa-solid fa-battery-three-quarters"></i>
                             </span>
-                            <button class="games-close" onclick="closeWindow(games)" aria-label="close">&#10005;</button>
                         </div>
                     </div>
 
@@ -308,7 +307,7 @@
                         <div class="games-view games-view-profile">
                             <div class="gp-body">
                                 <div class="gp-header">
-                                    <img class="gp-avatar" src="imgs/misc/portrait.png" onerror="this.onerror=null;this.src='imgs/misc/thumb.png'">
+                                    <img class="gp-avatar" src="imgs/misc/pfp.jpg" onerror="this.onerror=null;this.src='imgs/misc/thumb.png'">
                                     <div class="gp-id">
                                         <h1 class="gp-name">maddy</h1>
                                         <p class="gp-sub" id="gp-sub">Player since 2020</p>
@@ -317,7 +316,7 @@
                                 <div class="gp-activity">
                                     <div class="gp-activity-head">
                                         <span>Play Activity</span>
-                                        <span class="gp-total" id="gp-total"></span>
+                                        <span class="gp-total">Hours</span>
                                     </div>
                                     <div class="gp-list" id="gp-list"></div>
                                 </div>
@@ -331,29 +330,35 @@
                     <!-- game detail: window over a dark overlay -->
                     <div class="games-detail-overlay" id="games-detail-overlay" onclick="gamesDetailBackdrop(event)">
                         <div class="gd-window">
-                            <button class="gd-close" onclick="gamesCloseDetail()" aria-label="close">&#10005;</button>
-                            <button class="gd-nav gd-prev" onclick="gamesDetailStep(-1)" aria-label="previous"><i class="fa-solid fa-chevron-left"></i></button>
-                            <button class="gd-nav gd-next" onclick="gamesDetailStep(1)" aria-label="next"><i class="fa-solid fa-chevron-right"></i></button>
+                            <button class="gd-close" onclick="gamesCloseDetail()" aria-label="close"><svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="7" x2="17" y2="17"></line><line x1="17" y1="7" x2="7" y2="17"></line></svg></button>
+                            <button class="gd-nav gd-prev" onclick="gamesDetailStep(-1)" aria-label="previous"><svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                            <button class="gd-nav gd-next" onclick="gamesDetailStep(1)" aria-label="next"><svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
                             <div class="gd-body" id="gd-body">
                                 <div class="gd-head">
                                     <img class="gd-thumb" id="gd-thumb" src="">
                                     <div class="gd-meta">
-                                        <div class="gd-meta-top">
-                                            <span class="games-status" id="gd-status"></span>
-                                            <a class="gd-eshop" id="gd-eshop" href="" rel="noopener">eShop <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                                        </div>
                                         <h1 class="gd-name" id="gd-name"></h1>
+                                        <div class="gd-statusline">
+                                            <span class="games-status" id="gd-status"></span>
+                                            <span class="gd-dot">&bull;</span>
+                                            <span class="gd-hours" id="gd-hours"></span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="gd-section">
-                                    <p class="gd-section-title">Notes</p>
-                                    <p class="gd-notes" id="gd-notes"></p>
-                                </div>
-                                <div class="gd-section">
-                                    <p class="gd-section-title">Screenshots</p>
+                                <div class="gd-section" id="gd-shots-section">
                                     <div class="gd-shots" id="gd-shots"></div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- screenshot lightbox: full-screen viewer with prev/next (controls in the dark margins, outside the image) -->
+                    <div class="gd-lightbox" id="gd-lightbox" onclick="lightboxBackdrop(event)">
+                        <div class="lb-window">
+                            <button class="lb-close" onclick="lightboxClose()" aria-label="close"><svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="7" x2="17" y2="17"></line><line x1="17" y1="7" x2="7" y2="17"></line></svg></button>
+                            <button class="lb-nav lb-prev" onclick="lightboxStep(-1)" aria-label="previous"><svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                            <button class="lb-nav lb-next" onclick="lightboxStep(1)" aria-label="next"><svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+                            <img class="lb-img" id="lb-img" src="" alt="">
                         </div>
                     </div>
                 </div>
@@ -361,7 +366,7 @@
 
             <!-- right joy-con (drag handle) -->
             <div class="joycon joycon-right">
-                <span class="jc-sym jc-plus">+</span>
+                <span class="jc-sym jc-close" onclick="closeWindow(games)" role="button" aria-label="close"><svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="7" x2="17" y2="17"></line><line x1="17" y1="7" x2="7" y2="17"></line></svg></span>
                 <div class="jc-cluster">
                     <span class="jc-diamond jc-abxy"><i></i><i></i><i></i><i></i></span>
                     <span class="jc-stick"></span>
@@ -380,7 +385,7 @@
                 <img src="imgs/icons/resume.png">
                 <h3>resume</h3>
                 <aside class="x" onclick="closeWindow(resume)">
-                    <h3>x</h3>
+                    <svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="7" x2="17" y2="17"></line><line x1="17" y1="7" x2="7" y2="17"></line></svg>
                 </aside>
             </header>
             <div class="resume-toolbar">
@@ -444,7 +449,7 @@
                 <img src="imgs/icons/settings.png">
                 <h3>settings</h3>
                 <aside class="x" onclick="closeWindow(settings)">
-                    <h3>x</h3>
+                    <svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="7" x2="17" y2="17"></line><line x1="17" y1="7" x2="7" y2="17"></line></svg>
                 </aside>
             </header>
             <section class="settings-content">

@@ -321,12 +321,13 @@ function openWindow(x) {
     });
   }
   if (wasOpen) {
-    el.style.transition = "transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)";
+    // expand quickly, hold the expanded state a beat, then settle — same ~400ms total as before
+    el.style.transition = "transform 0.12s cubic-bezier(0.4, 0, 0.2, 1)";
     el.style.transform = "scale(1.01)";
     setTimeout(function() {
-      el.style.transition = "transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)";
+      el.style.transition = "transform 0.12s cubic-bezier(0.4, 0, 0.2, 1)";
       el.style.transform = "scale(1)";
-    }, 200);
+    }, 280);
   } else {
     el.style.transform = "scale(1.01)";
     el.style.opacity = "1";
@@ -716,8 +717,8 @@ window.addEventListener('click', (event) => {
     });
 
     var openSelectors = "a, .icon, #guestbook-pages p";
-    var closeSelectors = ".x, .games-close, .gd-close";
-    var interactSelectors = ".switch, .theme-circle, .art, .controls i, .item, .work-item, .game-tile, .games-nav-btn, #games-profile-img, .games-home-btn, .gp-row, .gd-nav, .gd-shot, .gb-scroll-bottom, .guestbookcontent input, .guestbookcontent textarea, input[type=submit]:not(:disabled), #guestbooks___pow-checkbox, #guestbooks___pow-status, #guestbooks___challenge-answer-container, #copy-open, #openwindows li, #sitemap li";
+    var closeSelectors = ".x, .jc-close, .gd-close, .lb-close";
+    var interactSelectors = ".switch, .theme-circle, .art, .controls i, .item, .work-item, .game-tile, .games-nav-btn, #games-profile-img, .games-home-btn, .gp-row, .gd-nav, .lb-nav, .gallery-shot, .gd-shot, .lb-img, .gb-scroll-bottom, .guestbookcontent input, .guestbookcontent textarea, input[type=submit]:not(:disabled), #guestbooks___pow-checkbox, #guestbooks___pow-status, #guestbooks___challenge-answer-container, #copy-open, #openwindows li, #sitemap li";
 
     document.addEventListener("mouseover", function(e) {
       if (isDragging) return;
@@ -761,7 +762,7 @@ window.addEventListener('click', (event) => {
     var gamesDragZones = document.querySelectorAll(".joycon, .games-bezel");
     for (var gi = 0; gi < gamesDragZones.length; gi++) {
       gamesDragZones[gi].addEventListener("mousedown", function(e) {
-        if (e.target.closest(".window-nodrag")) return;
+        if (e.target.closest(".window-nodrag, .jc-close")) return;
         isDragging = true;
         cursor.className = "cursor-drag";
         cursorText.textContent = "";
@@ -866,30 +867,118 @@ window.addEventListener('click', (event) => {
   // #endregion
 
   // #region ===== GAMES =====
-  // To add a game: add an entry below and drop its thumbnail in imgs/games/.
-  // status: playing | completed | backlog  (drives the status filters, detail page, and thumb badge)
-  // favorite: true puts it in the Favorites filter
-  // hours = play time (placeholder); shots = optional screenshot filenames in imgs/games/
+  // Source of truth: the Notion game-log database (kept in this order on the site).
+  // To add a game: add an entry below and drop its thumbnail in imgs/games/thumbnail/ (named <slug>.jpg).
+  // status: completed | ongoing | unfinished  (shown on the detail page)
+  // hours = play time
+  // screenshots = auto-detected. Drop files named 1.jpg, 2.jpg, 3.jpg ... into that game's folder,
+  //               imgs/games/<thumbnail-name-without-ext>/ (e.g. balatro.jpg -> imgs/games/balatro/).
+  //               They appear automatically on the detail page + gallery; no code edits needed.
   var GAMES = [
-    { name: "Balatro",                              img: "balatro.jpg",                  favorite: true,  status: "playing",   hours: 47,  rating: 0, notes: "", shots: [] },
-    { name: "Tomodachi Life: Living the Dream",     img: "tomodachi-life.jpg",           favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
-    { name: "Animal Crossing: New Horizons",        img: "animal-crossing.jpg",          favorite: true,  status: "playing",   hours: 320, rating: 0, notes: "", shots: [] },
-    { name: "Pokopia",                              img: "pokopia.jpg",                  favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
-    { name: "Phoenix Wright: Ace Attorney Trilogy",  img: "ace-attorney-trilogy.jpg",     favorite: true,  status: "completed", hours: 38,  rating: 0, notes: "", shots: [] },
-    { name: "The Great Ace Attorney",               img: "great-ace-attorney.jpg",       favorite: false, status: "playing",   hours: 22,  rating: 0, notes: "", shots: [] },
-    { name: "Portal 2",                             img: "portal-2.jpg",                 favorite: true,  status: "completed", hours: 14,  rating: 0, notes: "", shots: [] },
-    { name: "Katamari Damacy",                      img: "katamari-damacy.jpg",          favorite: true,  status: "completed", hours: 9,   rating: 0, notes: "", shots: [] },
-    { name: "Pokémon Scarlet",                      img: "pokemon-scarlet.jpg",          favorite: false, status: "completed", hours: 65,  rating: 0, notes: "", shots: [] },
-    { name: "Fire Emblem: Three Houses",            img: "fire-emblem-three-houses.jpg", favorite: true,  status: "completed", hours: 90,  rating: 0, notes: "", shots: [] },
-    { name: "Paper Mario: The Thousand-Year Door",  img: "paper-mario-ttyd.jpg",         favorite: true,  status: "playing",   hours: 31,  rating: 0, notes: "", shots: [] },
-    { name: "Pikmin 4",                             img: "pikmin-4.jpg",                 favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
-    { name: "Blue Prince",                          img: "blue-prince.jpg",              favorite: true,  status: "playing",   hours: 18,  rating: 0, notes: "", shots: [] },
-    { name: "Persona 5 Royal",                      img: "persona-5-royal.jpg",          favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
-    { name: "Danganronpa 2",                        img: "danganronpa-2.jpg",            favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
-    { name: "Pokémon Unite",                        img: "pokemon-unite.jpg",            favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
-    { name: "Cult of the Lamb",                     img: "cult-of-the-lamb.jpg",         favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
-    { name: "Stardew Valley",                       img: "stardew-valley.jpg",           favorite: false, status: "backlog",   hours: 0,   rating: 0, notes: "", shots: [] },
+    { name: "Animal Crossing: New Horizons",          img: "animal-crossing.jpg",             status: "ongoing",     hours: 1500 },
+    { name: "Balatro",                                img: "balatro.jpg",                     status: "completed",   hours: 470 },
+    { name: "Tomodachi Life: Living the Dream",       img: "tomodachi-life.jpg",              status: "ongoing",     hours: 80 },
+    { name: "Pokemon Pokopia",                        img: "pokopia.jpg",                     status: "ongoing",     hours: 250 },
+    { name: "Pokemon UNITE",                          img: "pokemon-unite.jpg",               status: "ongoing",     hours: 1800 },
+    { name: "The Great Ace Attorney Chronicles",      img: "great-ace-attorney.jpg",          status: "completed",   hours: 50 },
+    { name: "Apollo Justice: Ace Attorney Trilogy",   img: "apollo-justice.jpg",              status: "unfinished",  hours: 10 },
+    { name: "Ace Attorney Investigations Chronicles", img: "ace-attorney-investigations.jpg", status: "completed",   hours: 30 },
+    { name: "Phoenix Wright: Ace Attorney Trilogy",   img: "phoenix-wright.jpg",              status: "completed",   hours: 100 },
+    { name: "We Love Katamari REROLL+ Royal Reverie", img: "we-love-katamari.jpg",            status: "completed",   hours: 15 },
+    { name: "Katamari Damacy REROLL",                 img: "katamari-damacy.jpg",             status: "completed",   hours: 10 },
+    { name: "Slay the Spire",                         img: "slay-the-spire.jpg",              status: "unfinished",  hours: 10 },
+    { name: "Portal 2",                               img: "portal-2.jpg",                    status: "completed",   hours: 10 },
+    { name: "Portal",                                 img: "portal.jpg",                      status: "completed",   hours: 4 },
+    { name: "Dispatch",                               img: "dispatch.jpg",                    status: "completed",   hours: 7 },
+    { name: "Deltarune",                              img: "deltarune.jpg",                   status: "ongoing",     hours: 12 },
+    { name: "Undertale",                              img: "undertale.jpg",                   status: "completed",   hours: 30 },
+    { name: "Stardew Valley",                         img: "stardew-valley.jpg",              status: "completed",   hours: 70 },
+    { name: "Fire Emblem: Three Houses",              img: "fire-emblem-three-houses.jpg",    status: "completed",   hours: 80 },
+    { name: "Pokemon Legends: Z-A",                   img: "pokemon-legends-za.jpg",          status: "completed",   hours: 1035 },
+    { name: "Pokemon Scarlet",                        img: "pokemon-scarlet.jpg",             status: "completed",   hours: 225 },
+    { name: "Pokemon Sword",                          img: "pokemon-sword.jpg",               status: "completed",   hours: 200 },
+    { name: "Taiko no Tatsujin: Drum 'n' Fun!",       img: "taiko-drum-n-fun.jpg",            status: "completed",   hours: 35 },
+    { name: "Super Mario Odyssey",                    img: "super-mario-odyssey.jpg",         status: "completed",   hours: 10 },
+    { name: "Night in the Woods",                     img: "night-in-the-woods.jpg",          status: "completed",   hours: 10 },
+    { name: "New Pokemon Snap",                       img: "new-pokemon-snap.jpg",            status: "unfinished",  hours: 8 },
+    { name: "Pokemon Legends: Arceus",                img: "pokemon-legends-arceus.jpg",      status: "completed",   hours: 20 },
+    { name: "Pikmin 4",                               img: "pikmin-4.jpg",                    status: "unfinished",  hours: 4 },
+    { name: "Paper Mario: The Thousand-Year Door",    img: "paper-mario-ttyd.jpg",            status: "completed",   hours: 25 },
+    { name: "Overcooked! 2",                          img: "overcooked-2.jpg",                status: "completed",   hours: 20 },
+    { name: "Disco Elysium - The Final Cut",          img: "disco-elysium.jpg",               status: "unfinished",  hours: 4 },
+    { name: "Catherine: Full Body",                   img: "catherine-full-body.jpg",         status: "unfinished",  hours: 6 },
+    { name: "The Stanley Parable: Ultra Deluxe",      img: "stanley-parable.jpg",             status: "completed",   hours: 5 },
+    { name: "Inscryption",                            img: "inscryption.jpg",                 status: "completed",   hours: 20 },
+    { name: "The World Ends With You -Final Remix-",  img: "twewy.jpg",                       status: "completed",   hours: 10 },
+    { name: "SUPERHOT",                               img: "superhot.jpg",                    status: "completed",   hours: 3 },
+    { name: "Superliminal",                           img: "superliminal.jpg",                status: "completed",   hours: 3 },
+    { name: "Little Nightmares II",                   img: "little-nightmares-2.jpg",         status: "unfinished",  hours: 7 },
+    { name: "The Exit 8",                             img: "the-exit-8.jpg",                  status: "completed",   hours: 2 },
+    { name: "Platform 8",                             img: "platform-8.jpg",                  status: "completed",   hours: 1 },
+    { name: "Mario Kart 8 Deluxe",                    img: "mario-kart-8-deluxe.jpg",         status: "completed",   hours: 55 },
+    { name: "OneShot: World Machine Edition",         img: "oneshot.jpg",                     status: "completed",   hours: 4 },
+    { name: "A Short Hike",                           img: "a-short-hike.jpg",                status: "completed",   hours: 1 },
+    { name: "Outer Wilds",                            img: "outer-wilds.jpg",                 status: "completed",   hours: 20 },
+    { name: "Persona 5 Royal",                        img: "persona-5-royal.jpg",             status: "unfinished",  hours: 45 },
+    { name: "Cult of the Lamb",                       img: "cult-of-the-lamb.jpg",            status: "completed",   hours: 45 },
+    { name: "DAVE THE DIVER",                         img: "dave-the-diver.jpg",              status: "unfinished",  hours: 4 },
+    { name: "1000xRESIST",                            img: "1000xresist.jpg", thumb: "https://images.nintendolife.com/a71426410915e/1000xresist-cover.cover_large.jpg", status: "completed",   hours: 7 },
+    { name: "Spiritfarer",                            img: "spiritfarer.jpg",                 status: "completed",   hours: 20 },
+    { name: "Pikuniku",                               img: "pikuniku.jpg",                    status: "completed",   hours: 2 },
+    { name: "Untitled Goose Game",                    img: "untitled-goose-game.jpg",         status: "completed",   hours: 4 },
+    { name: "Wandersong",                             img: "wandersong.jpg",                  status: "completed",   hours: 8 },
+    { name: "Oxenfree",                               img: "oxenfree.jpg",                    status: "completed",   hours: 8 },
+    { name: "Card Shark",                             img: "card-shark.jpg",                  status: "unfinished",  hours: 3 },
+    { name: "Baba is You",                            img: "baba-is-you.jpg",                 status: "unfinished",  hours: 3 },
+    { name: "OMORI",                                  img: "omori.jpg",                       status: "completed",   hours: 15 },
   ];
+
+  // image path helpers — thumbnails live in imgs/games/thumbnail/, screenshots in imgs/games/<slug>/
+  function gameThumb(g) { return g.thumb || ("imgs/games/thumbnail/" + g.img); }
+  function gameSlug(g) { return g.img.replace(/\.[^.]+$/, ""); }
+  // escape for safe use in HTML attributes/text (game titles can contain ' " & < >)
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+
+  // ----- screenshot auto-discovery -----
+  // A static site can't list a folder, so screenshots use a numbered convention:
+  // drop files named 1.jpg, 2.jpg, 3.jpg ... into imgs/games/<slug>/ and they appear
+  // automatically. We probe sequential numbers and stop at the first gap.
+  // (Optional override: put explicit filenames in a game's `shots` array and those win.)
+  var SHOT_EXTS = ["jpg", "jpeg", "png", "gif", "webp"];
+  var SHOT_MAX = 60; // safety cap on numbers probed per game
+
+  // Try each extension for one number, then call cb(url) or cb(null) if none load.
+  function probeShot(base, n, extIdx, cb) {
+    if (extIdx >= SHOT_EXTS.length) { cb(null); return; }
+    var url = base + "/" + n + "." + SHOT_EXTS[extIdx];
+    var im = new Image();
+    im.onload = function() { cb(url); };
+    im.onerror = function() { probeShot(base, n, extIdx + 1, cb); };
+    im.src = url;
+  }
+
+  // Discover a game's screenshots (cached on the game object). Calls done(arrayOfUrls).
+  function discoverShots(g, done) {
+    if (g._shots) { done(g._shots); return; }
+    var base = "imgs/games/" + gameSlug(g);
+    if (g.shots && g.shots.length) { // manual override: explicit filenames in the folder
+      g._shots = g.shots.map(function(f) { return base + "/" + f; });
+      done(g._shots);
+      return;
+    }
+    var urls = [];
+    (function next(n) {
+      if (n > SHOT_MAX) { g._shots = urls; done(urls); return; }
+      probeShot(base, n, 0, function(url) {
+        if (!url) { g._shots = urls; done(urls); return; } // gap -> stop
+        urls.push(url);
+        next(n + 1);
+      });
+    })(1);
+  }
 
   // bottom-bar navigation
   var GAME_NAV = [
@@ -906,34 +995,6 @@ window.addEventListener('click', (event) => {
     { date: "Apr 2026", title: "Backlog spring cleaning", body: "Added a pile of games I keep meaning to start. No promises on when." }
   ];
 
-  // Nintendo eShop (US) product pages, keyed by thumbnail filename
-  var ESHOP_BASE = "https://www.nintendo.com/us/store/products/";
-  var GAME_ESHOP = {
-    "balatro.jpg": "balatro-switch",
-    "tomodachi-life.jpg": "tomodachi-life-living-the-dream-switch",
-    "animal-crossing.jpg": "animal-crossing-new-horizons-switch",
-    "pokopia.jpg": "pokemon-pokopia-switch-2",
-    "ace-attorney-trilogy.jpg": "phoenix-wright-ace-attorney-trilogy-switch",
-    "great-ace-attorney.jpg": "the-great-ace-attorney-chronicles-switch",
-    "portal-2.jpg": "portal-companion-collection-switch",
-    "katamari-damacy.jpg": "katamari-damacy-reroll-switch",
-    "pokemon-scarlet.jpg": "pokemon-scarlet-switch",
-    "fire-emblem-three-houses.jpg": "fire-emblem-three-houses-switch",
-    "paper-mario-ttyd.jpg": "paper-mario-the-thousand-year-door-switch",
-    "pikmin-4.jpg": "pikmin-4-switch",
-    "blue-prince.jpg": "blue-prince-switch-2",
-    "persona-5-royal.jpg": "persona-5-royal-switch",
-    "danganronpa-2.jpg": "danganronpa-2-goodbye-despair-anniversary-edition-switch",
-    "pokemon-unite.jpg": "pokemon-unite-switch",
-    "cult-of-the-lamb.jpg": "cult-of-the-lamb-switch",
-    "stardew-valley.jpg": "stardew-valley-switch"
-  };
-  function gamesEshopUrl(g) {
-    if (g.eshop) return g.eshop;
-    var slug = GAME_ESHOP[g.img];
-    return slug ? (ESHOP_BASE + slug + "/") : ("https://www.nintendo.com/us/search/?q=" + encodeURIComponent(g.name));
-  }
-
   function gamesShowView(name) {
     var s = document.querySelector("#games .games-screen");
     if (!s) return;
@@ -944,35 +1005,47 @@ window.addEventListener('click', (event) => {
     }
   }
   function gamesOpenProfile() {
-    // disabled for now — keep for later
-    // gamesShowView("profile");
+    gamesShowView("profile");
   }
   function gamesGoHome() { gamesShowView("home"); }
 
   // ----- game detail overlay -----
   var gamesDetailIndex = -1;
+  var gdShots = [];      // screenshot urls for the game currently shown in the detail view (for the lightbox)
+  var gdGameName = "";   // name of that game (used as the lightbox caption)
   function gamesPopulateDetail(idx) {
     var g = GAMES[idx];
     if (!g) return;
     gamesDetailIndex = idx;
-    document.getElementById("gd-thumb").src = "imgs/games/" + g.img;
+    gdGameName = g.name;
+    document.getElementById("gd-thumb").src = gameThumb(g);
     document.getElementById("gd-name").textContent = g.name;
     var st = document.getElementById("gd-status");
     st.textContent = g.status || "";
     st.className = "games-status" + (g.status ? " status-" + g.status : "");
-    var eshop = document.getElementById("gd-eshop");
-    if (eshop) eshop.href = gamesEshopUrl(g);
-    var notesEl = document.getElementById("gd-notes");
-    notesEl.textContent = g.notes ? g.notes : "No notes yet.";
-    notesEl.classList.toggle("gd-empty", !g.notes);
+    var hoursEl = document.getElementById("gd-hours");
+    if (hoursEl) hoursEl.textContent = (g.hours || 0) + (g.hours === 1 ? " hour played" : " hours played");
     var shotsEl = document.getElementById("gd-shots");
-    var html = "";
-    if (g.shots && g.shots.length) {
-      for (var s = 0; s < g.shots.length; s++) html += "<div class='gd-shot'><img src='imgs/games/" + g.shots[s] + "' alt=''></div>";
-    } else {
-      for (var p = 0; p < 3; p++) html += "<div class='gd-shot gd-shot-empty'></div>";
-    }
-    shotsEl.innerHTML = html;
+    var shotsSection = document.getElementById("gd-shots-section");
+    // hide the Screenshots section until/unless we actually find screenshots in this game's folder
+    gdShots = [];
+    shotsEl.innerHTML = "";
+    if (shotsSection) shotsSection.style.display = "none";
+    discoverShots(g, function(urls) {
+      if (gamesDetailIndex !== idx) return; // user flipped to another game while probing
+      if (!urls.length) return;             // no screenshots -> leave section hidden
+      gdShots = urls.slice().reverse();     // detail page shows newest-first (reverse of the folder order)
+      // stacked full-width: round only the top of the first shot and the bottom of the last
+      var n = gdShots.length, R = "12px", html = "";
+      for (var s = 0; s < n; s++) {
+        var top = (s === 0) ? R : "0";
+        var bot = (s === n - 1) ? R : "0";
+        html += "<div class='gd-shot'><img src='" + gdShots[s] + "' alt='" + esc(g.name) +
+          " screenshot' style='border-radius:" + top + " " + top + " " + bot + " " + bot + "'></div>";
+      }
+      shotsEl.innerHTML = html;
+      if (shotsSection) shotsSection.style.display = "";
+    });
     // little content refresh as you flip between games
     var body = document.getElementById("gd-body");
     body.style.transition = "none";
@@ -985,10 +1058,9 @@ window.addEventListener('click', (event) => {
     });
   }
   function gamesOpenDetail(idx) {
-    // disabled for now — keep for later
-    // gamesPopulateDetail(idx);
-    // var s = document.querySelector("#games .games-screen");
-    // if (s) s.classList.add("show-detail");
+    gamesPopulateDetail(idx);
+    var s = document.querySelector("#games .games-screen");
+    if (s) s.classList.add("show-detail");
   }
   function gamesCloseDetail() {
     var s = document.querySelector("#games .games-screen");
@@ -1010,6 +1082,50 @@ window.addEventListener('click', (event) => {
     gamesPopulateDetail(vis[pos]);
   }
 
+  // ----- screenshot lightbox (full-screen viewer with prev/next) -----
+  // items: array of { url, name } — the name shows as a caption under the single screenshot
+  var lbItems = [], lbIndex = 0;
+  function lightboxRender() {
+    var it = lbItems[lbIndex];
+    if (!it) return;
+    var img = document.getElementById("lb-img");
+    if (img) img.src = it.url;
+    var cap = document.getElementById("lb-caption");
+    if (cap) cap.textContent = it.name || "";
+  }
+  function lightboxOpen(items, idx) {
+    if (!items || !items.length) return;
+    lbItems = items;
+    lbIndex = idx || 0;
+    lightboxRender();
+    var lb = document.getElementById("gd-lightbox");
+    if (lb) lb.classList.add("show");
+    var s = document.querySelector("#games .games-screen");
+    if (s) s.classList.add("show-lightbox");
+  }
+  function lightboxClose() {
+    var lb = document.getElementById("gd-lightbox");
+    if (lb) lb.classList.remove("show");
+    var s = document.querySelector("#games .games-screen");
+    if (s) s.classList.remove("show-lightbox");
+  }
+  function lightboxStep(dir) {
+    if (!lbItems.length) return;
+    lbIndex = (lbIndex + dir + lbItems.length) % lbItems.length;
+    lightboxRender();
+  }
+  function lightboxBackdrop(e) {
+    // close when the dark area (not the image or arrows) is clicked
+    if (e.target && e.target.id === "gd-lightbox") lightboxClose();
+  }
+  document.addEventListener("keydown", function(e) {
+    var lb = document.getElementById("gd-lightbox");
+    if (!lb || !lb.classList.contains("show")) return;
+    if (e.key === "Escape") lightboxClose();
+    else if (e.key === "ArrowLeft") lightboxStep(-1);
+    else if (e.key === "ArrowRight") lightboxStep(1);
+  });
+
   window.addEventListener("load", function() {
     var row = document.getElementById("games-row");
     if (!row) return;
@@ -1020,11 +1136,11 @@ window.addEventListener('click', (event) => {
         var g = GAMES[idx];
         var tile = document.createElement("div");
         tile.className = "game-tile";
-        tile.setAttribute("data-tags", g.status + (g.favorite ? " favorites" : ""));
+        tile.setAttribute("data-tags", g.status);
         tile.setAttribute("data-idx", idx);
         tile.innerHTML =
-          "<img src='imgs/games/" + g.img + "' alt='" + g.name + "'>" +
-          "<span class='game-label'><span class='game-label-text'>" + g.name + "</span></span>";
+          "<img src='" + gameThumb(g) + "' alt='" + esc(g.name) + "'>" +
+          "<span class='game-label'><span class='game-label-text'>" + esc(g.name) + "</span></span>";
         tile.addEventListener("click", function() { gamesOpenDetail(idx); });
         row.appendChild(tile);
       })(i);
@@ -1044,21 +1160,55 @@ window.addEventListener('click', (event) => {
       })(GAME_NAV[f]);
     }
 
-    // gallery: every screenshot across all games
+    // gallery: every screenshot across all games (discovered from each game's folder)
     var galleryGrid = document.getElementById("gallery-grid");
+    var galleryItems = []; // flat list of { url, name }, in display order, for the lightbox
     if (galleryGrid) {
-      var shotHtml = "";
-      for (var gi = 0; gi < GAMES.length; gi++) {
-        var gg = GAMES[gi];
-        if (gg.shots && gg.shots.length) {
-          for (var sh = 0; sh < gg.shots.length; sh++) {
-            shotHtml += "<div class='gallery-shot'><img src='imgs/games/" + gg.shots[sh] + "' alt='" + gg.name + "'></div>";
-          }
+      var found = [];          // found[order] = { name, urls } — keeps game order stable
+      var pending = GAMES.length;
+      var renderGallery = function() {
+        galleryItems = [];
+        for (var i = 0; i < found.length; i++) {
+          var c = found[i];
+          if (!c) continue;
+          for (var s = 0; s < c.urls.length; s++) galleryItems.push({ url: c.urls[s], name: c.name });
         }
+        if (!galleryItems.length) {
+          galleryGrid.innerHTML = "<p class='gallery-empty'>No screenshots yet, check back later for updates.</p>";
+          return;
+        }
+        // round each tile's corner only where it has no neighbor across either edge forming it (3-col grid)
+        var N = galleryItems.length, R = "8px";
+        var shotHtml = "";
+        for (var k = 0; k < N; k++) {
+          var col = k % 3;
+          var hasLeft = col > 0, hasRight = col < 2 && k + 1 < N, hasAbove = k - 3 >= 0, hasBelow = k + 3 < N;
+          var tl = (!hasAbove && !hasLeft) ? R : "0";
+          var tr = (!hasAbove && !hasRight) ? R : "0";
+          var br = (!hasBelow && !hasRight) ? R : "0";
+          var bl = (!hasBelow && !hasLeft) ? R : "0";
+          shotHtml += "<div class='gallery-shot' data-i='" + k + "'>" +
+              "<img src='" + galleryItems[k].url + "' alt='" + esc(galleryItems[k].name) +
+              "' style='border-radius:" + tl + " " + tr + " " + br + " " + bl + "'>" +
+            "</div>";
+        }
+        galleryGrid.innerHTML = shotHtml;
+      };
+      for (var gi = 0; gi < GAMES.length; gi++) {
+        (function(order) {
+          discoverShots(GAMES[order], function(urls) {
+            found[order] = { name: GAMES[order].name, urls: urls };
+            if (--pending === 0) renderGallery();
+          });
+        })(gi);
       }
-      galleryGrid.innerHTML = shotHtml ||
-        "<p class='gallery-empty'>No screenshots yet, check back later for updates.</p>";
+      // click a gallery screenshot -> open the lightbox at that image (name shown as caption)
+      galleryGrid.addEventListener("click", function(e) {
+        var cell = e.target.closest && e.target.closest(".gallery-shot");
+        if (cell && cell.hasAttribute("data-i")) lightboxOpen(galleryItems, parseInt(cell.getAttribute("data-i"), 10));
+      });
     }
+
 
     // news / blog
     var newsList = document.getElementById("news-list");
@@ -1077,32 +1227,28 @@ window.addEventListener('click', (event) => {
 
 
     var gpSub = document.getElementById("gp-sub");
-    if (gpSub) gpSub.textContent = "Player since 2020 · " + GAMES.length + " games logged";
+    if (gpSub) gpSub.textContent = "updated 06.10.26";
 
-    // build the profile "play activity" list (top games by hours)
+    // build the profile play list — every game, sorted by hours
     var gpList = document.getElementById("gp-list");
     if (gpList) {
-      var act = GAMES.slice().sort(function(a, b) { return (b.hours || 0) - (a.hours || 0); }).slice(0, 5);
+      var act = GAMES.slice().sort(function(a, b) { return (b.hours || 0) - (a.hours || 0); }).slice(0, 10);
       var maxH = (act[0] && act[0].hours) || 1;
-      var totalH = 0;
-      for (var th = 0; th < GAMES.length; th++) totalH += GAMES[th].hours || 0;
       var html = "";
       for (var a = 0; a < act.length; a++) {
         var g = act[a];
         var w = Math.max(3, Math.round((g.hours / maxH) * 100));
         html +=
           "<div class='gp-row'>" +
-            "<img src='imgs/games/" + g.img + "' alt='" + g.name + "'>" +
+            "<img src='" + gameThumb(g) + "' alt='" + esc(g.name) + "'>" +
             "<div class='gp-row-main'>" +
-              "<div class='gp-row-top'><span class='gp-row-name'>" + g.name + "</span>" +
-              "<span class='gp-row-hrs'>" + g.hours + " h</span></div>" +
+              "<div class='gp-row-top'><span class='gp-row-name'>" + esc(g.name) + "</span>" +
+              "<span class='gp-row-hrs'>" + g.hours + "</span></div>" +
               "<div class='gp-bar'><span style='width:" + w + "%'></span></div>" +
             "</div>" +
           "</div>";
       }
       gpList.innerHTML = html;
-      var totalEl = document.getElementById("gp-total");
-      if (totalEl) totalEl.textContent = totalH + " h total";
     }
 
     // JS-managed hover: tracks the tile under the cursor, snaps to the closest tile
@@ -1148,17 +1294,70 @@ window.addEventListener('click', (event) => {
       }
       tile._mqChecked = true;
     }
-    row.addEventListener("mousemove", function(e) { hoverX = e.clientX; hoverY = e.clientY; gamesSetHover(); });
+    row.addEventListener("mousemove", function(e) { if (panning) return; hoverX = e.clientX; hoverY = e.clientY; gamesSetHover(); });
     row.addEventListener("mouseleave", function() { hoverX = hoverY = null; gamesSetHover(); });
-    row.addEventListener("scroll", function() { gamesSetHover(); });
+    row.addEventListener("scroll", function() { if (!panning) gamesSetHover(); });
 
     // vertical wheel scrolls the row horizontally (hover re-evaluates via the scroll handler)
     row.addEventListener("wheel", function(e) {
       if (e.deltaY === 0) return;
       e.preventDefault();
       hoverX = e.clientX; hoverY = e.clientY;
-      row.scrollLeft += e.deltaY;
+      row.scrollLeft += e.deltaY * 0.6; // dial down the wheel sensitivity a bit
     }, { passive: false });
+
+    // click-drag to pan the row horizontally — works anywhere on the screen (not just the tiles),
+    // with velocity-based momentum on release so it glides to a stop instead of snapping.
+    var screenEl = document.querySelector("#games .games-screen");
+    var panEl = screenEl || row;
+    var dragActive = false, dragStartX = 0, dragStartScroll = 0, dragMoved = false, panning = false;
+    var lastX = 0, lastT = 0, velocity = 0, momentumId = null;
+    function stopMomentum() {
+      if (momentumId) { cancelAnimationFrame(momentumId); momentumId = null; }
+    }
+    panEl.addEventListener("mousedown", function(e) {
+      if (e.button !== 0) return;
+      // only pan while the game-log (home) view is showing and no detail/lightbox modal is open
+      if (screenEl && screenEl.getAttribute("data-view") !== "home") return;
+      if (screenEl && (screenEl.classList.contains("show-detail") || screenEl.classList.contains("show-lightbox"))) return;
+      stopMomentum();
+      dragActive = true; dragMoved = false; panning = true;
+      dragStartX = lastX = e.clientX;
+      dragStartScroll = row.scrollLeft;
+      lastT = performance.now(); velocity = 0;
+      hoverX = hoverY = null; gamesSetHover(); // drop the hover lift so the pan stays smooth
+    });
+    document.addEventListener("mousemove", function(e) {
+      if (!dragActive) return;
+      var dx = e.clientX - dragStartX;
+      if (Math.abs(dx) > 3) dragMoved = true;
+      if (!dragMoved) return;
+      row.scrollLeft = dragStartScroll - dx;
+      var now = performance.now(), dt = now - lastT;
+      if (dt > 0) velocity = (e.clientX - lastX) / dt; // px per ms
+      lastX = e.clientX; lastT = now;
+      e.preventDefault(); // suppress text/image selection while panning
+    });
+    document.addEventListener("mouseup", function() {
+      if (!dragActive) return;
+      dragActive = false;
+      if (dragMoved && Math.abs(velocity) > 0.03) {
+        var v = velocity * 16; // px per ~16ms frame
+        var step = function() {
+          v *= 0.94; // friction
+          row.scrollLeft -= v;
+          if (Math.abs(v) > 0.4) { momentumId = requestAnimationFrame(step); }
+          else { momentumId = null; panning = false; gamesSetHover(); }
+        };
+        momentumId = requestAnimationFrame(step);
+      } else {
+        panning = false;
+      }
+    });
+    // swallow the click that ends a real drag so it doesn't open a game / trigger a control
+    panEl.addEventListener("click", function(e) {
+      if (dragMoved) { e.stopPropagation(); e.preventDefault(); dragMoved = false; }
+    }, true);
 
     // live clock
     function gamesUpdateClock() {

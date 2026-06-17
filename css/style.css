@@ -267,8 +267,11 @@ article {
     margin-left: 0;
 }
 .x {
-    padding: 0 12px;
+    padding: 0 4px 0 16px; /* less right / more left padding nudges the X toward the right edge */
     border-radius: 0 7px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .x:hover {
     background: var(--primary);
@@ -472,8 +475,8 @@ article {
 .controls {
     position: absolute;
     z-index: 3;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -558,8 +561,8 @@ article {
 #guestbooks___guestbook-messages-container .gb-message-text {
     background: color-mix(in srgb, var(--secondary) 90%, transparent);
     color: var(--bg);
-    border-radius: 20px;
-    padding: 12px 16px;
+    border-radius: 12px;
+    padding: 8px 13px;
     font-size: 11px;
     letter-spacing: -0.01rem;
     max-width: 75%;
@@ -859,7 +862,7 @@ article {
     width: fit-content;
     padding: 0;
     background: transparent;
-    border-radius: 40px;
+    border-radius: 48px;
     overflow: hidden;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -867,8 +870,8 @@ article {
 
 /* ----- joy-cons ----- */
 .joycon {
-    width: 96px;
-    flex: 0 0 96px;
+    width: 104px;
+    flex: 0 0 104px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -899,6 +902,7 @@ article {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 4px; /* square like the left capture button */
     font-size: 8px;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.5);
@@ -924,11 +928,11 @@ article {
     box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.45), inset 0 1.5px 2px rgba(255, 255, 255, 0.18), inset 0 -2px 3px rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
-/* colored outline ring around the stick, matching the joy-con's color */
+/* colored outline ring around the stick, matching the joy-con's color — hugs the stick's rim (no gap) */
 .jc-stick::after {
     content: "";
     position: absolute;
-    inset: -6px;
+    inset: -2px;
     border-radius: 50%;
     border: 1.5px solid var(--jc-accent);
     opacity: 0.8;
@@ -943,6 +947,23 @@ article {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
+/* the right joy-con's "+" repurposed as a close button — matches the about-page close (size + color) */
+.jc-close {
+    color: var(--bg);
+    text-shadow: none;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.jc-close:hover { background: var(--bg); color: var(--secondary); }
+/* uniform close-X size across the games UI — slightly smaller than the window-nav X (20px) */
+.jc-close .nav-ico,
+.gd-close .nav-ico,
+.lb-close .nav-ico { width: 18px; height: 18px; }
 
 /* diamond cluster (d-pad / ABXY) */
 .jc-diamond {
@@ -953,8 +974,8 @@ article {
 }
 .jc-diamond i {
     position: absolute;
-    width: 13px;
-    height: 13px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     background: radial-gradient(circle at 40% 35%, #4a4a50, #1b1b1e 74%);
     box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.14), inset 0 -1px 1px rgba(0, 0, 0, 0.5);
@@ -973,11 +994,16 @@ article {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.4);
     z-index: 1;
 }
-.jc-capture { border-radius: 3px; }
+.jc-capture { border-radius: 4px; }
 .jc-home {
     background: rgba(255, 255, 255, 0.06);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.4);
 }
+/* nudge the secondary buttons toward each joy-con's inner edge */
+.joycon-left  .jc-minus,
+.joycon-left  .jc-extra { transform: translateX(11px); }
+.joycon-right .jc-close,
+.joycon-right .jc-extra { transform: translateX(-11px); }
 
 /* ----- bezel + screen ----- */
 .games-bezel {
@@ -989,7 +1015,7 @@ article {
 .games-screen {
     width: 672px;
     height: 378px; /* 16:9, Switch 2 */
-    background: var(--s3);
+    background: var(--bg);
     color: var(--primary);
     border-radius: 4px;
     overflow: hidden;
@@ -1000,6 +1026,13 @@ article {
 
 /* ----- system bar ----- */
 .games-topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    height: 50px;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1009,6 +1042,26 @@ article {
     opacity: 0;
     transform: translateY(8px);
 }
+/* hide the frosted header while a modal (detail/lightbox) is open so it doesn't show through at the top */
+.games-screen.show-detail .games-topbar,
+.games-screen.show-lightbox .games-topbar { visibility: hidden; }
+/* frosted "liquid glass" layer behind the header text — solid behind the text, then fades out lower */
+.games-topbar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -15px; /* extend a bit below the header so the fade ends lower (text stays readable) */
+    z-index: -1;
+    border-radius: 4px 4px 0 0; /* clip the blur's top corners to the screen radius (else they render square) */
+    background: color-mix(in srgb, var(--bg) 55%, transparent);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+    pointer-events: none;
+}
 .games-profile { display: flex; align-items: center; gap: 8px; }
 .games-profile img {
     width: 28px;
@@ -1017,25 +1070,11 @@ article {
     object-fit: cover;
     border: solid 1px color-mix(in srgb, var(--primary) 22%, transparent);
 }
-.games-profile-name { text-transform: lowercase; }
+.games-profile-name { text-transform: uppercase; cursor: pointer; }
 .games-statusbar { display: flex; align-items: center; gap: 11px; }
 .games-statusbar i { font-size: 11px; }
 .games-battery { display: flex; align-items: center; gap: 5px; }
 .games-battery-pct { font-size: 10px; }
-.games-close {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background: transparent;
-    color: var(--primary);
-    font-size: 9px;
-    margin-left: 8px;
-}
-.games-close:hover { background: var(--primary); color: var(--bg); }
 
 /* ----- centered games ----- */
 .games-stage {
@@ -1078,7 +1117,7 @@ article {
     width: 138px;
     min-width: 138px;
     height: 138px;
-    border-radius: 10px;
+    border-radius: 8px;
     box-sizing: border-box;
     outline: 2px solid transparent;
     outline-offset: 2px; /* gap between the hover ring and the image */
@@ -1089,13 +1128,13 @@ article {
     height: 100%;
     object-fit: cover;
     display: block;
-    border-radius: 10px;
+    border-radius: 8px;
     background: color-mix(in srgb, var(--primary) 8%, transparent);
 }
 .game-tile.is-hover {
     transform: translateY(-3px) scale(1.035);
     outline-color: var(--secondary);
-    box-shadow: 0 7px 18px color-mix(in srgb, var(--secondary) 38%, transparent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
 }
 .games-row.has-hover .game-tile:not(.is-hover) {
     opacity: 0.62;
@@ -1155,22 +1194,23 @@ article {
 }
 
 /* ----- status pill ----- */
+/* status as plain colored text (no pill); hours sits on the same line to its right */
 .games-status {
     font-family: "DM Mono", monospace;
-    font-size: 8px;
+    font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 0;
     line-height: 1;
-    padding: 3px 8px;
-    border-radius: 100px;
-    color: #fff;
     white-space: nowrap;
 }
-.games-status.status-backlog   { background: #8a8a8a; }
-.games-status.status-playing   { background: #34c759; }
-.games-status.status-ongoing   { background: #af52de; }
-.games-status.status-completed { background: #0a84ff; }
-.games-status.status-abandoned { background: #ff453a; }
+.games-status.status-backlog    { color: #8a8a8a; }
+.games-status.status-playing    { color: #34c759; }
+.games-status.status-ongoing    { color: #af52de; }
+.games-status.status-completed  { color: #0a84ff; }
+.games-status.status-unfinished { color: #8a8a8a; }
+.games-status.status-abandoned  { color: #ff453a; }
+.gd-statusline { display: flex; align-items: baseline; gap: 7px; }
+.gd-dot { opacity: var(--dim); font-size: 9px; }
 
 /* ----- rating stars (half-step) ----- */
 .games-rating {
@@ -1196,17 +1236,24 @@ article {
 /* one big capsule holding the filter icons, like the Switch bottom bar */
 /* ----- bottom navigation pill ----- */
 .games-nav {
-    align-self: center;
+    /* overlay (not in flow) so games-content stays full-height on every view — otherwise hiding the
+       pill on profile/gallery resizes the content area and the view visibly jumps mid-transition */
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    z-index: 4;
     display: inline-flex;
     align-items: center;
     gap: 2px;
     padding: 5px 7px;
-    margin-bottom: 30px;
     border-radius: 100px;
     background: color-mix(in srgb, var(--primary) 9%, transparent);
     transition: opacity 0.2s ease;
 }
-.games-screen[data-view="profile"] .games-nav { opacity: 0; pointer-events: none; }
+/* on gallery + profile, fully remove the nav pill from layout so content fills the screen */
+.games-screen[data-view="gallery"] .games-nav,
+.games-screen[data-view="profile"] .games-nav { display: none; }
 .games-nav-btn {
     position: relative;
     width: 30px;
@@ -1269,7 +1316,7 @@ article {
 .games-screen:not([data-view="home"]) .games-home-btn { opacity: 0.7; pointer-events: auto; transform: none; }
 .games-screen:not([data-view="home"]) .games-home-btn:hover { opacity: 1; }
 
-/* ----- views slide + fade past each other (profile-style) ----- */
+/* ----- views crossfade with a subtle zoom (clean tab switching) ----- */
 .games-content { position: relative; flex: 1; min-height: 0; }
 .games-view {
     position: absolute;
@@ -1278,9 +1325,12 @@ article {
     flex-direction: column;
     min-height: 0;
     opacity: 0;
-    transform: translateX(34px) scale(0.97);
+    transform: scale(0.985);
+    /* zoom in from the bottom edge so it stays anchored — a centered zoom briefly insets the bottom
+       (the top inset hides under the header) and looks cut off during the transition */
+    transform-origin: center bottom;
     pointer-events: none;
-    transition: opacity 0.34s var(--ease), transform 0.34s var(--ease);
+    transition: opacity 0.24s var(--ease), transform 0.24s var(--ease);
 }
 .games-screen[data-view="home"]    .games-view-home,
 .games-screen[data-view="gallery"] .games-view-gallery,
@@ -1291,6 +1341,9 @@ article {
     transform: none;
     pointer-events: auto;
 }
+/* offset for the absolute header (top) and the overlay nav pill (bottom) so the home content
+   centers in the visible area between them */
+.games-view-home { padding-top: 50px; padding-bottom: 70px; box-sizing: border-box; }
 .games-view-gallery,
 .games-view-news,
 .games-view-shop,
@@ -1300,24 +1353,41 @@ article {
     color: var(--primary);
 }
 .view-title { display: none; }
-/* gallery */
+/* gallery — side padding only; the grid scrolls under the frosted header and reaches the bottom */
+.games-view-gallery {
+    padding: 0 16px;
+}
 .gallery-grid {
     flex: 1;
     min-height: 0;
     overflow-y: auto;
+    scrollbar-width: none;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    scrollbar-width: none;
+    grid-auto-rows: max-content;
+    gap: 5px;
+    /* the 50px frosted header overlays the top, so clear it (50) + a 16px gap up top to visually match
+       the 16px gap at the bottom; content still scrolls up under the header */
+    padding: 66px 0 16px;
+    /* per-tile corners are set inline in JS — only the grid's outer corners get rounded */
 }
 .gallery-grid::-webkit-scrollbar { display: none; }
-.gallery-shot {
+/* empty state: center the "no screenshots yet" message in the box instead of pinning it top-left */
+.gallery-grid:has(.gallery-empty) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.gallery-shot { cursor: pointer; min-width: 0; }
+/* aspect-ratio on the image itself (flow layout) — images take real height, so they can't overlap */
+.gallery-shot img {
+    display: block;
+    width: 100%;
+    height: auto;
     aspect-ratio: 16 / 9;
-    border-radius: 5px;
-    overflow: hidden;
+    object-fit: cover;
     background: color-mix(in srgb, var(--primary) 8%, transparent);
 }
-.gallery-shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .gallery-empty { opacity: var(--dim); font-size: 12px; line-height: 17px; }
 .gallery-empty code { font-family: "DM Mono", monospace; }
 /* news */
@@ -1333,7 +1403,7 @@ article {
 .news-list::-webkit-scrollbar { display: none; }
 .news-item {
     border: solid 1px color-mix(in srgb, var(--primary) 12%, transparent);
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 12px 14px;
 }
 .news-date {
@@ -1362,18 +1432,25 @@ article {
     gap: 12px;
     padding: 8px 10px;
     margin: 0;
-    border-radius: 10px;
+    border-radius: 8px;
     color: var(--primary);
     text-transform: none;
     transition: background 0.15s ease;
 }
 .shop-row::after { content: none; }
 .shop-row:hover { background: color-mix(in srgb, var(--primary) 8%, transparent); opacity: 1; }
-.shop-row img { width: 34px; height: 34px; border-radius: 6px; object-fit: cover; flex-shrink: 0; }
+.shop-row img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
 .shop-name { flex: 1; min-width: 0; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .shop-go { font-size: 10px; opacity: var(--dim); flex-shrink: 0; }
 
-.gp-body { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+/* whole profile view scrolls as one (header + list together) under the frosted header */
+.games-view-profile {
+    padding: 54px 16px 16px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.games-view-profile::-webkit-scrollbar { display: none; }
+.gp-body { display: flex; flex-direction: column; }
 .gp-header {
     display: flex;
     align-items: center;
@@ -1397,10 +1474,6 @@ article {
 }
 
 .gp-activity {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
     border-top: solid 1px color-mix(in srgb, var(--primary) 12%, transparent);
     padding-top: 12px;
 }
@@ -1418,16 +1491,12 @@ article {
     display: flex;
     flex-direction: column;
     gap: 11px;
-    overflow-y: auto;
-    min-height: 0;
-    scrollbar-width: none;
 }
-.gp-list::-webkit-scrollbar { display: none; }
 .gp-row { display: flex; align-items: center; gap: 12px; }
 .gp-row img {
     width: 34px;
     height: 34px;
-    border-radius: 7px;
+    border-radius: 8px;
     object-fit: cover;
     flex-shrink: 0;
 }
@@ -1468,9 +1537,7 @@ article {
     position: absolute;
     inset: 0;
     z-index: 6;
-    background: rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1486,55 +1553,53 @@ article {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 540px;
-    max-width: calc(100% - 100px);
-    max-height: calc(100% - 36px);
+    width: 580px;
+    height: 300px;
+    max-width: calc(100% - 56px);
+    max-height: calc(100% - 20px);
     box-sizing: border-box;
     background: var(--bg);
-    border-radius: 14px;
+    border-radius: 16px;
     box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
     overflow: hidden;
     transform: scale(0.92);
     transition: transform 0.25s var(--ease);
 }
 .games-screen.show-detail .gd-window { transform: none; }
-.gd-close {
+/* ---- one consistent icon system for nav arrows + close, shared by the detail window and the lightbox ---- */
+/* thin inline-SVG icons in equal flex boxes, so weight, size and centering match exactly */
+.gd-nav, .gd-close, .lb-nav, .lb-close {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    z-index: 5;
+    width: 28px;
+    height: 28px;
+    padding: 0;
     border: none;
     background: transparent;
-    color: var(--primary);
-    font-size: 9px;
-    z-index: 2;
-}
-.gd-close:hover { background: var(--primary); color: var(--bg); }
-.gd-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: none;
-    background: color-mix(in srgb, var(--primary) 8%, transparent);
-    color: var(--primary);
-    font-size: 12px;
-    z-index: 2;
-    transition: background 0.15s ease;
+    opacity: 0.55;
+    transition: opacity 0.18s ease;
 }
-.gd-nav:hover { background: color-mix(in srgb, var(--primary) 16%, transparent); }
-.gd-prev { left: 8px; }
-.gd-next { right: 8px; }
+.gd-nav:hover, .gd-close:hover, .lb-nav:hover, .lb-close:hover { opacity: 1; }
+.nav-ico {
+    width: 20px;
+    height: 20px;
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6; /* thin */
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+/* controls sit on the card frame, clear of the screenshot/content (theme color) */
+.gd-nav, .lb-nav { top: 50%; transform: translateY(-50%); }
+.gd-prev, .lb-prev { left: 6px; }
+.gd-next, .lb-next { right: 6px; }
+.gd-close, .lb-close { top: 6px; right: 6px; }
+.gd-nav, .gd-close, .lb-nav, .lb-close { color: var(--primary); }
 .gd-body {
     flex: 1;
     min-height: 0;
@@ -1544,18 +1609,23 @@ article {
     overflow-y: auto;
     scrollbar-width: none;
     color: var(--primary);
+    display: flex;
+    flex-direction: column;
 }
 .gd-body::-webkit-scrollbar { display: none; }
+/* head fills the visible body so the thumbnail + title are exactly vertically centered in the window */
 .gd-head {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     gap: 20px;
-    padding-bottom: 18px;
+    min-height: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
 }
 .gd-thumb {
-    width: 96px;
-    height: 96px;
-    border-radius: 8px;
+    width: 170px;
+    height: 170px;
+    border-radius: 12px;
     object-fit: cover;
     flex-shrink: 0;
 }
@@ -1563,30 +1633,25 @@ article {
     min-width: 0;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 9px;
 }
-.gd-name { font-size: 17px; line-height: 21px; padding-bottom: 0; margin-top: auto; }
-.gd-meta-top { display: flex; align-items: center; gap: 10px; }
-.gd-eshop {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin: 0;
-    padding: 4px 10px;
-    border-radius: 100px;
-    background: var(--primary);
-    color: var(--bg);
+.gd-name { font-size: 17px; line-height: 21px; padding-bottom: 0; margin: 0; }
+.gd-hours {
     font-family: "DM Mono", monospace;
-    font-size: 9px;
-    text-transform: uppercase;
-    transition: opacity 0.15s ease;
+    font-size: 10px;
+    opacity: var(--dim);
+    margin: 0;
+    padding-bottom: 0;
 }
-.gd-eshop::after { content: none; }
-.gd-eshop:hover { opacity: 0.8; }
-.gd-eshop i { font-size: 9px; }
 .gd-section {
-    border-top: solid 1px color-mix(in srgb, var(--primary) 12%, transparent);
-    padding-top: 14px;
-    margin-top: 14px;
+    flex-shrink: 0;
+    /* pull the screenshots up into the empty space below the centered thumbnail so they peek at the
+       bottom — without shifting the (centered) thumbnail + title above. less negative = more gap. */
+    margin-top: -20px;
+    /* +26 on top of gd-body's 24px bottom padding = 50px below the last screenshot, even with the sides */
+    padding-bottom: 26px;
 }
 .gd-section-title {
     font-family: "DM Mono", monospace;
@@ -1595,23 +1660,68 @@ article {
     opacity: var(--dim);
     padding-bottom: 8px;
 }
-.gd-notes { font-size: 12px; line-height: 18px; padding-bottom: 0; }
-.gd-notes.gd-empty { opacity: var(--dim); }
 .gd-shots {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    grid-template-columns: 1fr; /* full-width screenshots, one per row */
+    grid-auto-rows: max-content;
+    gap: 4px;
+    align-content: start;
 }
-.gd-shot {
+.gd-shot { min-width: 0; }
+/* aspect-ratio on the image itself (flow layout) — images take real height, so they can't overlap */
+.gd-shot img {
+    display: block;
+    width: 100%;
+    height: auto;
     aspect-ratio: 16 / 9;
-    border-radius: 5px;
-    overflow: hidden;
+    object-fit: cover;
+    border-radius: 8px;
     background: color-mix(in srgb, var(--primary) 8%, transparent);
 }
-.gd-shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.gd-shot-empty {
-    background: transparent;
-    border: dashed 1px color-mix(in srgb, var(--primary) 22%, transparent);
+
+/* ----- screenshot lightbox (full-screen viewer; controls overlaid on the image) ----- */
+.gd-lightbox {
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+.gd-lightbox.show { opacity: 1; pointer-events: auto; }
+/* stage is a definite 16:9 box (matches the screenshots) so the overlaid controls sit on the image */
+/* card wrapping the screenshot — matches the detail window (.gd-window) size + frame */
+.lb-window {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 580px;
+    max-width: calc(100% - 56px);
+    max-height: calc(100% - 16px);
+    padding: 36px; /* symmetric frame so the screenshot is vertically centered (level with the arrows + x) */
+    background: var(--bg);
+    border-radius: 16px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
+}
+.lb-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--primary) 8%, transparent);
 }
 /* #endregion */
 
@@ -1734,6 +1844,7 @@ article {
 /* #endregion */
 
 /* #region dark mode */
+.theme-dark .jc-close { color: var(--primary); } /* keep the joy-con close visible on the dark theme (mirrors the about close) */
 .theme-dark #about { background: var(--s3); }
 .theme-dark #about > * { color: var(--primary); }
 .theme-dark #about .windownav { background: var(--s3); color: var(--primary); }
